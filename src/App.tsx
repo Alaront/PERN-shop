@@ -1,10 +1,18 @@
 import React from 'react';
-import './App.css';
+import {Routes} from "react-router";
+import Main from "./pages/Main";
+import Product from "./pages/Product";
+import NotFound from "./pages/NotFound";
+import {Route} from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
-      <h1>Init</h1>
+      <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/product" element={<Product />} />
+          <Route path="*" element={<NotFound />} />
+      </Routes>
     </div>
   );
 }
