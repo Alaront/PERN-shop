@@ -7,3 +7,14 @@ body
   font-family: 'Roboto', sans-serif
   background: $bg_color
   color: $text_color
+
+.content
+  max-width: $max_wrapper
+  margin: 130px auto 0 auto
+
+  +min-w($tablet_m)
+    margin-top: 104px
+    padding: 0 10px
+
+  +min-w(1380px)
+    padding: 0
