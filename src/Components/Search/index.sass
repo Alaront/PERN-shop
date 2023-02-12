@@ -1,0 +1,36 @@
+@import "../../styles/common/index"
+
+.header__search
+  border: 2px solid $base_color
+  border-radius: 15px
+  display: flex
+  width: 100%
+  margin-bottom: 10px
+  overflow: hidden
+  padding: 4px 0
+
+  +min-w($tablet_m)
+    max-width: 648px
+    margin: 0 20px
+    width: calc(50% - 40px)
+
+.header__search-input
+  border: none
+  outline: none
+  border-radius: 15px
+  flex: 1
+  padding: 4px 7px
+  font-family: 'Roboto', sans-serif
+  font-size: 18px
+  line-height: 23px
+  font-weight: 400
+  background: $bg_color
+
+.header__btn-search
+  cursor: pointer
+  border: none
+  outline: none
+  width: 50px
+  transition: 0.5s
+  border-radius: 15px
+  background: $bg_color
