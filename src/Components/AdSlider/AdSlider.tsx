@@ -15,7 +15,7 @@ const AdSlider = () => {
     return (
         <Swiper
             modules={[Navigation, Pagination]}
-            slidesPerView={1}
+            slidesPerView={'auto'}
             speed={800}
             className={'ad-slider'}
             navigation

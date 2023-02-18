@@ -1,11 +1,12 @@
 import React from 'react';
 import AdSlider from "../Components/AdSlider/AdSlider";
+import AdOffer from "../Components/AdOffers/AdOffers";
 
 const Main = () => {
     return (
         <div className={'content'}>
-            <h1>Main</h1>
             <AdSlider />
+            <AdOffer />
         </div>
     );
 };
