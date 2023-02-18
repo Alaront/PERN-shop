@@ -7,11 +7,16 @@
   background: #ffffff
   padding: 10px 0 0 0
   border-radius: 5px
+  margin-bottom: 40px
+  overflow: hidden
 
   +min-w($tablet)
     flex-direction: row
     border: 1px solid #d9dade
     padding: 0
+
+  +min-w($tablet_m)
+    margin-bottom: 50px
 
   .swiper-slide
     width: auto
@@ -68,6 +73,9 @@
 
   +min-w($tablet)
     width: 179px
+    border-top: none
+    border-bottom: none
+
     .swiper-slide:first-child &
       border-left: 1px solid #d9dade
 

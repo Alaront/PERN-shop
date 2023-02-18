@@ -3,8 +3,9 @@ import {Swiper, SwiperSlide} from "swiper/react";
 import {Navigation, Pagination} from "swiper";
 import DailySlide from "./DailySlide";
 
-import watchPhoto from '../../../images/products/watch.png'
+import watchPhoto from '../../images/products/watch.png'
 
+import './index.sass'
 import 'swiper/css';
 
 const Daily = () => {
