@@ -1,0 +1,86 @@
+@import "../../styles/common/index"
+
+.subscribe-form
+  max-width: 600px
+  margin: 0 auto
+  border: 1px solid #1F1F1F
+  padding: 10px 5px
+  border-radius: 10px
+
+  +min-w(700px)
+    position: relative
+
+    &:before
+      content: ''
+      background: url("../../images/decor/mail-icon.png") no-repeat center
+      background-size: contain
+      width: 134px
+      height: 150px
+      position: absolute
+      top: 27px
+      right: 44px
+
+  +min-w($tablet)
+    padding: 15px 10px
+
+    &:before
+      top: 43px
+
+  +min-w($tablet_s)
+    padding: 25px 20px
+
+    &:before
+      top: 56px
+
+.subscribe-form__title
+  font-style: normal
+  font-weight: 500
+  font-size: 18px
+  line-height: 22px
+  color: #173C5F
+  margin: 0 0 10px 0
+  text-align: center
+
+  +min-w($tablet)
+    margin: 0 0 20px 0
+    font-size: 22px
+    line-height: 26px
+
+.subscribe-form__form
+  display: flex
+  flex-direction: column
+  width: 360px
+
+  div
+    display: flex
+    flex-direction: row
+    margin-bottom: 10px
+
+  p
+    font-style: normal
+    font-weight: 400
+    font-size: 18px
+    line-height: 22px
+    color: #173C5F
+    text-align: left
+    width: 120px
+
+  input
+    outline: none
+    font-size: 18px
+    line-height: 22px
+    border: 1px solid #1F1F1F
+    border-radius: 5px
+
+  button
+    text-align: center
+    border-radius: 5px
+    padding: 15px 0
+    background: #b8cae1
+    cursor: pointer
+    border: none
+    outline: none
+    width: 100%
+    font-weight: 600
+    font-size: 15px
+    line-height: 20px

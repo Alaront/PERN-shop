@@ -3,6 +3,7 @@ import AdSlider from "../Components/AdSlider/AdSlider";
 import Daily from "../Components/AdOffers/Daily";
 import Bestsellers from "../Components/Bestsellers/Bestsellers";
 import Viewed from "../Components/Viewed/Viewed";
+import SubscribeForm from "../Components/SubscribeForm/SubscribeForm";
 
 const Main = () => {
     return (
@@ -11,6 +12,7 @@ const Main = () => {
             <Daily />
             <Bestsellers />
             <Viewed />
+            <SubscribeForm />
         </div>
     );
 };
