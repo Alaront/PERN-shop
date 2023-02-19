@@ -1,0 +1,87 @@
+@import "common/index"
+
+.footer
+  background: #1C1C1C
+  padding: 0 0 57px 0
+
+.footer__wrapper
+  max-width: 1340px
+  margin: 0 auto
+  padding: 50px 10px 0
+  display: flex
+  flex-wrap: wrap
+  justify-content: space-between
+
+  +min-w($tablet)
+    padding: 60px 0 0
+
+.footer__item
+  margin-bottom: 25px
+  width: 100%
+  padding: 0
+
+  +min-w($tablet)
+    width: calc(90% / 4)
+    margin-bottom: 30px
+
+
+  ul
+    transition: 0.3s
+    height: 0
+    overflow: hidden
+
+    +min-w($tablet)
+      height: auto
+
+.footer-open
+  ul
+    transition: 0.3s
+    height: auto
+
+.footer__title
+  font-weight: 500
+  font-size: 18px
+  line-height: 24px
+  color: #fff
+  letter-spacing: 0.5px
+  margin-bottom: 10px
+  position: relative
+
+  &:after
+    content: ''
+    position: absolute
+    top: 0
+    right: 0
+    background: url("../images/decor/footer-arrow.svg") no-repeat center
+    background-size: contain
+    width: 20px
+    height: 20px
+    transform: rotate(180deg)
+    transition: 0.3s
+
+  +min-w($tablet)
+    margin-bottom: 18px
+
+    &:after
+      content: none
+
+  .footer-open &
+    position: relative
+
+    &:after
+      transform: none
+
+.footer__link
+  text-decoration: none
+  margin-bottom: 10px
+  font-weight: 400
+  font-size: 16px
+  line-height: 24px
+  letter-spacing: -0.2px
+  color: #a5adb9
+  cursor: pointer
+  display: block
+  max-width: max-content
+
+  +min-w($tablet)
+    margin-bottom: 12px
