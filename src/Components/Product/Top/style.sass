@@ -1,0 +1,245 @@
+@import "../../../styles/common/index"
+
+.top-content__title
+  font-style: normal
+  font-weight: 500
+  font-size: 18px
+  line-height: 22px
+  margin-bottom: 12px
+  padding: 0 10px
+
+  +min-w($tablet)
+    font-size: 22px
+    line-height: 25px
+
+  +min-w($tablet_s)
+    font-weight: 600
+    font-size: 35px
+    line-height: 38px
+    letter-spacing: -0.2px
+    color: $text_color
+
+.top-content__info-left
+  display: flex
+  flex-wrap: wrap
+  width: 100%
+  margin-bottom: 25px
+  padding: 0 10px
+
+  a, div
+    font-style: normal
+    font-weight: 400
+    font-size: 16px
+    line-height: 20px
+    color: #787A80
+    cursor: pointer
+    text-decoration: none
+    margin-right: 10px
+
+    +min-w($tablet_s)
+      font-size: 19px
+      line-height: 23px
+
+    &:hover
+      text-decoration: underline
+
+.top-content__bought
+  width: 100%
+
+  +min-w($tablet)
+    width: auto
+
+.top-content__grade
+  display: flex
+
+.top-content__stars-wrapper
+  display: flex
+  align-items: center
+
+  span
+    width: 16px
+    height: 16px
+    margin-right: 1px
+    display: block
+
+    +min-w($tablet_s)
+      margin-right: 3px
+
+  .top-content__stars-check
+    background: url("../../../images/decor/star-check.svg")
+    background-size: contain
+
+  .top-content__stars-not-check
+    background: url("../../../images/decor/star-not-check.svg")
+    background-size: contain
+
+.top-content__info-right
+  +min-w($tablet)
+    display: flex
+    flex-direction: row
+    padding: 0 10px 0 0
+
+.top-slider
+  margin-bottom: 20px
+  height: 200px
+
+  +min-w($tablet)
+    height: 400px
+    margin-right: 50px
+    margin-bottom: 0
+    width: 400px
+
+  +min-w($tablet_m)
+    width: 500px
+    margin-right: 70px
+
+  +min-w($tablet_s)
+    width: 600px
+    margin-right: 70px
+
+  +min-w($desktop_m)
+    width: 700px
+    height: 500px
+    margin-right: 80px
+
+.deals-slider_img
+  width: 100%
+  height: 200px
+
+  +min-w($tablet)
+    height: 400px
+
+  +min-w($desktop_m)
+    height: 500px
+
+  img
+    width: 100%
+    height: 100%
+    object-fit: contain
+
+.top-slider .swiper-button-prev, .top-slider .swiper-button-next
+  width: 45px
+  height: 45px
+  border-radius: 100%
+  border: none
+  cursor: pointer
+  transition: .3s
+  background: rgba(255, 255, 255, 0.23)
+  box-shadow: none
+
+  &:hover
+    background: rgba(255, 255, 255, 0.51)
+
+  &:after
+    content: ''
+    background: url("./../../AdSlider/adSliderItems/img/arrow.svg") no-repeat center
+    background-size: contain
+    width: 20px
+    height: 20px
+
+  &.swiper-button-disabled
+    opacity: 0
+
+.top-slider .swiper-button-next
+
+  &:after
+    transform: rotate(180deg)
+
+.top-slider .swiper-pagination-bullet
+  background: rgb(255, 255, 255)
+
+  &-active
+    background: rgba(255, 255, 255, 0.77)
+
+.top-content__info
+  padding: 0 10px
+
+  +min-w($tablet)
+    padding: 0
+    flex-grow: 1
+
+
+.top-content__info-discount
+  display: flex
+  flex-direction: row
+  margin-bottom: 5px
+
+  p
+    margin-right: 10px
+    font-weight: 500
+    font-size: 16px
+    line-height: 18px
+    color: $text_color
+
+    +min-w($tablet)
+      font-size: 22px
+      line-height: 25px
+
+    &.top-content__old-price
+      font-weight: 500
+      text-decoration: line-through
+
+    &.top-content__discount
+      font-weight: 400
+
+
+.top-content__price
+  margin-bottom: 15px
+  font-weight: 600
+  font-size: 28px
+  line-height: 32px
+  color: #FA3434
+
+  +min-w($tablet)
+    font-size: 33px
+    line-height: 37px
+
+.top-content__info-type
+  display: flex
+  margin-bottom: 20px
+
+.top-content__info-type-item
+  margin-right: 20px
+  cursor: pointer
+
+  p
+    font-weight: 400
+    font-size: 16px
+    line-height: 18px
+    color: $text_color
+    text-align: center
+
+  div
+    width: 50px
+    height: 50px
+    border-radius: 50%
+    overflow: hidden
+
+    img
+      display: block
+      width: 100%
+      height: 100%
+      object-fit: contain
+
+
+.top-content__buy
+  background: #ec8b97
+  border-radius: 6px
+  text-align: center
+  padding: 10px 0
+  border: none
+  outline: none
+  display: block
+  width: 100%
+  font-weight: 500
+  font-size: 16px
+  line-height: 19px
+  text-align: center
+  color: #FFFFFF
+  cursor: pointer
+
+  +min-w($tablet)
+    font-size: 23px
+    line-height: 26px
+    padding: 15px 0
+    max-width: 300px

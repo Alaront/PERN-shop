@@ -1,9 +1,10 @@
 import React from 'react';
+import TopContent from "../Components/Product/Top/TopContent";
 
 const Product = () => {
     return (
-        <div>
-            Product
+        <div className={'content product-content'}>
+            <TopContent />
         </div>
     );
 };
