@@ -1,0 +1,25 @@
+@import "../../styles/common/index"
+
+.grade-stars
+  display: flex
+  align-items: center
+
+  .reviews-item__stars &
+    align-items: flex-start
+
+  span
+    width: 16px
+    height: 16px
+    margin-right: 1px
+    display: block
+
+    +min-w($tablet_s)
+      margin-right: 3px
+
+  .grade-stars__stars-check
+    background: url("../../images/decor/star-check.svg")
+    background-size: contain
+
+  .grade-stars__stars-not-check
+    background: url("../../images/decor/star-not-check.svg")
+    background-size: contain

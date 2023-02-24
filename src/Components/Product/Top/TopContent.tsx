@@ -5,6 +5,7 @@ import TopSlider from "./TopSlider";
 import Bitmap from '../../../images/products/Bitmap.png'
 
 import TopInfo from "./TopInfo";
+import GradeStars from "../../Grade/GradeStars";
 
 export interface typeProduct {
     id: number,
@@ -35,14 +36,7 @@ const TopContent = () => {
             <h1 className={'top-content__title'}>{productTitle}</h1>
             <div className={'top-content__info-left'}>
                 <div className={'top-content__grade'}>
-                    <div className={'top-content__stars-wrapper'}>
-                        {
-                            [...Array(Math.floor(grade))].map((_, index) => <span key={index} className={'top-content__stars-check'}></span>)
-                        }
-                        {
-                            [...Array(5 - Math.floor(grade))].map((_, index) => <span key={index} className={'top-content__stars-not-check'}></span>)
-                        }
-                    </div>
+                    <GradeStars grade={grade} />
 
                     {grade}
                 </div>

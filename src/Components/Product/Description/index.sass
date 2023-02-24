@@ -1,13 +1,14 @@
 @import "../../../styles/common/index"
 
-.description-product
+.description-product, .reviews-product
   padding: 0 10px
+  margin-bottom: 40px
 
-.description-product__title
+.description-product__title, .reviews-product__title
   font-style: normal
   font-weight: 500
-  font-size: 18px
-  line-height: 22px
+  font-size: 20px
+  line-height: 25px
   margin-bottom: 12px
 
   +min-w($tablet_s)
@@ -31,7 +32,7 @@
     font-size: 16px
     line-height: 24px
     letter-spacing: -0.2px
-    color: #505050
+    color: $text_color
     transition: 0.5s
 
 .info-open
@@ -112,3 +113,71 @@
     margin: 0
     font-size: 14px
     line-height: 16px
+
+.reviews-item
+  margin-bottom: 35px
+
+.reviews-item__user
+  width: 100%
+  display: flex
+  justify-content: space-between
+  margin-bottom: 15px
+
+.reviews-item__user-data
+  display: flex
+
+.reviews-item__name
+  font-style: normal
+  font-weight: 400
+  font-size: 16px
+  line-height: 24px
+  letter-spacing: -0.2px
+  color: $text_color
+  transition: 0.5s
+
+.reviews-item__user-photo
+  width: 60px
+  height: 60px
+  overflow: hidden
+  border-radius: 50%
+  margin-right: 10px
+
+  img
+    display: block
+    object-fit: cover
+    width: 100%
+    height: 100%
+
+.reviews-item__stars
+  display: flex
+  flex-direction: column
+
+  +min-w($tablet)
+    flex-direction: row
+
+.reviews-item__date
+  font-style: normal
+  font-weight: 400
+  font-size: 15px
+  line-height: 20px
+  letter-spacing: -0.2px
+  color: #505050
+  margin-top: 10px
+
+  +min-w($tablet)
+    margin-top: 0
+    margin-right: 10px
+    order: -1
+
+.reviews-item__subtitle
+  font-style: normal
+  font-weight: 400
+  font-size: 17px
+  line-height: 20px
+  margin-bottom: 8px
+
+.reviews-item__text
+  font-weight: 300
+  font-size: 16px
+  line-height: 18px
+  margin-bottom: 20px
