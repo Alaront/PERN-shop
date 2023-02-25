@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './index.sass'
+
 interface ProductCartShortI {
     title: string,
     photoUrl: string,

@@ -1,0 +1,64 @@
+@import "../../../styles/common/index"
+
+.similar-products
+  margin-bottom: 40px
+
+.similar-products__slider .swiper-slide
+  width: calc(100%/12*6 - 8px)
+
+  +min-w(500px)
+    width: calc(100%/12*4 - 8px)
+
+  +min-w($tablet)
+    width: calc(100%/12*3 - 8px)
+
+  +min-w($tablet_s)
+    width: calc(100%/12*2 - 8px)
+
+.similar-products__title
+  font-style: normal
+  font-weight: 500
+  font-size: 20px
+  line-height: 25px
+  margin-bottom: 12px
+  padding: 0 10px
+
+  +min-w($tablet_s)
+    font-size: 20px
+    line-height: 25px
+    margin-bottom: 20px
+
+.similar-products__slider .swiper-button-prev, .similar-products__slider .swiper-button-next
+  width: 45px
+  height: 45px
+  border-radius: 100%
+  border: none
+  cursor: pointer
+  transition: .3s
+  background: rgba(255, 255, 255, 0.7)
+  box-shadow: none
+
+  &:hover
+    background: rgba(255, 255, 255, 0.92)
+
+  &:after
+    content: ''
+    background: url("./../../AdSlider/adSliderItems/img/arrow.svg") no-repeat center
+    background-size: contain
+    width: 20px
+    height: 20px
+
+  &.swiper-button-disabled
+    opacity: 0
+
+.similar-products__slider .swiper-button-next
+
+  &:after
+    transform: rotate(180deg)
+
+.similar-products__slider .swiper-pagination-bullet
+  background: rgb(255, 255, 255)
+
+  &-active
+    background: rgba(255, 255, 255, 0.77)
+
