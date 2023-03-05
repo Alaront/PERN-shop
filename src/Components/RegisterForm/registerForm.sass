@@ -1,0 +1,149 @@
+@import "../../styles/common/index"
+
+.register-form
+  display: flex
+  align-items: center
+  justify-content: center
+  position: fixed
+  top: 0
+  left: 0
+  width: 100%
+  height: 100vh
+  z-index: 999
+  background: rgba(149, 147, 147, 0.56)
+
+.register-form__wrapper
+  width: 100%
+  background: $bg_color
+  padding: 40px 30px
+  height: auto
+  max-width: 400px
+  border-radius: 10px
+  position: relative
+
+.register-form__logo
+  width: 100%
+  max-width: 150px
+  margin: 0 auto 15px auto
+
+  img
+    width: 100%
+    object-fit: contain
+
+.register-form__switch
+  width: 100%
+  display: flex
+  border-bottom: 1px solid #d9dade
+  justify-content: center
+  margin-bottom: 20px
+
+  span
+    padding: 10px 14px
+    font-size: 17px
+    line-height: 21px
+    text-transform: uppercase
+    cursor: pointer
+    position: relative
+
+    &:after
+      content: ''
+      position: absolute
+      bottom: 0
+      left: 50%
+      transform: translateX(-50%)
+      height: 5px
+      background: #ec8b97
+      width: 0
+      transition: 0.1s
+
+    &.switch-active
+      &:after
+        width: 100%
+
+.register-form__register, .register-form__login
+  display: flex
+  flex-direction: column
+
+  &--hide
+    display: none
+
+  label
+    display: flex
+    flex-direction: column
+    margin-bottom: 10px
+    position: relative
+
+    p
+      font-size: 13px
+      line-height: 15px
+      margin-bottom: 2px
+
+    span
+      position: absolute
+      bottom: 6px
+      right: 6px
+      width: 25px
+      height: 25px
+      background: url("../../images/decor/eye.svg") no-repeat center
+      background-size: contain
+
+      &.pass-close
+        background: url("../../images/decor/eye-close.svg") no-repeat center
+        background-size: contain
+
+    input
+      outline: none
+      border: 1px solid #d9dade
+      border-radius: 5px
+      padding: 8px 5px
+      font-size: 16px
+      line-height: 19px
+      color: $text_color
+
+      &.error-text
+        color: #d85e6d
+
+.register-form-rep-btn
+  background: #ec8b97
+  border-radius: 6px
+  text-align: center
+  padding: 10px 0
+  border: none
+  outline: none
+  display: block
+  text-transform: uppercase
+  width: 100%
+  font-weight: 600
+  font-size: 16px
+  line-height: 19px
+  text-align: center
+  color: #FFFFFF
+  cursor: pointer
+  margin: 20px auto
+
+  +min-w($tablet)
+    font-size: 23px
+    line-height: 26px
+    padding: 15px 0
+
+.register-form-rep-info
+  font-size: 13px
+  line-height: 15px
+  color: $text_color
+
+  a
+    color: $text_color
+
+.register-form__close
+  position: absolute
+  top: 10px
+  right: 10px
+  width: 30px
+  height: 30px
+  background: url("../../images/decor/close.svg") no-repeat center
+  background-size: contain
+  cursor: pointer
+
+.register-form__login
+  &--hide
+    display: none
