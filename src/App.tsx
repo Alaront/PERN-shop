@@ -6,6 +6,7 @@ import NotFound from "./pages/NotFound";
 import {Route} from "react-router-dom";
 import Header from "./elements/Header";
 import Footer from "./elements/Footer";
+import ShopPage from "./pages/ShopPage";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/product" element={<Product />} />
+          <Route path="/shopPage" element={<ShopPage />} />
           <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
