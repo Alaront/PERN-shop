@@ -1,5 +1,6 @@
 import React from 'react';
 import {typeProduct} from "./TopContent";
+import {writeLSShopingCart} from "../../../helpers";
 
 interface ContentInfo {
     productId: number,
@@ -39,7 +40,7 @@ const TopInfo = ({discount, productId, price, oldPrice, typeArray}: ContentInfo)
                     )
                 }
                 <p className={"top-content__price"}>$ {price}</p>
-                <button className={'top-content__buy'}>В корзну</button>
+                <button className={'top-content__buy'} onClick={() => writeLSShopingCart(0, 1)}>В корзну</button>
             </div>
         </div>
     );
