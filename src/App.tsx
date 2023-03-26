@@ -7,6 +7,7 @@ import {Route} from "react-router-dom";
 import Header from "./elements/Header";
 import Footer from "./elements/Footer";
 import ShopPage from "./pages/ShopPage";
+import Cart from "./pages/Cart";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/" element={<Main />} />
           <Route path="/product" element={<Product />} />
           <Route path="/shopPage" element={<ShopPage />} />
+          <Route path="/cart" element={<Cart />} />
           <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />

@@ -1,0 +1,187 @@
+@import "../../styles/common/index"
+
+.content-cart
+  position: relative
+  display: flex
+  flex-direction: row
+  justify-content: space-between
+  align-items: flex-start
+
+.card-all-choosing
+  position: fixed
+  bottom: 47px
+  left: 0
+  width: 100%
+  z-index: 9
+
+  +min-w($tablet_m)
+    width: 27%
+    position: sticky
+    background: -webkit-linear-gradient(90deg, #d1bdcb, #d7d7d7, #d1bdcb)
+    background: linear-gradient(90deg, #d1bdcb, #d7d7d7, #d1bdcb)
+    padding: 10px
+    border-radius: 10px
+    z-index: auto
+    bottom: auto
+    top: 81px
+
+.card-all-choosing__title, .card-all-choosing__products, .card-all-choosing__discount
+  display: none
+
+  +min-w($tablet_m)
+    display: flex
+    width: 100%
+    justify-content: space-between
+
+
+  span
+    font-size: 15px
+    line-height: 18px
+    color: $color_black
+    margin-bottom: 5px
+    font-weight: 500
+
+    +min-w($desktop_m)
+      font-size: 18px
+      line-height: 20px
+      margin-bottom: 10px
+
+.card-all-choosing__discount
+  margin-bottom: 20px
+
+
+.card-all-choosing__btn
+  width: 100%
+  margin: 0 auto
+  display: flex
+  flex-direction: column
+  align-items: center
+  background: $base_color_red
+  padding: 8px
+  border-radius: 5px
+
+  +min-w($tablet_m)
+    cursor: pointer
+
+  span
+    text-transform: uppercase
+    display: block
+    font-size: 15px
+    line-height: 18px
+    color: $color_white
+    font-weight: 400
+
+    &:first-child
+      margin-bottom: 5px
+      font-weight: 600
+
+.cart-data
+  +min-w($tablet_m)
+    width: 70%
+
+.cart-data__info
+  display: flex
+  justify-content: space-between
+  margin-bottom: 50px
+  position: sticky
+
+  p
+    font-weight: 500
+    font-size: 18px
+    line-height: 22px
+
+    +min-w($tablet)
+      font-size: 22px
+      line-height: 25px
+
+
+.cart-item
+  display: flex
+  flex-direction: row
+  width: 100%
+  //height: 150px
+  margin-bottom: 25px
+  justify-content: space-between
+
+.cart-item__photo
+  width: 150px
+  min-height: 150px
+  height: 100%
+  display: block
+  object-fit: contain
+  background: $color_white
+  border-radius: 25px
+  padding: 10px
+  margin-right: 2%
+
+.cart-item__wrapper
+  display: flex
+  flex-direction: column
+  width: calc(100% - 4% - 150px - 30px)
+
+  +min-w($tablet)
+    flex-direction: row
+
+.cart-item__title, .cart-item__count, .cart-item__price
+  font-weight: 400
+  font-size: 14px
+  line-height: 17px
+  margin-bottom: 10px
+
+  +min-w($tablet_m)
+    font-size: 17px
+    line-height: 19px
+
+.cart-item__title
+  +min-w($tablet)
+    width: 70%
+    margin-right: 20px
+
+.cart-item__count-wrapper
+  border: 2px solid $color_black
+  border-radius: 20px
+  height: 40px
+  overflow: hidden
+  display: flex
+  flex-direction: row
+
+  +min-w($tablet)
+    width: 15%
+    margin-right: 20px
+
+  span
+    width: 50%
+    align-items: center
+    border: none
+    outline: none
+    display: flex
+    align-items: center
+    justify-content: center
+
+.cart-item__count-decrease, .cart-item__count-increase
+  width: 25%
+  display: flex
+  align-items: center
+  justify-content: center
+  cursor: pointer
+
+  img
+    display: block
+    width: 100%
+    object-fit: contain
+
+
+.cart-item__price
+  font-size: 16px
+  line-height: 19px
+  font-weight: 600
+
+  +min-w($tablet)
+    width: 15%
+    margin-right: 20px
+
+  +min-w($tablet_m)
+    font-size: 20px
+    line-height: 22px
+
+
