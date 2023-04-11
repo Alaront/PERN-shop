@@ -13,6 +13,7 @@ import AdminProducts from "./Components/Admin/Products/AdminProducts";
 import AdminUsers from "./Components/Admin/Users/AdminUsers";
 import AdminBrands from "./Components/Admin/Brands/AdminBrands";
 import AdminProductsType from "./Components/Admin/ProductsType/AdminProductsType";
+import AdminBrandNew from "./Components/Admin/Brands/AdminBrandNew";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
               <Route path="brands" element={<AdminBrands />} />
               <Route path="users" element={<AdminUsers />} />
               <Route path="productsType" element={<AdminProductsType />} />
+              <Route path="brandNew" element={<AdminBrandNew />} />
           </Route>
           <Route path="*" element={<NotFound />} />
       </Routes>

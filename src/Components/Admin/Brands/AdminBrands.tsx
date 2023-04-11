@@ -27,7 +27,7 @@ const AdminBrands = () => {
 
     return (
         <div className={'admin-main'}>
-            <h2 className={'admin-main__title'}>List of brands</h2>
+            <h2 className={'admin-main__title'}>Brands</h2>
             <div className={'admin-main__content'}>
                 <div className={'admin-main__content-left'}>
                     <table className={'admin-main__content-table'}>

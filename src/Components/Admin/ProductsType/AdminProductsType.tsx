@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {NavLink} from "react-router-dom";
 import AdminProductsTypeForm from "./AdminProductsTypeForm";
+import AdminAddNewProductType from "./AdminAddNewProductType";
 
 interface allProductsTypeI {
     id: number,
@@ -21,6 +22,7 @@ const AdminProductsType = () => {
 
     return (
         <div className={'admin-main'}>
+            <AdminAddNewProductType />
             <h2 className={'admin-main__title'}>List of products type</h2>
             <div className={'admin-main__content'}>
                 <div className={'admin-main__content-left'}>

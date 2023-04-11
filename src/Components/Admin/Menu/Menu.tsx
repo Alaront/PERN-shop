@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import './index.sass'
-import {Link, NavLink} from "react-router-dom";
+import { NavLink} from "react-router-dom";
 
 const Menu = () => {
     const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false)
@@ -14,6 +14,7 @@ const Menu = () => {
                     </li>
                     <li className={'admin-menu__brands'}>
                         <NavLink to={'/admin/brands'} className={({isActive}) => isActive ? 'active-link' : ''}>Brands</NavLink>
+                        <NavLink to={'/admin/brandNew'} className={({isActive}) => isActive ? 'active-link' : ''}>Add new brand</NavLink>
                     </li>
                     <li className={'admin-menu__products'}>
                         <NavLink to={'/admin/products'} className={({isActive}) => isActive ? 'active-link' : ''}>Products</NavLink>
