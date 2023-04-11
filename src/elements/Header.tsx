@@ -42,6 +42,10 @@ const Header = () => {
         }
     }
 
+    if (window.location.href.includes('admin')) {
+        return <></>
+    }
+
     return (
         <header className="header">
             <div className={'header-wrapper'}>

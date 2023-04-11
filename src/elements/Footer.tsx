@@ -129,6 +129,10 @@ const Footer = () => {
         }
     ])
 
+    if (window.location.href.includes('admin')) {
+        return <></>
+    }
+
     return (
         <div className={'footer'}>
             <div className={'footer__wrapper'}>

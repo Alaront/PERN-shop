@@ -1,0 +1,70 @@
+@import "../../../styles/common/index"
+
+.admin-menu
+  min-width: 300px
+  background: #173C5F
+  padding: 20px 30px
+  display: none
+  position: fixed
+  height: 100%
+
+  +min-w($tablet_s)
+    position: static
+    display: block
+    height: auto
+
+  &.admin-menu--show
+    display: block
+
+  ul
+    li
+      width: 100%
+      border-bottom: 1px solid $color_white
+
+      &:last-child
+        border: none
+
+      a
+        font-style: normal
+        font-weight: 500
+        font-size: 18px
+        line-height: 22px
+        text-decoration: none
+        color: $color_white
+        padding: 12px 0 12px 30px
+        display: block
+
+        &.active-link
+          color: $base_color
+
+.admin-menu-need
+  position: fixed
+  width: 100px
+  height: 100px
+  bottom: 20px
+  left: 50%
+  transform: translateX(-50%)
+  border-radius: 50%
+  background: #173C5F
+  border: 1px solid $color_black
+
+  +min-w($tablet_s)
+    display: none
+
+  &:before
+    content: ''
+    width: 50px
+    border: 1px solid $color_white
+    top: 37px
+    left: 50%
+    transform: translateX(-50%)
+    position: absolute
+
+  &:after
+    content: ''
+    width: 50px
+    border: 1px solid $color_white
+    top: 60px
+    left: 50%
+    transform: translateX(-50%)
+    position: absolute
