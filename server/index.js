@@ -4,6 +4,7 @@ import sequelize from './db.js'
 import cors from 'cors';
 import * as models from './models/models.js';
 import router from './routes/index.js'
+import ApiError from "./Utils/ApiError.js";
 
 config()
 
@@ -18,6 +19,8 @@ app.use('/api', router)
 app.get('/', (req, res) => {
     res.json('work')
 })
+
+app.use(ApiError)
 
 const startServer = async () => {
   try {
