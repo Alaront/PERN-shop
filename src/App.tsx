@@ -14,6 +14,7 @@ import AdminUsers from "./Components/Admin/Users/AdminUsers";
 import AdminBrands from "./Components/Admin/Brands/AdminBrands";
 import AdminProductsType from "./Components/Admin/ProductsType/AdminProductsType";
 import AdminBrandNew from "./Components/Admin/Brands/AdminBrandNew";
+import AddProduct from "./pages/addProduct";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/product" element={<Product />} />
           <Route path="/shopPage" element={<ShopPage />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/addProduct" element={<AddProduct />} />
           <Route path="/admin/*" element={<Admin />} >
               <Route path="products" element={<AdminProducts />} />
               <Route path="brands" element={<AdminBrands />} />
