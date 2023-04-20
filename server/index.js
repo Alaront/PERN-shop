@@ -5,6 +5,7 @@ import cors from 'cors';
 import * as models from './models/models.js';
 import router from './routes/index.js'
 import ApiError from "./Utils/ApiError.js";
+import fileUpload from 'express-fileupload'
 
 config()
 
@@ -13,6 +14,7 @@ const PORT = process.env.PORT || 5000;
 
 app.use(cors())
 app.use(express.json())
+app.use(fileUpload())
 
 app.use('/api', router)
 
