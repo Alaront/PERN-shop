@@ -1,0 +1,42 @@
+@import "common/index"
+
+.not-found-page
+  position: relative
+  min-height: 80vh
+
+  h6
+    font-size: 26px
+    line-height: 34px
+    margin-bottom: 30px
+    color: $text_color
+
+  p
+    font-size: 20px
+    line-height: 26px
+    color: $text_color
+
+    a
+      color: $text_color
+      text-decoration: none
+      border-bottom: 1px solid $text_color
+      transition: 0.5s
+
+      &:hover
+        color: $color_red
+        border-bottom: 1px solid $color_red
+
+  span
+    font-size: 150px
+    line-height: 176px
+    color: $text_color
+    opacity: 0.5
+    position: absolute
+    bottom: 10px
+    right: 20px
+    z-index: -1
+
+
+    +min-w($tablet_m)
+      font-size: 220px
+      line-height: 226px
+
