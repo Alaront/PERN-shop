@@ -6,29 +6,16 @@ interface ContentInfo {
     productId: number,
     price: number,
     oldPrice?: number,
-    discount?: number,
-    typeArray?: typeProduct[]
+    discount?: number
 }
 
-const TopInfo = ({discount, productId, price, oldPrice, typeArray}: ContentInfo) => {
+const TopInfo = ({discount, productId, price, oldPrice}: ContentInfo) => {
     const changeTypeProduct = (id: number):void => {
         console.log(id)
     }
 
     return (
         <div className={'top-content__info'}>
-            <div className={'top-content__info-type'}>
-                {
-                    typeArray && typeArray.map(item => (
-                        <div className={'top-content__info-type-item'} onClick={() => changeTypeProduct(item.id)} key={item.id}>
-                            <p>{item.title}</p>
-                            <div>
-                                <img src={item.photoUrl} alt={item.title}/>
-                            </div>
-                        </div>
-                    ))
-                }
-            </div>
 
             <div className={"top-content__info-price"}>
                 {

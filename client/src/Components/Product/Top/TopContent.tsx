@@ -22,11 +22,6 @@ const TopContent = () => {
                 id: 1,
                 title: 'Other',
                 photoUrl: Bitmap
-            },
-            {
-                id: 2,
-                title: 'Other 2',
-                photoUrl: Bitmap
             }
         ]
     )
@@ -45,7 +40,7 @@ const TopContent = () => {
             </div>
             <div className={'top-content__info-right'}>
                 <TopSlider />
-                <TopInfo productId={1} price={950} oldPrice={1200} discount={25} typeArray={productType}/>
+                <TopInfo productId={1} price={950} oldPrice={1200} discount={25} />
             </div>
         </div>
     );

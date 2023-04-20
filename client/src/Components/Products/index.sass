@@ -18,9 +18,16 @@
 
   +min-w($tablet_s)
     width: calc(100%/12*2 - 8px)
+    &:hover
+      .product-card-short__price
+        color: $color_red
+
+      .product-card-short__title
+        color: $base_color
 
   .similar-products__slider &
     width: 100%
+
 
 .product-card-short__photo
   width: 100%
@@ -35,6 +42,7 @@
     z-index: 1
 
 .product-card-short__price
+  transition: 0.3s
   font-style: normal
   font-weight: 600
   font-size: 16px
@@ -55,6 +63,7 @@
 
 
 .product-card-short__title
+  transition: 0.3s
   font-style: normal
   font-weight: 400
   font-size: 13px

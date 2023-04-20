@@ -3,7 +3,7 @@ import logo from '../images/shop-logo.svg'
 import Search from "../Components/Search/Search";
 
 import '../styles/header.sass'
-import {Link} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 import RegisterForm from "../Components/RegisterForm/RegisterForm";
 import {readLSShopingCart} from "../helpers";
 import {EVENT_ADD_GOODS_CARD} from "../helpers/consts";
@@ -50,7 +50,9 @@ const Header = () => {
         <header className="header">
             <div className={'header-wrapper'}>
                 <div className={'header__left'}>
-                    <img src={logo} alt={'logo'} className={'header__logo'}/>
+                    <NavLink to={'/'}>
+                        <img src={logo} alt={'logo'} className={'header__logo'}/>
+                    </NavLink>
                     <div className={'header__menu-btn'}>Каталог</div>
                 </div>
                 <Search />

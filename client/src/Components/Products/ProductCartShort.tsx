@@ -1,6 +1,7 @@
 import React from 'react';
 
 import './index.sass'
+import {NavLink} from "react-router-dom";
 
 interface ProductCartShortI {
     title: string,
@@ -22,7 +23,7 @@ const ProductCartShort = ({oldPrice, photoUrl, price, title, hrefLink}: ProductC
                     oldPrice ? <span>{oldPrice.toFixed(2)}</span> : ''
                 }
             </p>
-            <a className={'product-card-short__title'} href={hrefLink}>{title}</a>
+            <NavLink className={'product-card-short__title'} to={hrefLink}>{title}</NavLink>
         </div>
     );
 };

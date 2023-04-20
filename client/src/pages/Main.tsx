@@ -12,7 +12,6 @@ const Main = () => {
             <Daily />
             <Bestsellers />
             <Viewed />
-            <SubscribeForm />
         </div>
     );
 };
