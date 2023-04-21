@@ -24,10 +24,6 @@ app.use(fileUpload())
 app.use(express.static(path.resolve(__dirname, 'static')))
 app.use('/api', router)
 
-app.get('/', (req, res) => {
-    res.json('work')
-})
-
 app.use(errorHandler)
 
 const startServer = async () => {

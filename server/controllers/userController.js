@@ -38,39 +38,44 @@ class UserController {
     }
 
     async login(req, res, next) {
-        const {email, pass} = req.body;
+        try {
+            const {email, pass} = req.body;
 
-        const user = await User.findOne({where: {email}})
+            const user = await User.findOne({where: {email}})
 
-        if(!user) {
-            return next(ApiError.internal('Неверный email или пароль'))
+            if(!user) {
+                return next(ApiError.internal('Неверный email или пароль'))
+            }
+
+            let compressPassword = bcrypt.compareSync(pass, user.password)
+            if(!compressPassword) {
+                return next(ApiError.internal('Неверный email или пароль'))
+            }
+
+            const token = generateJwt(user.id, user.email)
+            return res.json(token)
+        } catch (e) {
+            return next(ApiError.badRequest('Error', e))
         }
-
-        let compressPassword = bcrypt.compareSync(pass, user.password)
-        if(!compressPassword) {
-            return next(ApiError.internal('Неверный email или пароль'))
-        }
-
-        const token = generateJwt(user.id, email.email)
-        return res.json(token)
     }
 
-    async getOne(req, res) {
-        const {id} = req.params;
+    async getOne(req, res, next) {
+        try {
+            const {id} = req.params;
 
-        const user = await User.findOne({where: {id}});
+            const user = await User.findOne({where: {id}});
 
-        return res.json(user);
+            return res.json(user);
+        } catch (e) {
+            return next(ApiError.badRequest('Error', e))
+        }
     }
 
-    async auth(req, res, next) {
-        const {id} = req.query
+    async check(req, res, next) {
+        console.log(req.user.id, req.user.email)
+        const token = generateJwt(req.user.id, req.user.email);
 
-        if(!id) {
-            return next(ApiError.badRequest('Not set ID'))
-        }
-
-        return res.json(id)
+        return res.json({token})
     }
 }
 
