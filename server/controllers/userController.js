@@ -37,8 +37,30 @@ class UserController {
         }
     }
 
-    async get(req, res) {
-        return res.status(203).json('Answer test')
+    async login(req, res, next) {
+        const {email, pass} = req.body;
+
+        const user = await User.findOne({where: {email}})
+
+        if(!user) {
+            return next(ApiError.internal('Неверный email или пароль'))
+        }
+
+        let compressPassword = bcrypt.compareSync(pass, user.password)
+        if(!compressPassword) {
+            return next(ApiError.internal('Неверный email или пароль'))
+        }
+
+        const token = generateJwt(user.id, email.email)
+        return res.json(token)
+    }
+
+    async getOne(req, res) {
+        const {id} = req.params;
+
+        const user = await User.findOne({where: {id}});
+
+        return res.json(user);
     }
 
     async auth(req, res, next) {
