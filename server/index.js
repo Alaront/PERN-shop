@@ -4,9 +4,14 @@ import sequelize from './db.js'
 import cors from 'cors';
 import * as models from './models/models.js';
 import router from './routes/index.js'
-import ApiError from "./Utils/ApiError.js";
+import errorHandler from "./middleware/ErrorHandingMiddleware.js"
 import fileUpload from 'express-fileupload'
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+import * as path from "path";
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 config()
 
 const app = new express();
@@ -15,14 +20,14 @@ const PORT = process.env.PORT || 5000;
 app.use(cors())
 app.use(express.json())
 app.use(fileUpload())
-
+app.use(express.static(path.resolve(__dirname, 'static')))
 app.use('/api', router)
 
 app.get('/', (req, res) => {
     res.json('work')
 })
 
-app.use(ApiError)
+app.use(errorHandler)
 
 const startServer = async () => {
   try {
