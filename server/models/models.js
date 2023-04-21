@@ -11,6 +11,9 @@ const User = sequelize.define('user', {
         type: DataTypes.STRING,
         unique: true
     },
+    name: {
+        type: DataTypes.STRING,
+    },
     password: {
         type: DataTypes.STRING
     },
@@ -52,21 +55,31 @@ const UserShop = sequelize.define('userShop', {
     },
     description: {
         type: DataTypes.STRING,
+        defaultValue: ""
     },
     title: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        defaultValue: ""
     },
     email: {
         type: DataTypes.STRING,
+        defaultValue: ""
     },
     phone: {
         type: DataTypes.STRING,
+        defaultValue: ""
     },
     rating: {
         type: DataTypes.INTEGER,
+        defaultValue: 0
     },
     country: {
         type: DataTypes.STRING,
+        defaultValue: ""
+    },
+    img: {
+        type: DataTypes.STRING,
+        defaultValue: ""
     },
 })
 
