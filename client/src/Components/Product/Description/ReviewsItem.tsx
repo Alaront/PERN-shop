@@ -1,8 +1,18 @@
-import React from 'react';
+import React, {FormEvent, useState} from 'react';
 import watchPhoto from "../../../images/products/watch.png";
 import GradeStars from "../../Grade/GradeStars";
 
 const ReviewsItem = () => {
+    const [showForm, setShowForm] = useState<boolean>(false)
+
+    const [textAnswer, setTextAnswer] = useState<String>('')
+
+    const sendFormReviews = (e:FormEvent) => {
+        e.preventDefault();
+        console.log('textAnswer', textAnswer)
+    }
+
+
     return (
         <div className={'reviews-item'}>
             <div className={'reviews-item__user'}>
@@ -29,6 +39,13 @@ const ReviewsItem = () => {
                 <p className={'reviews-item__text'}>Конфеты точно как Баунти, приятный аналог без сахара и вредностей. Много начинки и тооонкий слой шоколада. Любителям кокоса идеально! В коробке 12 штучек, каждая отдельно упакована. Сама коробка очень красивая и оригинальная, можно и в подарок. </p>
 
             </div>
+
+            <p className={'reviews-item__answer'} onClick={() => setShowForm(!showForm)}>{showForm ? 'Скрыть форму' : 'Ответить'}</p>
+
+            <form className={`reviews-item__answer-form ${showForm ? '' : 'reviews-item__answer-form--hidden'}`} onSubmit={sendFormReviews}>
+                <textarea onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setTextAnswer(e.target.value)} />
+                <button>Отправить ответ</button>
+            </form>
         </div>
     );
 };

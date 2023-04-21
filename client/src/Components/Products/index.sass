@@ -9,6 +9,10 @@
   margin: 0 4px 14px
   text-decoration: none
   position: relative
+  transition: 0.3s
+
+  &:hover
+    transform: translateY(-2px)
 
   +min-w(500px)
     width: calc(100%/12*4 - 8px)
@@ -18,12 +22,6 @@
 
   +min-w($tablet_s)
     width: calc(100%/12*2 - 8px)
-    &:hover
-      .product-card-short__price
-        color: $color_red
-
-      .product-card-short__title
-        color: $base_color
 
   .similar-products__slider &
     width: 100%
