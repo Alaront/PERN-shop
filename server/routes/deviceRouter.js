@@ -4,6 +4,10 @@ import deviceController from "../controllers/deviceController.js";
 const router = new Router();
 
 router.post('', deviceController.create)
-router.get('', deviceController.get)
+router.patch('/photo', deviceController.updateMainPhoto)
+router.patch('/', deviceController.changeInfoDevice)
+router.post('/buyDevice', deviceController.buyDevice)
+router.post('/newRating', deviceController.newRatingDevice)
+router.get('', deviceController.getOne)
 
 export default router

@@ -123,10 +123,30 @@ const DeviceInfo = sequelize.define('deviceInfo', {
         type: DataTypes.STRING,
         defaultValue: ''
     },
+    mainPhoto: {
+        type: DataTypes.STRING,
+        defaultValue: ''
+    },
     rating: {
         type: DataTypes.INTEGER,
         defaultValue: 0
     },
+})
+
+const DevicePhoto = sequelize.define('devicePhoto', {
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
+    url: {
+        type: DataTypes.STRING,
+        defaultValue: ''
+    },
+    text: {
+        type: DataTypes.STRING,
+        defaultValue: ''
+    }
 })
 
 const DeviceCharacteristics = sequelize.define('deviceCharacteristic', {
@@ -213,6 +233,9 @@ UserOperation.belongsTo(User);
 UserShop.hasMany(Review)
 Review.belongsTo(UserShop)
 
+UserShop.hasMany(Device);
+Device.belongsTo(UserShop);
+
 Device.hasOne(DeviceInfo)
 DeviceInfo.belongsTo(Device)
 
@@ -221,6 +244,9 @@ DeviceCharacteristics.belongsTo(Device)
 
 Device.hasMany(Review)
 Review.belongsTo(Device)
+
+Device.hasMany(DevicePhoto);
+DevicePhoto.belongsTo(Device)
 
 Review.hasMany(ReviewComment)
 ReviewComment.belongsTo(Review)
