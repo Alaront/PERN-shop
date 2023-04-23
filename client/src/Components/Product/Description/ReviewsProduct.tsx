@@ -5,7 +5,7 @@ import ReviewsItem from "./ReviewsItem";
 import ReviewsForm from "./ReviewsForm";
 
 const ReviewsProduct = () => {
-    const [showReviewsForm, setShowReviewsForm] = useState<Boolean>(true)
+    const [showReviewsForm, setShowReviewsForm] = useState<Boolean>(false)
 
     return (
         <div className={'reviews-product'}>
