@@ -245,6 +245,9 @@ DeviceCharacteristics.belongsTo(Device)
 Device.hasMany(Review)
 Review.belongsTo(Device)
 
+User.hasMany(Review)
+Review.belongsTo(User)
+
 Device.hasMany(DevicePhoto);
 DevicePhoto.belongsTo(Device)
 

@@ -264,3 +264,100 @@
     font-size: 15px
     line-height: 20px
     color: #FFFFFF
+
+.reviews-product__score
+  display: flex
+  flex-direction: row
+  flex-wrap: wrap
+
+  .reviews-product__title
+    width: 100%
+
+  .reviews-item__answer
+    font-weight: 400
+    margin-right: 40px
+
+.reviews-form
+  display: flex
+  align-items: center
+  justify-content: center
+  position: fixed
+  top: 0
+  left: 0
+  width: 100%
+  height: 100vh
+  z-index: 999
+  background: rgba(149, 147, 147, 0.56)
+
+.reviews-form__wrapper
+  width: 100%
+  background: $bg_color
+  padding: 40px 30px
+  height: auto
+  max-width: 1000px
+  border-radius: 10px
+  position: relative
+
+.reviews-form__title
+  font-weight: 500
+  font-size: 18px
+  line-height: 22px
+  margin-bottom: 15px
+
+  +min-w($tablet_s)
+    font-size: 24px
+    line-height: 22px
+    margin-bottom: 35px
+
+.reviews-form__close
+  position: absolute
+  top: 35px
+  right: 20px
+  width: 30px
+  height: 30px
+  background: url("../../../images/decor/close.svg") no-repeat center
+  background-size: contain
+  cursor: pointer
+
+.reviews-form__form
+  div
+    margin-bottom: 15px
+
+    +min-w($tablet_s)
+      margin-bottom: 25px
+
+  p
+    font-weight: 400
+    font-size: 18px
+    line-height: 22px
+    margin-bottom: 5px
+
+    +min-w($tablet_s)
+      font-size: 20px
+      line-height: 22px
+
+  textarea
+    width: 100%
+    resize: vertical
+    padding: 15px
+    border-radius: 15px
+    height: 100px
+
+  button
+    max-width: max-content
+    border-radius: 5px
+    padding: 15px 10px
+    background: $base_color_red
+    cursor: pointer
+    border: none
+    outline: none
+    font-weight: 500
+    font-size: 18px
+    line-height: 20px
+    color: #FFFFFF
+
+    +min-w($tablet_s)
+      padding: 20px 15px
+      font-weight: 600
+      font-size: 20px
+      line-height: 25px
