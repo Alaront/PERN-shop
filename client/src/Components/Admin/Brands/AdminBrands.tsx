@@ -3,6 +3,7 @@ import './index.sass'
 import logo1 from './tempLogo/logo1.png'
 import logo2 from './tempLogo/logo2.svg'
 import AdminBrandsForm from "./AdminBrandsForm";
+import AdminEditBrands from "./AdminEditBrands";
 
 
 interface allBrandsI {
@@ -27,6 +28,7 @@ const AdminBrands = () => {
 
     return (
         <div className={'admin-main'}>
+            <AdminEditBrands />
             <h2 className={'admin-main__title'}>Brands</h2>
             <div className={'admin-main__content'}>
                 <div className={'admin-main__content-left'}>
