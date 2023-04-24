@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './index.sass'
 import {NavLink} from "react-router-dom";
 import AdminProductsForm from "./AdminProductsForm";
+import axios from "../../../axios";
 
 interface allProductsI {
     id: number,
@@ -13,24 +14,14 @@ interface allProductsI {
 }
 
 const AdminProducts = () => {
-    const [allProducts, setAllProducts] = useState<allProductsI[]>([
-        {
-            id: 1,
-            fullName: 'Test name',
-            nameShop: 'Test name shop',
-            brand: 'Test email',
-            rating: 32,
-            link: '#'
-        },
-        {
-            id: 2,
-            fullName: 'Test name two',
-            nameShop: 'Test name shop two',
-            brand: 'Test email tweo',
-            rating: 3222,
-            link: '$'
-        }
-    ])
+    const [allProducts, setAllProducts] = useState<allProductsI[]>()
+
+    useEffect(() => {
+        axios.get('/device').then(response => {
+            const data = response.data;
+            setAllProducts(data.deviceInfo.map((item: { deviceId: any; }) => {return {...item, id: item.deviceId, link: item.deviceId }}))
+        })
+    }, [])
 
     return (
         <div className={'admin-main'}>
@@ -39,12 +30,12 @@ const AdminProducts = () => {
                 <div className={'admin-main__content-left'}>
                     <table className={'admin-main__content-table'}>
                         <thead>
-                        <tr><th className={'admin-main__content-table-id'}>id</th><th>Full name</th><th>name of shop</th><th>brand</th><th>rating</th><th>Открыть</th></tr>
+                            <tr><th className={'admin-main__content-table-id'}>id</th><th>Full name</th><th>name of shop</th><th>rating</th><th>Открыть</th></tr>
                         </thead>
                         <tbody>
                         {
-                            allProducts.map(item => (
-                                <tr key={item.id} ><td>{item.id}</td><td>{item.fullName}</td><td>{item.nameShop}</td><td>{item.brand}</td><td>{item.rating}</td><td><NavLink to={item.link} target={"_blank"}>Открыть</NavLink></td></tr>
+                            allProducts && allProducts.map(item => (
+                                <tr key={item.id} ><td>{item.id}</td><td>{item.fullName}</td><td>{item.nameShop}</td><td>{item.rating}</td><td><NavLink to={`/product/${item.link}`} target={"_blank"}>Открыть</NavLink></td></tr>
                             ))
                         }
                         </tbody>

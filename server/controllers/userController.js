@@ -71,6 +71,16 @@ class UserController {
         }
     }
 
+    async getAll(req, res, next) {
+        try {
+            const user = await User.findAll()
+
+            return res.json(user);
+        } catch (e) {
+            return next(ApiError.badRequest('Error', e))
+        }
+    }
+
     async check(req, res, next) {
         console.log(req.user.id, req.user.email)
         const token = generateJwt(req.user.id, req.user.email);

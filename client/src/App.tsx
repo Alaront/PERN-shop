@@ -28,8 +28,8 @@ function App() {
       <Header />
       <Routes>
           <Route path="/" element={<Main />} />
-          <Route path="/product" element={<Product />} />
-          <Route path="/shopPage" element={<ShopPage />} />
+          <Route path="/product/:id" element={<Product />} />
+          <Route path="/shopPage/:id" element={<ShopPage />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/addProduct" element={<AddProduct />} />
           <Route path="/admin/*" element={<Admin />} >

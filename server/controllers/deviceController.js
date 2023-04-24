@@ -128,7 +128,7 @@ class DeviceController {
 
     async getOne(req, res, next) {
         try {
-            const {id} = req.body;
+            const {id} = req.params;
 
             if(!id) {
                 return next(ApiError.badRequest('Not set id'))
@@ -136,6 +136,18 @@ class DeviceController {
 
             const device = await Device.findOne({where: {id}})
             const deviceInfo = await DeviceInfo.findOne({where: {deviceId: id}})
+
+            return res.json({device, deviceInfo})
+        } catch (e) {
+            console.log(e)
+            return next(ApiError.badRequest(e))
+        }
+    }
+
+    async getAll(req, res, next) {
+        try {
+            const device = await Device.findAll();
+            const deviceInfo = await DeviceInfo.findAll();
 
             return res.json({device, deviceInfo})
         } catch (e) {
