@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Routes} from "react-router";
 import Main from "./pages/Main";
 import Product from "./pages/Product";
@@ -15,8 +15,14 @@ import AdminBrands from "./Components/Admin/Brands/AdminBrands";
 import AdminProductsType from "./Components/Admin/ProductsType/AdminProductsType";
 import AdminBrandNew from "./Components/Admin/Brands/AdminBrandNew";
 import AddProduct from "./pages/addProduct";
+import axios from "./axios";
 
 function App() {
+    useEffect(() => {
+        console.log('Effect')
+    }, [])
+
+
   return (
     <div className="App">
       <Header />

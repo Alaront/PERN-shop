@@ -1,11 +1,39 @@
 import React, {ChangeEvent, FormEvent, useState} from 'react';
+import axios from "../../../axios";
+import { updateType} from "../../../redux/slice/types";
+import {useAppDispatch} from "../../../redux/helpers";
+
+interface paramsI {
+    id: string
+    name?: string,
+    slug?: string
+}
 
 const AdminAddNewProductType = () => {
     const [id, setId] = useState<string>('')
     const [name, setName] = useState<string>('')
+    const [slug, setSlug] = useState<string>('')
+
+    const dispatch = useAppDispatch();
 
     const searchEvent = (e: FormEvent) => {
         e.preventDefault();
+
+        if(!id) return
+
+        const params:paramsI = {
+            id,
+        }
+
+        if(name) params['name'] = name
+        if(slug) params['slug'] = slug
+
+        axios.patch('/type', params)
+            .then(response => {
+                setName('')
+                setSlug('')
+                dispatch(updateType(response.data[1][0]))
+            })
     }
 
     return (
@@ -17,6 +45,9 @@ const AdminAddNewProductType = () => {
                 </label>
                 <label>
                     New name: <input type={'text'} value={name} onChange={(e) => setName(e.target.value)}/>
+                </label>
+                <label>
+                    New slug: <input type={'slug'} value={slug} onChange={(e) => setSlug(e.target.value)}/>
                 </label>
                 <button>Edit</button>
             </form>

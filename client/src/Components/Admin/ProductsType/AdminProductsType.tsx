@@ -1,25 +1,50 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {NavLink} from "react-router-dom";
 import AdminProductsTypeForm from "./AdminProductsTypeForm";
 import AdminAddNewProductType from "./AdminAddNewProductType";
 import AdminEditProductType from "./AdminEditProductType";
+import {useDispatch, useSelector} from "react-redux";
+import {fetchTypes, removeType} from "../../../redux/slice/types";
+import {useAppDispatch} from "../../../redux/helpers";
+import axios from "../../../axios";
 
 interface allProductsTypeI {
     id: number,
-    fullName: string,
+    name: string,
+    slug: string,
+}
+
+interface productsTypeI {
+    allTypes: Array<allProductsTypeI>,
+    status: string
 }
 
 const AdminProductsType = () => {
-    const [allProductsType, setAllProductsType] = useState<allProductsTypeI[]>([
-        {
-            id: 1,
-            fullName: 'Test name',
-        },
-        {
-            id: 2,
-            fullName: 'Test name two',
+    // @ts-ignore
+    const allProductsType:productsTypeI = useSelector((state) => state.types);
+
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        dispatch(fetchTypes())
+    }, [])
+
+    const dellType = (id:number) => {
+        if(!id) return
+
+        const config = {
+            data: {
+                id
+            }
         }
-    ])
+
+        if (window.confirm("Удалить ?")) {
+            axios.delete('/type', config)
+                .then(data => {
+                    dispatch(removeType(id))
+                })
+        }
+    }
 
     return (
         <div className={'admin-main'}>
@@ -32,12 +57,12 @@ const AdminProductsType = () => {
                 <div className={'admin-main__content-left'}>
                     <table className={'admin-main__content-table'}>
                         <thead>
-                        <tr><th className={'admin-main__content-table-id'}>id</th><th>Full name</th></tr>
+                        <tr><th className={'admin-main__content-table-id'}>id</th><th>Full name</th><th>Slug</th><th>Dell</th></tr>
                         </thead>
                         <tbody>
                         {
-                            allProductsType.map(item => (
-                                <tr key={item.id} ><td>{item.id}</td><td>{item.fullName}</td></tr>
+                            allProductsType.allTypes && allProductsType.allTypes.map(item => (
+                                <tr key={item.id} ><td>{item.id}</td><td>{item.name}</td><td>{item.slug}</td><td  className={'admin-main__content-table-dell'} onClick={() => dellType(item.id)}>X</td></tr>
                             ))
                         }
                         </tbody>

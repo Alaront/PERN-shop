@@ -8,6 +8,10 @@ class TypeController {
         try {
             let {name, slug} = req.body;
 
+            if(!name) {
+                return next(ApiError.badRequest('Not set name'))
+            }
+
             if(!slug) {
                 slug = tr(name).replace(' ', '') + '_' + Date.now()
             }
