@@ -57,6 +57,8 @@ class BrandController {
             const {id } = req.body;
             const {logo} = req.files;
 
+            console.log(id, logo)
+
             if(!id || !logo) {
                 return next(ApiError.badRequest('Not set id or logo'))
             }

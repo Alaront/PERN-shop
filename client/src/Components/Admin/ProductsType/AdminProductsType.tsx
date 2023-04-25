@@ -29,7 +29,7 @@ const AdminProductsType = () => {
         dispatch(fetchTypes())
     }, [])
 
-    const dellType = (id:number) => {
+    const dellType = (id:number, name:string) => {
         if(!id) return
 
         const config = {
@@ -38,7 +38,7 @@ const AdminProductsType = () => {
             }
         }
 
-        if (window.confirm("Удалить ?")) {
+        if (window.confirm(`Удалить ${name} ?`)) {
             axios.delete('/type', config)
                 .then(data => {
                     dispatch(removeType(id))
@@ -62,7 +62,7 @@ const AdminProductsType = () => {
                         <tbody>
                         {
                             allProductsType.allTypes && allProductsType.allTypes.map(item => (
-                                <tr key={item.id} ><td>{item.id}</td><td>{item.name}</td><td>{item.slug}</td><td  className={'admin-main__content-table-dell'} onClick={() => dellType(item.id)}>X</td></tr>
+                                <tr key={item.id} ><td>{item.id}</td><td>{item.name}</td><td>{item.slug}</td><td  className={'admin-main__content-table-dell'} onClick={() => dellType(item.id, item.name)}>X</td></tr>
                             ))
                         }
                         </tbody>

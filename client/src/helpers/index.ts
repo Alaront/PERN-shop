@@ -39,4 +39,8 @@ async function readLSShopingCart(): Promise<Array<cartData>> {
 
 }
 
-export {writeLSShopingCart, readLSShopingCart}
+function makeFullPhotoUrl(url:string):string {
+    return `http://localhost:7000/${url}`
+}
+
+export {writeLSShopingCart, readLSShopingCart, makeFullPhotoUrl}

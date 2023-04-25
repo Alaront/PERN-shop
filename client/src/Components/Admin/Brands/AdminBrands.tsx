@@ -1,30 +1,55 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './index.sass'
-import logo1 from './tempLogo/logo1.png'
-import logo2 from './tempLogo/logo2.svg'
 import AdminBrandsForm from "./AdminBrandsForm";
 import AdminEditBrands from "./AdminEditBrands";
+import {useSelector} from "react-redux";
+import {useAppDispatch} from "../../../redux/helpers";
+import {fetchBrands, removeBrand} from "../../../redux/slice/brands";
+import {makeFullPhotoUrl} from "../../../helpers";
+import axios from "../../../axios";
+import {removeType} from "../../../redux/slice/types";
 
+
+interface brandI {
+    id: number,
+    photo: string,
+    name: string,
+}
 
 interface allBrandsI {
-    id: number,
-    logo: string,
-    fullName: string,
+    allBrands: Array<brandI>,
+    status: string
 }
 
 const AdminBrands = () => {
-    const [allBrands, setAllBrands] = useState<allBrandsI[]>([
-        {
-            id: 1,
-            logo: logo1,
-            fullName: 'Brand 1',
-        },
-        {
-            id: 2,
-            logo: logo2,
-            fullName: 'Brand 2',
+    // @ts-ignore
+    const allBrands:allBrandsI = useSelector((state) => state.brands);
+    console.log(allBrands)
+
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        console.log('start fetch')
+        dispatch(fetchBrands());
+    }, [])
+
+
+    const dellType = (id:number, name: string) => {
+        if(!id) return
+
+        const config = {
+            data: {
+                id
+            }
         }
-    ])
+
+        if (window.confirm(`Удалить ${name} ?`)) {
+            axios.delete('/brand', config)
+                .then(data => {
+                    dispatch(removeBrand(id))
+                })
+        }
+    }
 
     return (
         <div className={'admin-main'}>
@@ -34,12 +59,12 @@ const AdminBrands = () => {
                 <div className={'admin-main__content-left'}>
                     <table className={'admin-main__content-table'}>
                         <thead>
-                        <tr><th className={'admin-main__content-table-id'}>id</th><th>logo</th><th>full name</th></tr>
+                        <tr><th className={'admin-main__content-table-id'}>id</th><th>logo</th><th>full name</th><th>Dell</th></tr>
                         </thead>
                         <tbody>
                         {
-                            allBrands.map(item => (
-                                <tr key={item.id}><td>{item.id}</td><td><img src={item.logo} alt={item.fullName}/></td><td>{item.fullName}</td></tr>
+                            allBrands.allBrands && allBrands.allBrands.map(item => (
+                                <tr key={item.id}><td>{item.id}</td><td><img src={makeFullPhotoUrl(item.photo)} alt={item.name}/></td><td>{item.name}</td><td  className={'admin-main__content-table-dell'} onClick={() => dellType(item.id, item.name)}>X</td></tr>
                             ))
                         }
                         </tbody>
