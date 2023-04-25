@@ -1,21 +1,46 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import watchPhoto from "../../images/products/watch.png";
 
 import './index.sass'
+import axios from "../../axios";
+import {useParams} from "react-router";
+import {makeFullPhotoUrl} from "../../helpers";
+
+interface shopDataI {
+    img: string,
+    title: string,
+    description: string,
+    email: string,
+    phone: string,
+    country: string,
+}
 
 const SellerAbout = () => {
+    const [shopData, setShopData] = useState<shopDataI | {}>({})
+
+    const {id} = useParams();
+
+    useEffect(() => {
+        axios.get(`/userShop/${id}`)
+            .then(response => {
+                setShopData(response.data)
+            })
+    }, [])
+
+    if(!Object.keys(shopData).length) return <></>
+
     return (
         <div className={'seller-about'}>
             <div className={'seller-about__photo'}>
-                <img src={watchPhoto} alt={'photo'} />
+                <img src={"img" in shopData ? makeFullPhotoUrl(shopData.img) : ''} alt={'photo'} />
             </div>
             <div className={'seller-about__text'} >
-                <h2 className={'seller-about__title'}>Seller number oNe</h2>
-                <p className={'seller-about__description'}>Lorem LoremL oremLo remL oremLor emLoremLo remL oremL oremLor em Lorem LoremL oremLo remL oremLor emLoremLo remL oremL oremLor em Lorem LoremL oremLo remL oremLor emLoremLo remL oremL oremLor em Lorem LoremL oremLo remL oremLor emLoremLo remL oremL oremLor em Lorem LoremL oremLo remL oremLor emLoremLo remL oremL oremLor em Lorem LoremL oremLo remL oremLor emLoremLo remL oremL oremLor em Lorem LoremL oremLo remL oremLor emLoremLo remL oremL oremLor em Lorem LoremL oremLo remL oremLor emLoremLo remL oremL oremLor em Lorem LoremL oremLo remL oremLor emLoremLo remL oremL oremLor em Lorem LoremL oremLo remL oremLor emLoremLo remL oremL oremLor em Lorem LoremL oremLo remL oremLor emLoremLo remL oremL oremLor em Lorem LoremL oremLo remL oremLor emLoremLo remL oremL oremLor em</p>
+                <h2 className={'seller-about__title'}>{"title" in shopData ? shopData.title : ''}</h2>
+                <p className={'seller-about__description'}>{"description" in shopData ? shopData.description : ''}</p>
                 <ul className={'seller-about__info-list'}>
-                    <li className={'seller-about__info-list--email'}><span>Email: </span>test@mail.ru</li>
-                    <li className={'seller-about__info-list--phone'}><span>Телефон: </span>+7 (093) - 237 - 20 - 32</li>
-                    <li className={'seller-about__info-list--country'}><span>Страна: </span>UK</li>
+                    <li className={'seller-about__info-list--email'}><span>Email: </span>{"email" in shopData ? shopData.email : ''}</li>
+                    <li className={'seller-about__info-list--phone'}><span>Телефон: </span>{"phone" in shopData ? shopData.phone : ''}</li>
+                    <li className={'seller-about__info-list--country'}><span>Страна: </span>{"country" in shopData ? shopData.country : ''}</li>
                 </ul>
             </div>
         </div>
