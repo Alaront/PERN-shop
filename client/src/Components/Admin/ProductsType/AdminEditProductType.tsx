@@ -1,5 +1,5 @@
 import React, {ChangeEvent, FormEvent, useState} from 'react';
-import{$host} from "../../../axios";
+import {$authHost, $host} from "../../../axios";
 import { updateType} from "../../../redux/slice/types";
 import {useAppDispatch} from "../../../redux/helpers";
 
@@ -28,7 +28,7 @@ const AdminAddNewProductType = () => {
         if(name) params['name'] = name
         if(slug) params['slug'] = slug
 
-        $host.patch('/type', params)
+        $authHost.patch('/type', params)
             .then(response => {
                 setName('')
                 setSlug('')

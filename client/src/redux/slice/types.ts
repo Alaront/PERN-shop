@@ -1,5 +1,5 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {$host} from "../../axios";
+import {$authHost, $host} from "../../axios";
 
 export const fetchTypes = createAsyncThunk("types/fetchTypes", async () => {
     const { data } = await $host.get("/type");
@@ -7,7 +7,7 @@ export const fetchTypes = createAsyncThunk("types/fetchTypes", async () => {
 });
 
 export const addNewType = createAsyncThunk("types/addNewType", async (params:object) => {
-    const { data } = await $host.post("/type", params);
+    const { data } = await $authHost.post("/type", params);
     return data;
 });
 

@@ -6,7 +6,7 @@ import AdminEditProductType from "./AdminEditProductType";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchTypes, removeType} from "../../../redux/slice/types";
 import {useAppDispatch} from "../../../redux/helpers";
-import{$host} from "../../../axios";
+import {$authHost, $host} from "../../../axios";
 
 interface allProductsTypeI {
     id: number,
@@ -39,7 +39,7 @@ const AdminProductsType = () => {
         }
 
         if (window.confirm(`Удалить ${name} ?`)) {
-            $host.delete('/type', config)
+            $authHost.delete('/type', config)
                 .then(data => {
                     dispatch(removeType(id))
                 })
