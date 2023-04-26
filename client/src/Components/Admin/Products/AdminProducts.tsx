@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import './index.sass'
 import {NavLink} from "react-router-dom";
 import AdminProductsForm from "./AdminProductsForm";
-import axios from "../../../axios";
+import{$host} from "../../../axios";
 
 interface allProductsI {
     id: number,
@@ -17,7 +17,7 @@ const AdminProducts = () => {
     const [allProducts, setAllProducts] = useState<allProductsI[]>()
 
     useEffect(() => {
-        axios.get('/device').then(response => {
+        $host.get('/device').then(response => {
             const data = response.data;
             setAllProducts(data.deviceInfo.map((item: { deviceId: any; }) => {return {...item, id: item.deviceId, link: item.deviceId }}))
         })

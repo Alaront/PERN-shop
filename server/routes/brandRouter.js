@@ -1,12 +1,13 @@
 import {Router} from "express";
 import brandController from "../controllers/brandController.js";
+import checkRoleMiddleware from "../middleware/checkRoleMiddleware.js";
 
 const router = new Router();
 
-router.post('', brandController.create)
+router.post('', checkRoleMiddleware('ADMIN'), brandController.create)
 router.get('', brandController.get)
-router.delete('', brandController.dell)
-router.patch('/title', brandController.updateTitle)
-router.patch('/photo', brandController.updatePhoto)
+router.delete('', checkRoleMiddleware('ADMIN'), brandController.dell)
+router.patch('/title', checkRoleMiddleware('ADMIN'), brandController.updateTitle)
+router.patch('/photo', checkRoleMiddleware('ADMIN'), brandController.updatePhoto)
 
 export default router

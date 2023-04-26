@@ -6,7 +6,7 @@ import {useSelector} from "react-redux";
 import {useAppDispatch} from "../../../redux/helpers";
 import {fetchBrands, removeBrand} from "../../../redux/slice/brands";
 import {makeFullPhotoUrl} from "../../../helpers";
-import axios from "../../../axios";
+import {$authHost, $host} from "../../../axios";
 import {removeType} from "../../../redux/slice/types";
 
 
@@ -44,7 +44,7 @@ const AdminBrands = () => {
         }
 
         if (window.confirm(`Удалить ${name} ?`)) {
-            axios.delete('/brand', config)
+            $authHost.delete('/brand', config)
                 .then(data => {
                     dispatch(removeBrand(id))
                 })

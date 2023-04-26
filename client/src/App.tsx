@@ -15,12 +15,25 @@ import AdminBrands from "./Components/Admin/Brands/AdminBrands";
 import AdminProductsType from "./Components/Admin/ProductsType/AdminProductsType";
 import AdminBrandNew from "./Components/Admin/Brands/AdminBrandNew";
 import AddProduct from "./pages/addProduct";
-import axios from "./axios";
+import {$authHost, $host} from "./axios";
+import {setIsAuth, setUser} from "./redux/slice/user";
+import jwtDecode from "jwt-decode";
+import {useAppDispatch} from "./redux/helpers";
 
 function App() {
+
+    const dispatch = useAppDispatch();
+
     useEffect(() => {
         console.log('Effect')
+        $authHost.get('/user/check')
+            .then(response => {
+                dispatch(setUser(jwtDecode(response.data.token)))
+                dispatch(setIsAuth(true))
+                localStorage.setItem('pern-shop-token', response.data.token)
+            })
     }, [])
+
 
 
   return (

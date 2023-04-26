@@ -1,6 +1,6 @@
 import React, {FormEvent, useState} from 'react';
 import {useAppDispatch} from "../../../redux/helpers";
-import axios from "../../../axios";
+import {$authHost, $host} from "../../../axios";
 import {addType} from "../../../redux/slice/types";
 
 interface paramsI {
@@ -24,7 +24,7 @@ const AdminAddNewProductType = () => {
 
         if(slug) params['slug'] = slug
 
-        axios.post('/type', params)
+        $authHost.post('/type', params)
             .then(response => {
                 console.log(response)
                 setName('')

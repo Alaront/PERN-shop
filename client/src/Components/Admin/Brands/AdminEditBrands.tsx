@@ -1,5 +1,5 @@
 import React, {ChangeEvent, FormEvent, useState} from 'react';
-import axios from "../../../axios";
+import {$authHost, $host} from "../../../axios";
 import {useAppDispatch} from "../../../redux/helpers";
 import {addBrand, editBrand} from "../../../redux/slice/brands";
 
@@ -28,7 +28,7 @@ const AdminAddNewProductType = () => {
                 id: id,
                 title: name
             }
-            await axios.patch('/brand/title', params)
+            await $authHost.patch('/brand/title', params)
                 .then(response => {
                     console.log('response 1')
                     dispatch(editBrand(response.data[1][0]))
@@ -40,7 +40,7 @@ const AdminAddNewProductType = () => {
             formData.append('id', id)
             formData.append('logo', file)
 
-            await axios.patch('/brand/photo', formData)
+            await $authHost.patch('/brand/photo', formData)
                 .then(response => {
                     console.log('response 2')
                     dispatch(editBrand(response.data[1][0]))

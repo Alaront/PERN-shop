@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import watchPhoto from "../../images/products/watch.png";
 
 import './index.sass'
-import axios from "../../axios";
+import {$host} from "../../axios";
 import {useParams} from "react-router";
 import {makeFullPhotoUrl} from "../../helpers";
 
@@ -21,7 +21,7 @@ const SellerAbout = () => {
     const {id} = useParams();
 
     useEffect(() => {
-        axios.get(`/userShop/${id}`)
+        $host.get(`/userShop/${id}`)
             .then(response => {
                 setShopData(response.data)
             })

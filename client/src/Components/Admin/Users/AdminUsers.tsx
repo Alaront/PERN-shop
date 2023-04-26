@@ -3,7 +3,7 @@ import './index.sass'
 import {NavLink} from "react-router-dom";
 import CheckComponent from "../../CheckComponent/CheckComponent";
 import AdminUserForm from "./AdminUserForm";
-import axios from "../../../axios";
+import{$host} from "../../../axios";
 
 interface allUserI {
     id: number,
@@ -17,7 +17,7 @@ const AdminUsers = () => {
     const [allUser, setAllUser] = useState<allUserI[]>([])
 
     useEffect(() => {
-        axios.get('/user').then(response => {
+        $host.get('/user').then(response => {
             const data = response.data;
             setAllUser(data)
         })

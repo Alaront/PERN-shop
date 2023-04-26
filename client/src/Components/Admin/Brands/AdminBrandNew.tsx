@@ -1,6 +1,6 @@
 import React, {ChangeEvent, FormEvent, useState} from 'react';
 import './index.sass'
-import axios from "../../../axios";
+import {$authHost, $host} from "../../../axios";
 import {addBrand} from "../../../redux/slice/brands";
 
 const AdminBrandNew = () => {
@@ -25,7 +25,7 @@ const AdminBrandNew = () => {
         formData.append('title', name);
         formData.append('logo', file)
 
-        axios.post('/brand', formData)
+        $authHost.post('/brand', formData)
             .then(response => {
                 addBrand(response.data)
                 setFile(null);

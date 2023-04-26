@@ -7,11 +7,19 @@ import {Link, NavLink} from "react-router-dom";
 import RegisterForm from "../Components/RegisterForm/RegisterForm";
 import {readLSShopingCart} from "../helpers";
 import {EVENT_ADD_GOODS_CARD} from "../helpers/consts";
+import {useSelector} from "react-redux";
+import {setIsAuth, setUser} from "../redux/slice/user";
+import jwtDecode from "jwt-decode";
+import {useAppDispatch} from "../redux/helpers";
 
 const Header = () => {
-    const [isLogin, setIsLogin] = useState(false);
     const [haveForm, setHaveForm] = useState<boolean>(false);
     const [goodsCount, setGoodsCount] = useState<number>(0)
+
+    const dispatch = useAppDispatch();
+
+    // @ts-ignore
+    const isLogin = useSelector((state) => state.user)
 
     const getGoodsCount = () => {
         console.log('getGoodsCount')
@@ -35,8 +43,10 @@ const Header = () => {
     }, [])
 
     const loginEvent = () => {
-        if(isLogin) {
-
+        if(isLogin.isAuth) {
+            dispatch(setUser({}))
+            dispatch(setIsAuth(false))
+            localStorage.removeItem('pern-shop-token')
         } else {
             setHaveForm(true)
         }
@@ -62,10 +72,10 @@ const Header = () => {
                             goodsCount > 0 && <span>{goodsCount}</span>
                         }
                     </Link>
-                    <Link to={"#"} className={`header__prof header__prof--${isLogin ? 'logout' : 'login'}`} onClick={loginEvent}></Link>
+                    <Link to={"#"} className={`header__prof header__prof--${isLogin.isAuth ? 'logout' : 'login'}`} onClick={loginEvent}></Link>
                 </div>
             </div>
-            <RegisterForm haveForm={haveForm} setHaveForm={setHaveForm} />
+            <RegisterForm haveForm={haveForm && !isLogin.isAuth} setHaveForm={setHaveForm} />
         </header>
     );
 };

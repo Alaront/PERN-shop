@@ -1,4 +1,8 @@
 import React, {useState} from 'react';
+import {$host} from "../../axios";
+import {setIsAuth, setUser} from "../../redux/slice/user";
+import jwtDecode from "jwt-decode";
+import {useAppDispatch} from "../../redux/helpers";
 
 interface loginPropsI {
     isHide: boolean
@@ -20,6 +24,8 @@ const Login = ({isHide}:loginPropsI) => {
         show: false
     });
 
+    const dispatch = useAppDispatch();
+
     const changeField = ({target}: React.ChangeEvent<HTMLInputElement>, fieldType: string):void => {
         if(fieldType === 'mail') {
             setMail({data: target.value, error: !/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(target.value)});
@@ -32,6 +38,26 @@ const Login = ({isHide}:loginPropsI) => {
 
     const pushForm = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+        if(mail.error || pass.error) return
+
+        console.log('start');
+
+        const params = {
+            email: mail.data,
+            pass: pass.data
+        }
+
+        $host.post('/user/login', params)
+            .then(response => {
+                console.log(response.data)
+                dispatch(setUser(jwtDecode(response.data)))
+                dispatch(setIsAuth(true))
+                localStorage.setItem('pern-shop-token', response.data)
+            })
+            .catch(e => {
+                alert(e.message)
+            })
     }
 
     return (

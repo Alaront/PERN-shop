@@ -1,4 +1,8 @@
 import React, {useState} from 'react';
+import {$host} from "../../axios";
+import jwtDecode from "jwt-decode";
+import {setIsAuth, setUser} from "../../redux/slice/user";
+import {useAppDispatch} from "../../redux/helpers";
 
 interface registerPropsI {
     isHide: boolean
@@ -30,8 +34,31 @@ const Register = ({isHide}: registerPropsI) => {
         show: false
     });
 
-    const formPush = (e: React.FormEvent<HTMLFormElement>) => {
+    const dispatch = useAppDispatch();
+
+
+    const formPush = async(e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+        if(name.error || mail.error || pass.error || repPass.error) return
+
+        console.log('start');
+
+        const params = {
+            name: name.data,
+            email: mail.data,
+            pass: pass.data
+        }
+
+        $host.post('/user/registration', params)
+            .then(response => {
+                dispatch(setUser(jwtDecode(response.data.token)))
+                dispatch(setIsAuth(true))
+                localStorage.setItem('pern-shop-token', response.data.token)
+            })
+            .catch(e => {
+                alert(e)
+            })
     }
 
     const changeField = ({target}: React.ChangeEvent<HTMLInputElement>, fieldType: string):void => {
