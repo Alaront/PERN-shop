@@ -31,7 +31,8 @@
     width: 45%
 
   p
-    height: 100px
+    height: auto
+    max-height: 100px
     overflow: hidden
     font-style: normal
     font-weight: 400
@@ -39,12 +40,12 @@
     line-height: 24px
     letter-spacing: -0.2px
     color: $text_color
-    transition: 0.5s
+    transition: max-height 0.4s cubic-bezier(0,1,0,1)
 
 .info-open
   p
-    height: auto
-    transition: 0.5s
+    max-height: 99999px
+    transition: max-height 0.4s cubic-bezier(0,1,0,1)
 
 .description-product__wrapper
   display: flex
@@ -82,11 +83,15 @@
 
 
 .description-product__characteristics-wrapper
-  height: 100px
+  height: auto
+  max-height: 100px
+  transition: max-height 0.4s cubic-bezier(0,1,0,1)
   overflow: hidden
 
   &.characteristics-open
     height: auto
+    max-height: 99999px
+    transition: max-height 0.4s cubic-bezier(0,1,0,1)
 
   dl
     display: flex

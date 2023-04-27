@@ -25,46 +25,46 @@
   +min-w($tablet_m)
     padding: 40px 30px
 
-  button
-    background: $base_color
-    padding: 10px 8px
-    text-align: right
-    cursor: pointer
-    border-radius: 10px
-    align-items: center
-    justify-content: end
-    color: $bg_color
-    font-size: 15px
-    line-height: 18px
-    position: relative
-    font-weight: 600
-    display: block
-    border: none
-    outline: none
+.add-product__form-btn, .add-product__form-characteristics-btn
+  background: $base_color
+  padding: 10px 8px
+  text-align: right
+  cursor: pointer
+  border-radius: 10px
+  align-items: center
+  justify-content: end
+  color: $bg_color
+  font-size: 15px
+  line-height: 18px
+  position: relative
+  font-weight: 600
+  display: block
+  border: none
+  outline: none
 
-    +min-w($tablet_m)
-      font-size: 18px
-      line-height: 22px
+  +min-w($tablet_m)
+    font-size: 18px
+    line-height: 22px
 
 .add-product__form-title
   margin-bottom: 15px
 
-  input
-    border: 1px solid $color_black
-    outline: none
-    display: block
-    background: $color_white
-    border-radius: 10px
-    font-size: 18px
-    line-height: 22px
-    padding: 5px 10px
-    font-weight: 600
-    margin-bottom: 10px
+.add-product__form  input
+  border: 1px solid $color_black
+  outline: none
+  display: block
+  background: $color_white
+  border-radius: 10px
+  font-size: 18px
+  line-height: 22px
+  padding: 5px 10px
+  font-weight: 600
+  margin-bottom: 10px
 
-    +min-w($tablet_m)
-      font-size: 22px
-      line-height: 25px
-      padding: 10px 15px
+  +min-w($tablet_m)
+    font-size: 22px
+    line-height: 25px
+    padding: 10px 15px
 
 
 .add-product__form
@@ -72,11 +72,11 @@
     font-size: 18px
     line-height: 22px
     color: $color_red
-    visibility: hidden
+    display: none
 
-  .add-product__form-title--error
-    .add-product__form-error
-      visibility: visible
+.add-product__form
+  .add-product__form--error
+    display: block
 
 
 .add-product__form-name
@@ -99,29 +99,24 @@
   +min-w($tablet_m)
     margin-bottom: 35px
 
-  select
-    position: relative
-    min-width: 220px
-    width: auto
-    border: 1px solid $color_black
-    outline: none
+  span
+    margin-bottom: 20px
     display: block
-    background: $color_white
-    border-radius: 10px
+
+  .add-product__form-btn-modal
+    display: block
+    max-width: max-content
+    border-radius: 5px
+    padding: 15px 10px
+    background: $base_color
+    cursor: pointer
+    border: none
+    outline: none
+    font-weight: 500
     font-size: 18px
-    line-height: 22px
-    padding: 5px 10px
-    font-weight: 600
-    margin-bottom: 10px
+    line-height: 20px
+    color: #FFFFFF
 
-    +min-w($tablet_m)
-      font-size: 22px
-      line-height: 25px
-      padding: 10px 15px
-
-    option
-      &:hover
-        background-color: rgba(224, 229, 231, 0.5)
 
 .add-product__form-photo
   margin-bottom: 15px
@@ -147,15 +142,20 @@
 
     &:hover
       .input-file-btn
-        background-color: #59be6e
+        background-color: $base_color
 
     &:active
       .input-file-btn
-        background-color: #2E703A
+        background-color: $base_color
 
     input[type=file]:disabled
       & + .input-file-btn
         background-color: #eee
+
+  img
+    width: 50px
+    display: block
+    object-fit: cover
 
   .input-file-btn
     position: relative
@@ -168,7 +168,7 @@
     color: rgb(255 255 255)
     text-align: center
     border-radius: 4px
-    background-color: #419152
+    background-color: $base_color
     line-height: 22px
     height: 40px
     padding: 10px 20px
@@ -182,3 +182,35 @@
     line-height: 40px
     display: inline-block
 
+.add-product__form-description, .add-product__form-characteristics
+  margin-bottom: 15px
+
+  +min-w($tablet_m)
+    margin-bottom: 35px
+
+
+.add-product__form-characteristics-btn
+  background-color: $base_color
+  max-width: max-content
+  padding: 15px 60px 15px 20px
+  position: relative
+  font-weight: 400
+  margin: 20px 0 0 0
+
+  &:before
+    content: '+'
+    position: absolute
+    top: 50%
+    right: 20px
+    font-weight: 500
+    font-size: 38px
+    line-height: 20px
+    transform: translateY(-50%)
+
+.add-product__form-characteristics-item
+  margin: 0 0 20px 0
+  display: flex
+  flex-wrap: wrap
+
+  input, span
+    margin-right: 20px

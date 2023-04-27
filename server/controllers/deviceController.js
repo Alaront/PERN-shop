@@ -1,5 +1,5 @@
 import ApiError from "../Utils/ApiError.js";
-import {Brand, Device, DeviceCharacteristics, DeviceInfo, UserShop} from "../models/models.js";
+import {Brand, Device, DeviceCharacteristics, DeviceInfo, User, UserShop} from "../models/models.js";
 import HelperFiles from "../Utils/helperFiles.js";
 
 const average = array => array.reduce((a, b) => a + b) / array.length;
@@ -7,12 +7,16 @@ const average = array => array.reduce((a, b) => a + b) / array.length;
 class DeviceController {
     async create(req, res, next) {
         try {
-            let {userShopId, price, discount, count, countSales, typeId, brandId, fullName, text, ratingSetUsers, rating, characteristics}  = req.body;
+            let {userId, price, discount, count, countSales, typeId, brandId, fullName, text, ratingSetUsers, rating, characteristics}  = req.body;
             let {photo} = req.files;
 
-            if(!userShopId) {
-                return next(ApiError.badRequest('Not set userShopId'))
+            if(!userId) {
+                return next(ApiError.badRequest('Not set userID'))
             }
+
+            const {id} = await UserShop.findOne({where: {userId: userId}})
+
+            console.log('photo', photo)
 
             if(!typeId || !brandId) {
                 return next(ApiError.badRequest('Not set typeId || brandId'))
@@ -33,7 +37,7 @@ class DeviceController {
                 photo = HelperFiles.makeImgReturnPath(photo)
             }
 
-            const device = await Device.create({ price, discount, count, countSales, typeId, brandId, userShopId });
+            const device = await Device.create({ price, discount, count, countSales, typeId, brandId, userShopId: id });
             const deviceInfo = await DeviceInfo.create({ fullName, text, ratingSetUsers, rating, deviceId: device.id, mainPhoto: photo });
 
             console.log('characteristics', characteristics)
