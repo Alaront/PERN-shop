@@ -5,6 +5,10 @@ import HelperFiles from "../Utils/helperFiles.js";
 const average = array => array.reduce((a, b) => a + b) / array.length;
 
 class DeviceController {
+    constructor() {
+    }
+
+
     async create(req, res, next) {
         try {
             let {userId, price, discount, count, countSales, typeId, brandId, fullName, text, ratingSetUsers, rating, characteristics}  = req.body;
@@ -41,11 +45,16 @@ class DeviceController {
             const deviceInfo = await DeviceInfo.create({ fullName, text, ratingSetUsers, rating, deviceId: device.id, mainPhoto: photo });
 
             console.log('characteristics', characteristics)
+            console.log(this)
             if(characteristics) {
                 characteristics = JSON.parse(characteristics);
-
+                console.log(this)
                 characteristics.forEach((item) => {
-                    this.deviceCharacteristicsWrite(item, device.id);
+                    DeviceCharacteristics.create({
+                        title: item.title,
+                        description: item.description,
+                        deviceId: device.id
+                    })
                 })
             }
 
@@ -58,6 +67,7 @@ class DeviceController {
     }
 
     async deviceCharacteristicsWrite(item, deviceId) {
+        console.log('item', item)
         await DeviceCharacteristics.create({
             title: item.title,
             description: item.description,

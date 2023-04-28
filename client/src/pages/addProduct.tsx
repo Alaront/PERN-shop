@@ -8,6 +8,7 @@ import ok from "../images/decor/ok.svg"
 import {$authHost, $host} from "../axios";
 import jwtDecode from "jwt-decode";
 import {useSelector} from "react-redux";
+import {useNavigate} from "react-router";
 
 interface photoItemI {
     id: number,
@@ -49,7 +50,9 @@ const AddProduct = () => {
     const [descriptionError, setDescriptionError] = useState<boolean>(false);
 
     // @ts-ignore
-    const {user} = useSelector(state => state.user)
+    const {user} = useSelector(state => state.user);
+
+    const navigate = useNavigate();
 
     const formSubmit = async (e:FormEvent) => {
         e.preventDefault()
@@ -85,9 +88,12 @@ const AddProduct = () => {
         formData.append('text', description)
         formData.append('rating', '0')
         formData.append('photo', photo)
+        formData.append('characteristics', JSON.stringify(characteristics))
 
         const {data} = await $authHost.post('/device', formData)
         console.log(data)
+
+        navigate(`/addProduct/${data.device.id}`)
     }
 
     const editorOptions = useMemo(() => {
