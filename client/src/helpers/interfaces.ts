@@ -26,6 +26,11 @@ export interface deviceInfoI {
     text: string,
 }
 
+export interface devicePhotosItem {
+    id: number,
+    url: string
+}
+
 export interface deviceCharacteristicItem {
     id: number
     deviceId: number,

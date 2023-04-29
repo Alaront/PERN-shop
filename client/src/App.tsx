@@ -19,6 +19,8 @@ import {$authHost, $host} from "./axios";
 import {setIsAuth, setUser} from "./redux/slice/user";
 import jwtDecode from "jwt-decode";
 import {useAppDispatch} from "./redux/helpers";
+import EditProduct from "./pages/editProduct";
+import EditProductPhoto from "./pages/EditProductPhoto";
 
 function App() {
 
@@ -45,6 +47,8 @@ function App() {
           <Route path="/shopPage/:id" element={<ShopPage />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/addProduct" element={<AddProduct />} />
+          <Route path="/editProduct/:id" element={<EditProduct />} />
+          <Route path="/editProductPhoto/:id" element={<EditProductPhoto />} />
           <Route path="/admin/*" element={<Admin />} >
               <Route path="products" element={<AdminProducts />} />
               <Route path="brands" element={<AdminBrands />} />

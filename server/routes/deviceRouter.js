@@ -4,6 +4,7 @@ import deviceController from "../controllers/deviceController.js";
 const router = new Router();
 
 router.post('', deviceController.create)
+router.post('/addPhoto', deviceController.addDevicePhoto)
 router.patch('/photo', deviceController.updateMainPhoto)
 router.patch('/', deviceController.changeInfoDevice)
 router.post('/buyDevice', deviceController.buyDevice)

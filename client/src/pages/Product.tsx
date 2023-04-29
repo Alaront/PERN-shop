@@ -5,7 +5,7 @@ import ReviewsProduct from "../Components/Product/Description/ReviewsProduct";
 import Similar from "../Components/Product/Similar/Similar";
 import {useParams} from "react-router";
 import {$host} from "../axios";
-import {deviceCharacteristicItem, deviceI, deviceInfoI, deviceSimilar} from "../helpers/interfaces";
+import {deviceCharacteristicItem, deviceI, deviceInfoI, devicePhotosItem, deviceSimilar} from "../helpers/interfaces";
 
 const Product = () => {
     const {id} = useParams();
@@ -14,6 +14,7 @@ const Product = () => {
     const [device, setDevice] = useState<deviceI | null>(null)
     const [deviceCharacteristics, setDeviceCharacteristics] = useState<Array<deviceCharacteristicItem> | null>(null)
     const [deviceInfo, setDeviceInfo] = useState<deviceInfoI | null>(null)
+    const [devicePhotos, setDevicePhotos] = useState<Array<devicePhotosItem> | null>(null)
     const [shopTitle, setShopTitle] = useState<string>('')
     const [similar, setSimilar] = useState<Array<deviceSimilar> | null>(null)
 
@@ -24,6 +25,7 @@ const Product = () => {
         setDeviceCharacteristics(data.deviceCharacteristics);
         setDeviceInfo(data.deviceInfo);
         setShopTitle(data.shopTitle);
+        setDevicePhotos(data.devicePhotos);
         console.log('data', data);
 
         const response = await $host.get('/device/similar', {
@@ -42,11 +44,11 @@ const Product = () => {
     }, [id])
 
 
-    if (!device || !deviceCharacteristics || !deviceInfo) return <div className={'content product-content'}></div>
+    if (!device || !deviceCharacteristics || !deviceInfo || !devicePhotos) return <div className={'content product-content'}></div>
 
     return (
         <div className={'content product-content'}>
-            <TopContent device={device} deviceCharacteristics={deviceCharacteristics} deviceInfo={deviceInfo} shopTitle={shopTitle}/>
+            <TopContent device={device} deviceCharacteristics={deviceCharacteristics} deviceInfo={deviceInfo} shopTitle={shopTitle} devicePhotos={devicePhotos}/>
             <Description descriptionInfo={deviceInfo.text} deviceCharacteristics={deviceCharacteristics}/>
             <ReviewsProduct />
             {

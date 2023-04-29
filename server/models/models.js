@@ -260,4 +260,4 @@ Device.belongsTo(Type);
 Brand.hasMany(Device);
 Device.belongsTo(Brand);
 
-export {Brand, UserShop, Review, DeviceInfo, Type, User, ReviewComment, DeviceCharacteristics, Device, UserOperation}
+export {Brand, UserShop, Review, DeviceInfo, Type, User, ReviewComment, DeviceCharacteristics, Device, UserOperation, DevicePhoto}

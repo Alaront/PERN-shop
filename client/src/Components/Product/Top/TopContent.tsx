@@ -7,7 +7,7 @@ import Bitmap from '../../../images/products/Bitmap.png'
 import TopInfo from "./TopInfo";
 import GradeStars from "../../Grade/GradeStars";
 import {useParams} from "react-router";
-import {deviceCharacteristicItem, deviceI, deviceInfoI} from "../../../helpers/interfaces";
+import {deviceCharacteristicItem, deviceI, deviceInfoI, devicePhotosItem} from "../../../helpers/interfaces";
 import {NavLink} from "react-router-dom";
 
 export interface typeProduct {
@@ -20,13 +20,11 @@ interface TopContentI {
     device: deviceI,
     deviceCharacteristics: Array<deviceCharacteristicItem>,
     deviceInfo: deviceInfoI,
+    devicePhotos: Array<devicePhotosItem>
     shopTitle: string
 }
 
-const TopContent = ({deviceCharacteristics, deviceInfo, device, shopTitle}:TopContentI) => {
-    const [grade, setGrade] = useState<number>(4.6);
-    const [productTitle, setProductTitle] = useState<string>('Набор электронных компонентов для Arduino R3 UNO R3 в коробке, 830 точек связи');
-
+const TopContent = ({deviceCharacteristics, deviceInfo, device, shopTitle, devicePhotos}:TopContentI) => {
     return (
         <div className={'top-content'}>
             <h1 className={'top-content__title'}>{deviceInfo.fullName}</h1>
@@ -40,7 +38,7 @@ const TopContent = ({deviceCharacteristics, deviceInfo, device, shopTitle}:TopCo
                 <NavLink to={`/shopPage/${device.userShopId}`} className={'top-content__bought'}>{shopTitle || ''}</NavLink>
             </div>
             <div className={'top-content__info-right'}>
-                <TopSlider mainPhoto={deviceInfo.mainPhoto} otherPhotos={[deviceInfo.mainPhoto, deviceInfo.mainPhoto]}/>
+                <TopSlider mainPhoto={deviceInfo.mainPhoto} otherPhotos={[...devicePhotos.map(item => item.url)]}/>
                 <TopInfo productId={device.id} price={device.price} discount={device.discount} />
             </div>
         </div>

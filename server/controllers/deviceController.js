@@ -1,5 +1,5 @@
 import ApiError from "../Utils/ApiError.js";
-import {Brand, Device, DeviceCharacteristics, DeviceInfo, User, UserShop} from "../models/models.js";
+import {Brand, Device, DeviceCharacteristics, DeviceInfo, User, UserShop, DevicePhoto} from "../models/models.js";
 import HelperFiles from "../Utils/helperFiles.js";
 
 const average = array => array.reduce((a, b) => a + b) / array.length;
@@ -75,6 +75,27 @@ class DeviceController {
         })
     }
 
+    async addDevicePhoto(req, res, next) {
+        try {
+            const {deviceId} = req.body;
+            const {photo} = req.files;
+
+            if(!deviceId || !photo) {
+                return next(ApiError.badRequest('Not set id or logo'))
+            }
+
+            const fileName = HelperFiles.makeImgReturnPath(photo)
+
+            const photoNew = await DevicePhoto.create({url: fileName, text: '', deviceId})
+
+            return res.json(photoNew)
+
+        } catch (e) {
+            console.log(e)
+            return next(ApiError.badRequest(e))
+        }
+    }
+
     async updateMainPhoto(req, res, next) {
         try {
             const {deviceId} = req.body;
@@ -108,15 +129,27 @@ class DeviceController {
     }
 
     async  changeInfoDevice(req, res, next) {
+        console.log('change info')
         try {
-            let {id, price, discount, count, typeId, brandId, fullName, text }  = req.body;
+            let {userId, id, price, discount, count, typeId, brandId, fullName, text }  = req.body;
 
-            if(!id) {
-                return next(ApiError.badRequest('Not set id '))
+            if(!id || !userId) {
+                return next(ApiError.badRequest('Not set id or userId'))
             }
 
             const DeviceOld = await Device.findOne({where: {id}})
             const DeviceInfoOld = await DeviceInfo.findOne({where: {deviceId: id}})
+
+            const userShop = await UserShop.findOne({where: {id: DeviceOld.userShopId}});
+
+            if(!userShop) {
+                return next(ApiError.badRequest('Not found userShop'))
+            }
+
+            if(userShop.userId !== Number(userId)) {
+                console.log(userShop.userId, Number(userId) )
+                return next(ApiError.badRequest('У вас нет доступа к редактированию данного продукта'))
+            }
 
             price = price || DeviceOld.dataValues.price;
             discount = discount || DeviceOld.dataValues.discount;
@@ -152,10 +185,11 @@ class DeviceController {
             const deviceInfo = await DeviceInfo.findOne({where: {deviceId: id}})
             const deviceCharacteristics = await DeviceCharacteristics.findAll({where: {deviceId: id}})
             const deviceShopOwner = await UserShop.findOne({where: {id: device.userShopId}})
+            const devicePhotos = await DevicePhoto.findAll({where: {deviceId: id}})
 
             const shopTitle = deviceShopOwner.title;
 
-            return res.json({shopTitle, device, deviceInfo, deviceCharacteristics})
+            return res.json({shopTitle, device, deviceInfo, deviceCharacteristics, devicePhotos})
         } catch (e) {
             console.log(e)
             return next(ApiError.badRequest(e))

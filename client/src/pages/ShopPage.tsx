@@ -6,7 +6,7 @@ const ShopPage = () => {
     return (
         <div className={'content'}>
             <SellerAbout />
-            <SellerGrade />
+            {/*<SellerGrade />*/}
         </div>
     );
 };

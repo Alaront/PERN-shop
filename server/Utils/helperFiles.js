@@ -11,12 +11,12 @@ export default class HelperFiles {
     constructor() {
     }
 
-    static makeImgReturnPath(logo){
-        console.log('logo', logo)
-        const ext = path.extname(logo.name);
+    static makeImgReturnPath(photo){
+        console.log('logo', photo)
+        const ext = path.extname(photo.name);
         let fileName = uuidv4() + ext;
         console.log('fileName', fileName)
-        logo.mv(path.resolve(__dirname, '..', 'static/img', fileName));
+        photo.mv(path.resolve(__dirname, '..', 'static/img', fileName));
 
         return 'img/' + fileName
     }

@@ -19,7 +19,7 @@ export default function (role) {
 
             const user = await User.findOne({where: {id: decode.id}});
             if(user.role !== role) {
-                return res.status(403).json({message: "Not promession"})
+                return res.status(403).json({message: "Not promesion"})
             }
 
             req.user = decode;
