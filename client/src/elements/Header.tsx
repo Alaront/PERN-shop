@@ -22,7 +22,7 @@ const Header = () => {
     const isLogin = useSelector((state) => state.user)
 
     const getGoodsCount = () => {
-        console.log('getGoodsCount')
+        //console.log('getGoodsCount')
         readLSShopingCart()
             .then(data => {
                 let count: number = 0;

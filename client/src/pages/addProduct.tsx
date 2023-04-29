@@ -91,7 +91,7 @@ const AddProduct = () => {
         formData.append('characteristics', JSON.stringify(characteristics))
 
         const {data} = await $authHost.post('/device', formData)
-        console.log(data)
+        //console.log(data)
 
         navigate(`/addProduct/${data.device.id}`)
     }

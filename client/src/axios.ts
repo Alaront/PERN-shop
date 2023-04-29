@@ -10,7 +10,7 @@ const $authHost = axios.create({
 
 const authInterceptor = (config: { headers: { authorization: string; }; }) => {
     config.headers.authorization = `Bearer ${localStorage.getItem('pern-shop-token')}`
-    console.log(`Bearer ${localStorage.getItem('pern-shop-token')}`)
+    //console.log(`Bearer ${localStorage.getItem('pern-shop-token')}`)
     return config
 }
 

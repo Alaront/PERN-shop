@@ -6,8 +6,14 @@ import './index.sass'
 import 'swiper/css';
 import watchPhoto from "../../../images/products/watch.png";
 import ProductCartShort from "../../Products/ProductCartShort";
+import {deviceSimilar} from "../../../helpers/interfaces";
 
-const Similar = () => {
+interface SimilarI {
+    allSimilar: Array<deviceSimilar>
+}
+
+const Similar = ({allSimilar}:SimilarI) => {
+    console.log(allSimilar[0].deviceInfo.fullName)
     return (
         <div className={'similar-products'}>
             <h6 className={'similar-products__title'}>Похожие товары</h6>
@@ -20,33 +26,11 @@ const Similar = () => {
                     spaceBetween={20}
                     navigation
                 >
-                    <SwiperSlide>
-                        <ProductCartShort title={'Swifter'} photoUrl={watchPhoto} price={12} hrefLink={'#'} />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <ProductCartShort title={'Swifter 2'} photoUrl={watchPhoto} price={15} hrefLink={'#'} />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <ProductCartShort title={'Swifter 3'} photoUrl={watchPhoto} price={8} hrefLink={'#'} />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <ProductCartShort title={'Swifter 4'} photoUrl={watchPhoto} price={19} hrefLink={'#'} />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <ProductCartShort title={'Swifter'} photoUrl={watchPhoto} price={12} hrefLink={'#'} />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <ProductCartShort title={'Swifter 2'} photoUrl={watchPhoto} price={15} hrefLink={'#'} />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <ProductCartShort title={'Swifter 3'} photoUrl={watchPhoto} price={8} hrefLink={'#'} />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <ProductCartShort title={'Swifter 4'} photoUrl={watchPhoto} price={19} hrefLink={'#'} />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <ProductCartShort title={'Swifter 4'} photoUrl={watchPhoto} price={19} hrefLink={'#'} />
-                    </SwiperSlide>
+                    {allSimilar && allSimilar.map(item => (
+                        <SwiperSlide key={item.id}>
+                            <ProductCartShort title={item.deviceInfo.fullName} photoUrl={item.deviceInfo.mainPhoto} price={item.price} discount={item.discount} hrefLink={String(item.id)} />
+                        </SwiperSlide>
+                    ))}
                 </Swiper>
             </div>
         </div>

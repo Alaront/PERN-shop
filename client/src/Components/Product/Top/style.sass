@@ -32,7 +32,7 @@
   margin-bottom: 25px
   padding: 0 10px
 
-  a, div
+  a, div, span
     font-style: normal
     font-weight: 400
     font-size: 16px
@@ -49,11 +49,41 @@
     &:hover
       text-decoration: underline
 
+  span, div
+    cursor: auto
+
+    &:hover
+      text-decoration: none
+
 .top-content__bought
   width: 100%
 
   +min-w($tablet)
     width: auto
+
+.top-content__grade, .top-content__reviews
+  padding-right: 20px
+  position: relative
+
+  &:before
+    content: ''
+    width: 3px
+    height: 3px
+    background: #787A80
+    border-radius: 50%
+    position: absolute
+    top: 50%
+    right: 5px
+    transform: translateY(-50%)
+
+.top-content__reviews
+  &:before
+    content: none
+
+  +min-w($tablet)
+
+    &:before
+      content: ''
 
 .top-content__grade
   display: flex
@@ -173,11 +203,19 @@
   font-weight: 600
   font-size: 28px
   line-height: 32px
-  color: #FA3434
+  color: $color_red
+
+  span
+    color: $color_black
 
   +min-w($tablet)
     font-size: 33px
     line-height: 37px
+
+.top-content__info-price
+  +min-w($tablet)
+    position: sticky
+    top: 80px
 
 .top-content__info-type
   display: flex

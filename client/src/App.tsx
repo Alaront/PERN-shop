@@ -25,7 +25,7 @@ function App() {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        console.log('Effect')
+        ///console.log('Effect')
         $authHost.get('/user/check')
             .then(response => {
                 dispatch(setUser(jwtDecode(response.data.token)))

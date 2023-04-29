@@ -5,8 +5,14 @@ import {Navigation, Pagination} from "swiper";
 import 'swiper/css';
 
 import watchPhoto from "../../../images/products/watch.png";
+import {makeFullPhotoUrl} from "../../../helpers";
 
-const TopSlider = () => {
+interface TopSliderI {
+    mainPhoto: string,
+    otherPhotos: Array<string>
+}
+
+const TopSlider = ({mainPhoto, otherPhotos}: TopSliderI) => {
     return (
         <div className={'top-slider'}>
             <Swiper
@@ -16,26 +22,15 @@ const TopSlider = () => {
                 navigation
                 pagination={{ clickable: true }}
             >
-                <SwiperSlide>
-                    <div className={'deals-slider_img'}>
-                        <img src={watchPhoto} alt={'photo'}/>
-                    </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <div className={'deals-slider_img'}>
-                        <img src={watchPhoto} alt={'photo'}/>
-                    </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <div className={'deals-slider_img'}>
-                        <img src={watchPhoto} alt={'photo'}/>
-                    </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <div className={'deals-slider_img'}>
-                        <img src={watchPhoto} alt={'photo'}/>
-                    </div>
-                </SwiperSlide>
+                {
+                    [mainPhoto, ...otherPhotos].map((item, index) => (
+                        <SwiperSlide key={index}>
+                            <div className={'deals-slider_img'}>
+                                <img src={makeFullPhotoUrl(item)} alt={'photo'}/>
+                            </div>
+                        </SwiperSlide>
+                    ))
+                }
             </Swiper>
         </div>
     );

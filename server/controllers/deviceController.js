@@ -150,8 +150,34 @@ class DeviceController {
 
             const device = await Device.findOne({where: {id}})
             const deviceInfo = await DeviceInfo.findOne({where: {deviceId: id}})
+            const deviceCharacteristics = await DeviceCharacteristics.findAll({where: {deviceId: id}})
+            const deviceShopOwner = await UserShop.findOne({where: {id: device.userShopId}})
 
-            return res.json({device, deviceInfo})
+            const shopTitle = deviceShopOwner.title;
+
+            return res.json({shopTitle, device, deviceInfo, deviceCharacteristics})
+        } catch (e) {
+            console.log(e)
+            return next(ApiError.badRequest(e))
+        }
+    }
+
+    async getSimilar(req, res, next) {
+        try {
+            const {typeId, brandId} = req.query;
+
+
+            const productByType = await Device.findAll({
+                where: {typeId},
+                limit: 10,
+                include: [{model: DeviceInfo}]
+            })
+            const productByBrand = await  Device.findAll({where: {brandId}, limit: 5 })
+
+
+            const similarProduct = [...productByType];
+
+            return res.json(similarProduct)
         } catch (e) {
             console.log(e)
             return next(ApiError.badRequest(e))

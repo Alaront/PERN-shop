@@ -30,7 +30,7 @@ async function readLSShopingCart(): Promise<Array<cartData>> {
 
     if (data) {
         let dataFromLS:Array<cartData> = await JSON.parse(data)
-        console.log(data)
+        //console.log(data)
 
         return dataFromLS
     }
