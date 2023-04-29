@@ -19,10 +19,20 @@ const ProductCartShort = ({discount, photoUrl, price, title, hrefLink, oldPrice}
             <div className={'product-card-short__photo'}>
                 <img src={makeFullPhotoUrl(photoUrl)} alt={title}/>
             </div>
-            <p className={'product-card-short__price'}>
-                $ {(price - ((price * discount) / 100)).toFixed(2)}
-            </p>
-            <NavLink className={'product-card-short__title'} to={`/product/${hrefLink}`}>{title}</NavLink>
+            <div className={'product-card-short__content'}>
+                {
+                    discount > 0 && (
+                        <div className={"product-card-short__discount-wrapper"}>
+                            <p className={'product-card-short__old-price'}>&nbsp;$ {price.toFixed(2)}&nbsp;</p>
+                            <p className={'product-card-short__discount'}>{discount}%</p>
+                        </div>
+                    )
+                }
+                <p className={'product-card-short__price'}>
+                    {(price - ((price * discount) / 100)).toFixed(2)}&nbsp;$
+                </p>
+                <NavLink className={'product-card-short__title'} to={`/product/${hrefLink}`}>{title}</NavLink>
+            </div>
         </div>
     );
 };

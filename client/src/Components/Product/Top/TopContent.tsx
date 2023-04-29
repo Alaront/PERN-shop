@@ -8,6 +8,7 @@ import TopInfo from "./TopInfo";
 import GradeStars from "../../Grade/GradeStars";
 import {useParams} from "react-router";
 import {deviceCharacteristicItem, deviceI, deviceInfoI} from "../../../helpers/interfaces";
+import {NavLink} from "react-router-dom";
 
 export interface typeProduct {
     id: number,
@@ -36,7 +37,7 @@ const TopContent = ({deviceCharacteristics, deviceInfo, device, shopTitle}:TopCo
                     {deviceInfo.rating}
                 </div>
                 <span className={'top-content__reviews'}>{device.countSales} купили</span>
-                <a href={'#'} className={'top-content__bought'}>{shopTitle || ''}</a>
+                <NavLink to={`/shopPage/${device.userShopId}`} className={'top-content__bought'}>{shopTitle || ''}</NavLink>
             </div>
             <div className={'top-content__info-right'}>
                 <TopSlider mainPhoto={deviceInfo.mainPhoto} otherPhotos={[deviceInfo.mainPhoto, deviceInfo.mainPhoto]}/>

@@ -5,12 +5,14 @@
   border: 1px solid #DEE2E7
   border-radius: 6px
   width: calc(100%/12*6 - 8px)
-  padding: 14px 10px
   margin: 0 4px 14px
   text-decoration: none
   position: relative
   transition: 0.3s
-  min-height: 250px
+  min-height: 200px
+  display: flex
+  justify-content: space-between
+  flex-direction: column
 
   +min-w($tablet)
     min-height: 300px
@@ -33,15 +35,15 @@
 
 .product-card-short__photo
   width: 100%
-  height: auto
+  height: 100px
   margin-bottom: 10px
+  flex-grow: 1
 
   img
     width: 100%
-    height: auto
-    left: 0
-    top: 50%
-    z-index: 1
+    height: 100%
+    display: block
+    object-fit: cover
 
 .product-card-short__price
   transition: 0.3s
@@ -50,7 +52,7 @@
   font-size: 16px
   line-height: 22px
   color: $text_color
-  margin-bottom: 2px
+  margin: 0 0 2px 0
 
   +min-w($tablet_m)
     font-size: 19px
@@ -63,6 +65,18 @@
     text-decoration: line-through
     padding: 0 5px
 
+.product-card-short__discount-wrapper
+  display: flex
+  margin-bottom: 10px
+  font-weight: 400
+  font-size: 15px
+  line-height: 19px
+
+.product-card-short__discount
+  color: $color_red
+
+.product-card-short__old-price
+  text-decoration: line-through
 
 .product-card-short__title
   transition: 0.3s

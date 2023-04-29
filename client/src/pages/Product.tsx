@@ -38,6 +38,7 @@ const Product = () => {
 
     useEffect(() => {
         getProductData();
+        window.scrollTo(0, 0);
     }, [id])
 
 
