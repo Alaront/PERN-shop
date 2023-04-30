@@ -39,6 +39,14 @@ const ReviewsItem = ({item, id}: reviewsItemI) => {
         console.log('textAnswer', textAnswer)
     }
 
+    const makeDataFormat = (dateStr:string):string => {
+        const date = new Date(dateStr);
+        const options:object = { day: 'numeric', month: 'long', year: 'numeric' };
+        const formattedDate = date.toLocaleDateString('ru-RU', options);
+        console.log(formattedDate);
+        return formattedDate
+    }
+
 
     return (
         <div className={'reviews-item'}>
@@ -53,7 +61,7 @@ const ReviewsItem = ({item, id}: reviewsItemI) => {
                 </div>
                 <div className={'reviews-item__stars'}>
                     <GradeStars grade={item.rating} />
-                    <p className={'reviews-item__date'}>{item.updatedAt}</p>
+                    <p className={'reviews-item__date'}>{makeDataFormat(item.updatedAt)}</p>
                 </div>
             </div>
 

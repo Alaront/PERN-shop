@@ -116,7 +116,7 @@ const DeviceInfo = sequelize.define('deviceInfo', {
         type: DataTypes.STRING
     },
     text: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(1234),
         defaultValue: 0
     },
     ratingSetUsers: {

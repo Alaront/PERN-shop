@@ -30,7 +30,7 @@
   +min-w($tablet)
     width: 45%
 
-  p
+  div
     height: auto
     max-height: 100px
     overflow: hidden
@@ -42,10 +42,10 @@
     color: $text_color
     transition: max-height 0.4s cubic-bezier(0,1,0,1)
 
-.info-open
-  p
-    max-height: 99999px
-    transition: max-height 0.4s cubic-bezier(0,1,0,1)
+  &.info-open
+    div
+      max-height: 99999px
+      transition: max-height 0.4s cubic-bezier(0,1,0,1)
 
 .description-product__wrapper
   display: flex
@@ -149,6 +149,12 @@
   letter-spacing: -0.2px
   color: $text_color
   transition: 0.5s
+
+  +min-w($tablet_m)
+    font-weight: 600
+    font-size: 21px
+    line-height: 31px
+    margin-left: 10px
 
 .reviews-item__user-photo
   width: 60px
