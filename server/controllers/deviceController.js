@@ -131,25 +131,15 @@ class DeviceController {
     async  changeInfoDevice(req, res, next) {
         console.log('change info')
         try {
-            let {userId, id, price, discount, count, typeId, brandId, fullName, text }  = req.body;
+            let { id, price, discount, count, typeId, brandId, fullName, text }  = req.body;
 
-            if(!id || !userId) {
-                return next(ApiError.badRequest('Not set id or userId'))
+            if(!id) {
+                return next(ApiError.badRequest('Not set id '))
             }
 
             const DeviceOld = await Device.findOne({where: {id}})
             const DeviceInfoOld = await DeviceInfo.findOne({where: {deviceId: id}})
 
-            const userShop = await UserShop.findOne({where: {id: DeviceOld.userShopId}});
-
-            if(!userShop) {
-                return next(ApiError.badRequest('Not found userShop'))
-            }
-
-            if(userShop.userId !== Number(userId)) {
-                console.log(userShop.userId, Number(userId) )
-                return next(ApiError.badRequest('У вас нет доступа к редактированию данного продукта'))
-            }
 
             price = price || DeviceOld.dataValues.price;
             discount = discount || DeviceOld.dataValues.discount;

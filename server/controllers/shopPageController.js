@@ -30,7 +30,7 @@ class ShopPageController {
 
     async updatePhoto(req, res, next) {
         try {
-            const {id } = req.body;
+            const {id} = req.body;
             const {photo} = req.files;
 
             if(!id || !photo) {

@@ -1,14 +1,16 @@
 import {Router} from "express";
 import deviceController from "../controllers/deviceController.js";
+import checkOwnerDeviceMiddleware from "../middleware/checkOwnerDeviceMiddleware.js";
+import authMiddleware from "../middleware/authMiddleware.js";
 
 const router = new Router();
 
 router.post('', deviceController.create)
-router.post('/addPhoto', deviceController.addDevicePhoto)
-router.patch('/photo', deviceController.updateMainPhoto)
-router.patch('/', deviceController.changeInfoDevice)
-router.post('/buyDevice', deviceController.buyDevice)
-router.post('/newRating', deviceController.newRatingDevice)
+router.post('/addPhoto', checkOwnerDeviceMiddleware, deviceController.addDevicePhoto)
+router.patch('/photo', checkOwnerDeviceMiddleware, deviceController.updateMainPhoto)
+router.patch('/', checkOwnerDeviceMiddleware, deviceController.changeInfoDevice)
+router.post('/buyDevice', authMiddleware, deviceController.buyDevice)
+router.post('/newRating', authMiddleware, deviceController.newRatingDevice)
 router.get('/similar', deviceController.getSimilar)
 router.get('/:id', deviceController.getOne)
 router.get('/', deviceController.getAll)

@@ -97,6 +97,7 @@ const EditProduct = () => {
 
         const formData = new FormData();
         formData.append('id', id);
+        formData.append('deviceId', id);
         formData.append('userId', user.id);
         formData.append('price', String(price));
         formData.append('discount',  String(discount));
