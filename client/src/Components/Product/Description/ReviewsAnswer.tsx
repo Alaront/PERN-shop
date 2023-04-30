@@ -1,29 +1,48 @@
 import React, {FormEvent, useState} from 'react';
-import watchPhoto from "../../../images/products/watch.png";
+import user from "../../../images/products/user.png";
+import {reviewCommentItem} from "../../../helpers/interfaces";
+import {$authHost} from "../../../axios";
 
-const ReviewsAnswer = () => {
+interface ReviewsAnswerI {
+    commentItem: reviewCommentItem,
+    id: number
+}
+
+const ReviewsAnswer = ({commentItem, id}:ReviewsAnswerI) => {
     const [showForm, setShowForm] = useState<boolean>(false)
 
     const [textAnswer, setTextAnswer] = useState<String>('')
 
-    const sendFormReviews = (e:FormEvent) => {
+    const sendFormReviews = async (e:FormEvent) => {
         e.preventDefault();
-        console.log('textAnswer', textAnswer)
+
+        const params = {
+            text: textAnswer,
+            reviewId: id
+        }
+
+        const {data} = await $authHost.post('/review/reviewComment', params);
+        console.log(id, data);
+        alert('Ваш ответ был добавлен')
+        setTextAnswer('')
+        setShowForm(false)
     }
 
     return (
         <div className={'reviews-answer reviews-item'}>
             <div className={'reviews-item__user-data'}>
                 <div className={'reviews-item__user-photo'}>
-                    <img src={watchPhoto} alt={'name'}/>
+                    <img src={user} alt={'name'}/>
                 </div>
                 <p className={'reviews-item__name'}>
-                    Алена В.
+                    {
+                        commentItem.name
+                    }
                 </p>
             </div>
 
             <div className={'reviews-item__text'}>
-                <p className={'reviews-item__text'}>Конфеты точно как Баунти, приятный аналог без сахара и вредностей. Много начинки и тооонкий слой шоколада. Любителям кокоса идеально! В коробке 12 штучек, каждая отдельно упакована. Сама коробка очень красивая и оригинальная, можно и в подарок. </p>
+                <p className={'reviews-item__text'}>{commentItem.text}</p>
             </div>
 
             <p className={'reviews-item__answer'} onClick={() => setShowForm(!showForm)}>{showForm ? 'Скрыть форму' : 'Ответить'}</p>

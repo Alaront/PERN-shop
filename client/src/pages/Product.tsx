@@ -5,7 +5,14 @@ import ReviewsProduct from "../Components/Product/Description/ReviewsProduct";
 import Similar from "../Components/Product/Similar/Similar";
 import {useParams} from "react-router";
 import {$host} from "../axios";
-import {deviceCharacteristicItem, deviceI, deviceInfoI, devicePhotosItem, deviceSimilar} from "../helpers/interfaces";
+import {
+    deviceCharacteristicItem,
+    deviceI,
+    deviceInfoI,
+    devicePhotosItem,
+    deviceSimilar,
+    reviewsItem
+} from "../helpers/interfaces";
 
 const Product = () => {
     const {id} = useParams();
@@ -15,6 +22,7 @@ const Product = () => {
     const [deviceCharacteristics, setDeviceCharacteristics] = useState<Array<deviceCharacteristicItem> | null>(null)
     const [deviceInfo, setDeviceInfo] = useState<deviceInfoI | null>(null)
     const [devicePhotos, setDevicePhotos] = useState<Array<devicePhotosItem> | null>(null)
+    const [deviceReviews, setDeviceReviews] = useState<Array<reviewsItem> | []>([])
     const [shopTitle, setShopTitle] = useState<string>('')
     const [similar, setSimilar] = useState<Array<deviceSimilar> | null>(null)
 
@@ -26,6 +34,7 @@ const Product = () => {
         setDeviceInfo(data.deviceInfo);
         setShopTitle(data.shopTitle);
         setDevicePhotos(data.devicePhotos);
+        setDeviceReviews(data.deviceReviews);
         console.log('data', data);
 
         const response = await $host.get('/device/similar', {
@@ -50,7 +59,7 @@ const Product = () => {
         <div className={'content product-content'}>
             <TopContent device={device} deviceCharacteristics={deviceCharacteristics} deviceInfo={deviceInfo} shopTitle={shopTitle} devicePhotos={devicePhotos}/>
             <Description descriptionInfo={deviceInfo.text} deviceCharacteristics={deviceCharacteristics}/>
-            <ReviewsProduct />
+            <ReviewsProduct deviceReviews={deviceReviews}/>
             {
                 similar && <Similar allSimilar={similar}/>
             }

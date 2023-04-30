@@ -1,15 +1,41 @@
 import React, {FormEvent, useState} from 'react';
-import watchPhoto from "../../../images/products/watch.png";
+import user from "../../../images/products/user.png";
 import GradeStars from "../../Grade/GradeStars";
 import ReviewsAnswer from "./ReviewsAnswer";
+import {reviewsItem} from "../../../helpers/interfaces";
+import {$authHost} from "../../../axios";
 
-const ReviewsItem = () => {
+interface reviewsItemI {
+    item: reviewsItem,
+    id: number
+}
+
+const ReviewsItem = ({item, id}: reviewsItemI) => {
     const [showForm, setShowForm] = useState<boolean>(false)
 
     const [textAnswer, setTextAnswer] = useState<String>('')
 
-    const sendFormReviews = (e:FormEvent) => {
+    const sendFormReviews = async (e:FormEvent) => {
         e.preventDefault();
+
+        try {
+            if(!textAnswer) return
+
+            const params = {
+                text: textAnswer,
+                reviewId: id
+            }
+
+            const {data} = await $authHost.post('/review/reviewComment', params);
+            console.log(id, data);
+            alert('Ваш комментарий был добавлен')
+            setTextAnswer('')
+            setShowForm(false)
+
+        } catch (e) {
+            console.log(e)
+        }
+
         console.log('textAnswer', textAnswer)
     }
 
@@ -19,30 +45,32 @@ const ReviewsItem = () => {
             <div className={'reviews-item__user'}>
                 <div className={'reviews-item__user-data'}>
                     <div className={'reviews-item__user-photo'}>
-                        <img src={watchPhoto} alt={'name'}/>
+                        <img src={user} alt={'name'}/>
                     </div>
                     <p className={'reviews-item__name'}>
-                        Алена В.
+                        {item.user.name}
                     </p>
                 </div>
                 <div className={'reviews-item__stars'}>
-                    <GradeStars grade={3} />
-                    <p className={'reviews-item__date'}>20 Февраля 2023</p>
+                    <GradeStars grade={item.rating} />
+                    <p className={'reviews-item__date'}>{item.updatedAt}</p>
                 </div>
             </div>
 
             <div className={'reviews-item__text'}>
                 <p className={'reviews-item__subtitle'}>Достоинства</p>
-                <p className={'reviews-item__text'}>Вкусные, без сахара, к тому же в индивидуальной упаковке каждая конфета</p>
+                <p className={'reviews-item__text'}>{item.positive}</p>
                 <p className={'reviews-item__subtitle'}>Недостатки</p>
-                <p className={'reviews-item__text'}>Нет</p>
+                <p className={'reviews-item__text'}>{item.negative}</p>
                 <p className={'reviews-item__subtitle'}>Комментарий</p>
-                <p className={'reviews-item__text'}>Конфеты точно как Баунти, приятный аналог без сахара и вредностей. Много начинки и тооонкий слой шоколада. Любителям кокоса идеально! В коробке 12 штучек, каждая отдельно упакована. Сама коробка очень красивая и оригинальная, можно и в подарок. </p>
+                <p className={'reviews-item__text'}>{item.text}</p>
             </div>
 
             <p className={'reviews-item__answer'} onClick={() => setShowForm(!showForm)}>{showForm ? 'Скрыть форму' : 'Ответить'}</p>
 
-            <ReviewsAnswer />
+            {
+                item.reviewComments && item.reviewComments.map(commentItem => <ReviewsAnswer key={commentItem.id} id={id} commentItem={commentItem}/>)
+            }
 
             <form className={`reviews-item__answer-form ${showForm ? '' : 'reviews-item__answer-form--hidden'}`} onSubmit={sendFormReviews}>
                 <textarea onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setTextAnswer(e.target.value)} />

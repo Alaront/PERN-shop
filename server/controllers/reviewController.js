@@ -1,5 +1,5 @@
 import ApiError from "../Utils/ApiError.js";
-import {Review, ReviewComment} from "../models/models.js";
+import {Review, ReviewComment, User} from "../models/models.js";
 
 class ReviewController {
     async createByDevice(req, res, next) {
@@ -78,13 +78,16 @@ class ReviewController {
                 return next(ApiError.badRequest('reviewId или text не заданы'))
             }
 
+            console.log(req.user.id)
+            const user = await User.findOne({where: {id: req.user.id}})
+
             const parentComment = await Review.findOne({id: reviewId});
 
             if(!parentComment) {
                 return next(ApiError.badRequest('not found reviewId'))
             }
 
-            const reviewComment = await ReviewComment.create({text, reviewId})
+            const reviewComment = await ReviewComment.create({text, reviewId, name: user.dataValues.name})
 
             return res.json(reviewComment)
 

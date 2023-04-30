@@ -1,21 +1,48 @@
 import React, {FormEvent, useState} from 'react';
 import '../../Grade/index.sass'
+import {useSelector} from "react-redux";
+import {useParams} from "react-router";
+import {$authHost} from "../../../axios";
 
 interface reviewsForm {
     closeForm: Function
 }
 
 const ReviewsForm = ({closeForm}:reviewsForm) => {
-    const [advantages, setAdvantages] = useState<String>('')
-    const [disadvantages, setDisadvantages] = useState<String>('')
-    const [comments, setComments] = useState<String>('')
+    const [advantages, setAdvantages] = useState<string>('')
+    const [disadvantages, setDisadvantages] = useState<string>('')
+    const [comments, setComments] = useState<string>('')
 
     const [grade, setGrade] = useState<Number>(2);
 
+    // @ts-ignore
+    const {user} = useSelector(state => state.user);
+    const {id} = useParams();
 
-    const pushForm = (e:FormEvent) => {
+    const pushForm = async (e:FormEvent) => {
         e.preventDefault();
 
+        const params = {
+            text: comments.length ? comments : '-',
+            positive: advantages.length ? advantages : '-',
+            negative: disadvantages.length ? disadvantages : '-',
+            grade,
+            deviceId: id,
+            userId: user.id
+        }
+
+        try {
+            const {data} = await $authHost.post('/review/device', params);
+            console.log(data)
+
+            const response = await $authHost.post('/device/newRating', params);
+            console.log(response.data)
+
+        } catch (e) {
+            // @ts-ignore
+            alert(e.response.data.message)
+        }
+        //closeForm()
         console.log(advantages, disadvantages, comments)
     }
 

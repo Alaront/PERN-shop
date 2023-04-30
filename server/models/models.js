@@ -194,6 +194,10 @@ const ReviewComment = sequelize.define('reviewComment', {
     text: {
         type: DataTypes.STRING
     },
+    name: {
+        type: DataTypes.STRING,
+        defaultValue: ''
+    }
 })
 
 const Type = sequelize.define('type', {

@@ -31,6 +31,28 @@ export interface devicePhotosItem {
     url: string
 }
 
+export interface reviewCommentItem {
+    id: number,
+    reviewId: number,
+    text: string,
+    name: string
+}
+
+export interface reviewsItem {
+    id: number,
+    deviceId: number,
+    positive: string,
+    negative: string,
+    text: string,
+    rating: number,
+    userId: number,
+    updatedAt: string,
+    user: {
+        name: string
+    }
+    reviewComments: Array<reviewCommentItem>
+}
+
 export interface deviceCharacteristicItem {
     id: number
     deviceId: number,

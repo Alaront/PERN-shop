@@ -1,5 +1,14 @@
 import ApiError from "../Utils/ApiError.js";
-import {Brand, Device, DeviceCharacteristics, DeviceInfo, User, UserShop, DevicePhoto} from "../models/models.js";
+import {
+    Brand,
+    Device,
+    DeviceCharacteristics,
+    DeviceInfo,
+    User,
+    UserShop,
+    DevicePhoto,
+    Review, ReviewComment
+} from "../models/models.js";
 import HelperFiles from "../Utils/helperFiles.js";
 
 const average = array => array.reduce((a, b) => a + b) / array.length;
@@ -176,10 +185,13 @@ class DeviceController {
             const deviceCharacteristics = await DeviceCharacteristics.findAll({where: {deviceId: id}})
             const deviceShopOwner = await UserShop.findOne({where: {id: device.userShopId}})
             const devicePhotos = await DevicePhoto.findAll({where: {deviceId: id}})
-
+            const deviceReviews = await Review.findAll({
+                where: {deviceId: id},
+                include: [{model: User}, {model: ReviewComment}]
+            })
             const shopTitle = deviceShopOwner.title;
 
-            return res.json({shopTitle, device, deviceInfo, deviceCharacteristics, devicePhotos})
+            return res.json({shopTitle, device, deviceInfo, deviceCharacteristics, devicePhotos, deviceReviews})
         } catch (e) {
             console.log(e)
             return next(ApiError.badRequest(e))
@@ -249,18 +261,20 @@ class DeviceController {
 
     async newRatingDevice(req, res, next) {
         try {
-            const {deviceId, userId, score} = req.body;
+            const {deviceId, userId, grade} = req.body;
 
-            if(!deviceId || !userId || !score) {
+            if(!deviceId || !userId || !grade) {
                 return next(ApiError.badRequest('Not set id or userId or score'))
             }
 
-            const device = await Device.findOne({where: {id: deviceId}});
+            const device = await DeviceInfo.findOne({where: {deviceId}});
 
             let beforeUser = false;
             let arrayScore = [];
 
-            let ratingSetUsers = JSON.parse(device.dataValues.ratingSetUsers);
+            let ratingSetUsers = device.dataValues.ratingSetUsers ? JSON.parse(device.dataValues.ratingSetUsers) : [];
+
+            console.log(ratingSetUsers)
 
             ratingSetUsers.forEach(item => {
                 arrayScore.push(item.score)
@@ -272,10 +286,10 @@ class DeviceController {
                 return next(ApiError.badRequest('Данный пользователь уже устанавливал оценку'))
             }
 
-            const rating = average(arrayScore)
-            ratingSetUsers = [...ratingSetUsers, {userId: userId, score: score}];
+            const rating = Math.round(average([...arrayScore, grade]))
+            ratingSetUsers = JSON.stringify([...ratingSetUsers, {userId: userId, score: grade}]);
 
-            const deviceNew = await Device.update({rating, ratingSetUsers}, {where: {id: deviceId}, returning: true});
+            const deviceNew = await DeviceInfo.update({rating, ratingSetUsers}, {where: {id: deviceId}, returning: true});
 
             return res.json(deviceNew)
         } catch (e) {
