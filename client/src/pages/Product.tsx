@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import TopContent from "../Components/Product/Top/TopContent";
 import Description from "../Components/Product/Description/Description";
-import ReviewsProduct from "../Components/Product/Description/ReviewsProduct";
+import ReviewsProduct from "../Components/Product/Description/Reviews/ReviewsProduct";
 import Similar from "../Components/Product/Similar/Similar";
 import {useParams} from "react-router";
 import {$host} from "../axios";
@@ -9,10 +9,11 @@ import {
     deviceCharacteristicItem,
     deviceI,
     deviceInfoI,
-    devicePhotosItem,
+    devicePhotosItem, deviceQuestionI,
     deviceSimilar,
     reviewsItem
 } from "../helpers/interfaces";
+import QuestionsProduct from "../Components/Product/Description/Questions/QuestionsProduct";
 
 const Product = () => {
     const {id} = useParams();
@@ -23,8 +24,10 @@ const Product = () => {
     const [deviceInfo, setDeviceInfo] = useState<deviceInfoI | null>(null)
     const [devicePhotos, setDevicePhotos] = useState<Array<devicePhotosItem> | null>(null)
     const [deviceReviews, setDeviceReviews] = useState<Array<reviewsItem> | []>([])
+    const [deviceQuestion, setDeviceQuestion] = useState<Array<deviceQuestionI> | []>([])
     const [shopTitle, setShopTitle] = useState<string>('')
     const [similar, setSimilar] = useState<Array<deviceSimilar> | null>(null)
+    const [showReviews, setShowReviews] = useState<boolean>(false)
 
 
     const getProductData = async () => {
@@ -35,6 +38,7 @@ const Product = () => {
         setShopTitle(data.shopTitle);
         setDevicePhotos(data.devicePhotos);
         setDeviceReviews(data.deviceReviews);
+        setDeviceQuestion(data.deviceQuestions);
         console.log('data', data);
 
         const response = await $host.get('/device/similar', {
@@ -53,13 +57,19 @@ const Product = () => {
     }, [id])
 
 
-    if (!device || !deviceCharacteristics || !deviceInfo || !devicePhotos) return <div className={'content product-content'}></div>
+    if (!device || !deviceCharacteristics || !deviceInfo || !devicePhotos || !deviceQuestion) return <div className={'content product-content'}></div>
 
     return (
         <div className={'content product-content'}>
             <TopContent device={device} deviceCharacteristics={deviceCharacteristics} deviceInfo={deviceInfo} shopTitle={shopTitle} devicePhotos={devicePhotos}/>
             <Description descriptionInfo={deviceInfo.text} deviceCharacteristics={deviceCharacteristics}/>
-            <ReviewsProduct deviceReviews={deviceReviews}/>
+            {
+                showReviews ? <p className={'btn-change-reviews'} onClick={() => setShowReviews(false)}>Показать вопросы</p> : <p className={'btn-change-reviews'} onClick={() => setShowReviews(true)}>Показать отзывы</p>
+            }
+            {
+                showReviews ?  <ReviewsProduct deviceReviews={deviceReviews}/> : <QuestionsProduct deviceQuestion={deviceQuestion}/>
+            }
+
             {
                 similar && <Similar allSimilar={similar}/>
             }

@@ -1,10 +1,10 @@
 @import "../../../styles/common/index"
 
-.description-product, .reviews-product
+.description-product, .reviews-product, .questions-product
   padding: 0 10px
   margin-bottom: 40px
 
-.description-product__title, .reviews-product__title
+.description-product__title, .reviews-product__title, .questions-product__title
   font-style: normal
   font-weight: 500
   font-size: 20px
@@ -125,23 +125,23 @@
     font-size: 14px
     line-height: 16px
 
-.reviews-item
+.product-text-item
   margin-bottom: 35px
 
   +min-w($tablet_m)
     margin-bottom: 65px
 
-.reviews-item__user
+.product-text-item__user
   width: 100%
   display: flex
   justify-content: space-between
   margin-bottom: 15px
 
-.reviews-item__user-data
+.product-text-item__user-data
   display: flex
   margin-bottom: 15px
 
-.reviews-item__name
+.product-text-item__name
   font-style: normal
   font-weight: 400
   font-size: 16px
@@ -156,7 +156,7 @@
     line-height: 31px
     margin-left: 10px
 
-.reviews-item__user-photo
+.product-text-item__user-photo
   width: 60px
   height: 60px
   overflow: hidden
@@ -169,14 +169,14 @@
     width: 100%
     height: 100%
 
-.reviews-item__stars
+.product-text-item__stars
   display: flex
   flex-direction: column
 
   +min-w($tablet)
     flex-direction: row
 
-.reviews-item__date
+.product-text-item__date
   font-style: normal
   font-weight: 400
   font-size: 15px
@@ -190,7 +190,7 @@
     margin-right: 10px
     order: -1
 
-.reviews-item__subtitle
+.product-text-item__subtitle
   font-style: normal
   font-weight: 400
   font-size: 17px
@@ -201,7 +201,7 @@
     font-size: 20px
     line-height: 22px
 
-.reviews-item__text
+.product-text-item__text
   font-weight: 300
   font-size: 16px
   line-height: 18px
@@ -211,7 +211,7 @@
     font-size: 16px
     line-height: 20px
 
-.reviews-item__answer
+.product-text-item__answer
   font-weight: 500
   font-size: 18px
   line-height: 22px
@@ -231,15 +231,15 @@
     transition: 0.5s
 
   +min-w($tablet_s)
-    font-size: 22px
-    line-height: 25px
+    font-size: 19px
+    line-height: 21px
     margin-bottom: 30px
 
     &:hover
       &:before
         width: 100%
 
-.reviews-item__answer-form
+.product-text-item__answer-form
   display: flex
   flex-direction: column
   align-items: flex-end
@@ -285,7 +285,7 @@
   .reviews-product__title
     width: 100%
 
-  .reviews-item__answer
+  .product-text-item__answer
     font-weight: 400
     margin-right: 40px
 
@@ -380,4 +380,20 @@
   margin-left: 20px
 
   +min-w($tablet_s)
+    margin-left: 50px
+
+.btn-change-reviews
+  font-size: 20px
+  line-height: 22px
+  cursor: pointer
+  margin: 0 10px 10px 10px
+  background: $base_color_red
+  color: #FFFFFF
+  padding: 15px 10px
+  max-width: max-content
+  border-radius: 5px
+
+
+.questions-item
+  .questions-item
     margin-left: 50px

@@ -26,6 +26,27 @@ export interface deviceInfoI {
     text: string,
 }
 
+export interface questionAnswersI {
+    id: number,
+    text: string,
+    user: {
+        name: string,
+        id: number
+    },
+    questionAnswers?: Array<questionAnswersI>
+}
+
+export interface deviceQuestionI {
+    id: number,
+    deviceId: number,
+    text: string,
+    user: {
+        name: string,
+        id: number
+    },
+    questionAnswers: Array<questionAnswersI>
+}
+
 export interface devicePhotosItem {
     id: number,
     url: string

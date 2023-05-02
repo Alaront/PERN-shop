@@ -1,8 +1,8 @@
 import React, {FormEvent, useState} from 'react';
-import '../../Grade/index.sass'
+import '../../../Grade/index.sass'
 import {useSelector} from "react-redux";
 import {useParams} from "react-router";
-import {$authHost} from "../../../axios";
+import {$authHost} from "../../../../axios";
 
 interface reviewsForm {
     closeForm: Function

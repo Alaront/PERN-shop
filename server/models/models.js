@@ -200,6 +200,28 @@ const ReviewComment = sequelize.define('reviewComment', {
     }
 })
 
+const Question = sequelize.define('question', {
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
+    text: {
+        type: DataTypes.STRING(1234)
+    }
+})
+
+const QuestionAnswer = sequelize.define('questionAnswer', {
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
+    text: {
+        type: DataTypes.STRING(1234)
+    }
+})
+
 const Type = sequelize.define('type', {
     id: {
         type: DataTypes.INTEGER,
@@ -252,11 +274,23 @@ Review.belongsTo(Device)
 User.hasMany(Review)
 Review.belongsTo(User)
 
+Device.hasMany(Question)
+Question.belongsTo(Device)
+
+User.hasMany(Question)
+Question.belongsTo(User)
+
 Device.hasMany(DevicePhoto);
 DevicePhoto.belongsTo(Device)
 
 Review.hasMany(ReviewComment)
 ReviewComment.belongsTo(Review)
+
+Question.hasMany(QuestionAnswer);
+QuestionAnswer.belongsTo(Question)
+
+User.hasMany(QuestionAnswer)
+QuestionAnswer.belongsTo(User)
 
 Type.hasMany(Device);
 Device.belongsTo(Type);
@@ -264,4 +298,4 @@ Device.belongsTo(Type);
 Brand.hasMany(Device);
 Device.belongsTo(Brand);
 
-export {Brand, UserShop, Review, DeviceInfo, Type, User, ReviewComment, DeviceCharacteristics, Device, UserOperation, DevicePhoto}
+export {Brand, UserShop, Review, DeviceInfo, Type, User, ReviewComment, DeviceCharacteristics, Device, UserOperation, DevicePhoto, QuestionAnswer, Question}

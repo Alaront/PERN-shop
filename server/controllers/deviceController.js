@@ -7,7 +7,7 @@ import {
     User,
     UserShop,
     DevicePhoto,
-    Review, ReviewComment
+    Review, ReviewComment, Question, QuestionAnswer
 } from "../models/models.js";
 import HelperFiles from "../Utils/helperFiles.js";
 
@@ -189,9 +189,14 @@ class DeviceController {
                 where: {deviceId: id},
                 include: [{model: User}, {model: ReviewComment}]
             })
+            const deviceQuestions = await Question.findAll({
+                    where: {deviceId: id},
+                    include: [{model: User}, {model: QuestionAnswer, include: [{model: User}]}]
+                }
+            )
             const shopTitle = deviceShopOwner.title;
 
-            return res.json({shopTitle, device, deviceInfo, deviceCharacteristics, devicePhotos, deviceReviews})
+            return res.json({shopTitle, device, deviceInfo, deviceCharacteristics, devicePhotos, deviceReviews, deviceQuestions})
         } catch (e) {
             console.log(e)
             return next(ApiError.badRequest(e))

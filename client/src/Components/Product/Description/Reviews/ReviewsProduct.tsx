@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 
-import './index.sass'
+import '../index.sass'
 import ReviewsItem from "./ReviewsItem";
 import ReviewsForm from "./ReviewsForm";
-import {reviewsItem} from "../../../helpers/interfaces";
+import {reviewsItem} from "../../../../helpers/interfaces";
 
 interface reviewsProductI {
     deviceReviews: Array<reviewsItem>
@@ -22,7 +22,7 @@ const ReviewsProduct = ({deviceReviews}:reviewsProductI) => {
             </div>
             <div className={'reviews-product__score'}>
                 <p className={'reviews-product__title'}>Уже купили ?</p>
-                <p className={'reviews-item__answer'} onClick={() => setShowReviewsForm(true)}>Оставьте отзыв</p>
+                <p className={'product-text-item__answer'} onClick={() => setShowReviewsForm(true)}>Оставьте отзыв</p>
             </div>
             {showReviewsForm && <ReviewsForm closeForm={() => setShowReviewsForm(false)}/>}
         </div>

@@ -1,7 +1,7 @@
 import React, {FormEvent, useState} from 'react';
-import user from "../../../images/products/user.png";
-import {reviewCommentItem} from "../../../helpers/interfaces";
-import {$authHost} from "../../../axios";
+import user from "../../../../images/products/user.png";
+import {reviewCommentItem} from "../../../../helpers/interfaces";
+import {$authHost} from "../../../../axios";
 
 interface ReviewsAnswerI {
     commentItem: reviewCommentItem,
@@ -29,25 +29,25 @@ const ReviewsAnswer = ({commentItem, id}:ReviewsAnswerI) => {
     }
 
     return (
-        <div className={'reviews-answer reviews-item'}>
-            <div className={'reviews-item__user-data'}>
-                <div className={'reviews-item__user-photo'}>
+        <div className={'reviews-answer product-text-item'}>
+            <div className={'product-text-item__user-data'}>
+                <div className={'product-text-item__user-photo'}>
                     <img src={user} alt={'name'}/>
                 </div>
-                <p className={'reviews-item__name'}>
+                <p className={'product-text-item__name'}>
                     {
                         commentItem.name
                     }
                 </p>
             </div>
 
-            <div className={'reviews-item__text'}>
-                <p className={'reviews-item__text'}>{commentItem.text}</p>
+            <div className={'product-text-item__text'}>
+                <p className={'product-text-item__text'}>{commentItem.text}</p>
             </div>
 
-            <p className={'reviews-item__answer'} onClick={() => setShowForm(!showForm)}>{showForm ? 'Скрыть форму' : 'Ответить'}</p>
+            <p className={'product-text-item__answer'} onClick={() => setShowForm(!showForm)}>{showForm ? 'Скрыть форму' : 'Ответить'}</p>
 
-            <form className={`reviews-item__answer-form ${showForm ? '' : 'reviews-item__answer-form--hidden'}`} onSubmit={sendFormReviews}>
+            <form className={`product-text-item__answer-form ${showForm ? '' : 'product-text-item__answer-form--hidden'}`} onSubmit={sendFormReviews}>
                 <textarea onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setTextAnswer(e.target.value)} />
                 <button>Отправить ответ на комментарий</button>
             </form>

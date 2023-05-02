@@ -1,9 +1,9 @@
 import React, {FormEvent, useState} from 'react';
-import user from "../../../images/products/user.png";
-import GradeStars from "../../Grade/GradeStars";
+import user from "../../../../images/products/user.png";
+import GradeStars from "../../../Grade/GradeStars";
 import ReviewsAnswer from "./ReviewsAnswer";
-import {reviewsItem} from "../../../helpers/interfaces";
-import {$authHost} from "../../../axios";
+import {reviewsItem} from "../../../../helpers/interfaces";
+import {$authHost} from "../../../../axios";
 
 interface reviewsItemI {
     item: reviewsItem,
@@ -49,38 +49,38 @@ const ReviewsItem = ({item, id}: reviewsItemI) => {
 
 
     return (
-        <div className={'reviews-item'}>
-            <div className={'reviews-item__user'}>
-                <div className={'reviews-item__user-data'}>
-                    <div className={'reviews-item__user-photo'}>
+        <div className={'product-text-item'}>
+            <div className={'product-text-item__user'}>
+                <div className={'product-text-item__user-data'}>
+                    <div className={'product-text-item__user-photo'}>
                         <img src={user} alt={'name'}/>
                     </div>
-                    <p className={'reviews-item__name'}>
+                    <p className={'product-text-item__name'}>
                         {item.user.name}
                     </p>
                 </div>
-                <div className={'reviews-item__stars'}>
+                <div className={'product-text-item__stars'}>
                     <GradeStars grade={item.rating} />
-                    <p className={'reviews-item__date'}>{makeDataFormat(item.updatedAt)}</p>
+                    <p className={'product-text-item__date'}>{makeDataFormat(item.updatedAt)}</p>
                 </div>
             </div>
 
-            <div className={'reviews-item__text'}>
-                <p className={'reviews-item__subtitle'}>Достоинства</p>
-                <p className={'reviews-item__text'}>{item.positive}</p>
-                <p className={'reviews-item__subtitle'}>Недостатки</p>
-                <p className={'reviews-item__text'}>{item.negative}</p>
-                <p className={'reviews-item__subtitle'}>Комментарий</p>
-                <p className={'reviews-item__text'}>{item.text}</p>
+            <div className={'product-text-item__text'}>
+                <p className={'product-text-item__subtitle'}>Достоинства</p>
+                <p className={'product-text-item__text'}>{item.positive}</p>
+                <p className={'product-text-item__subtitle'}>Недостатки</p>
+                <p className={'product-text-item__text'}>{item.negative}</p>
+                <p className={'product-text-item__subtitle'}>Комментарий</p>
+                <p className={'product-text-item__text'}>{item.text}</p>
             </div>
 
-            <p className={'reviews-item__answer'} onClick={() => setShowForm(!showForm)}>{showForm ? 'Скрыть форму' : 'Ответить'}</p>
+            <p className={'product-text-item__answer'} onClick={() => setShowForm(!showForm)}>{showForm ? 'Скрыть форму' : 'Ответить'}</p>
 
             {
                 item.reviewComments && item.reviewComments.map(commentItem => <ReviewsAnswer key={commentItem.id} id={id} commentItem={commentItem}/>)
             }
 
-            <form className={`reviews-item__answer-form ${showForm ? '' : 'reviews-item__answer-form--hidden'}`} onSubmit={sendFormReviews}>
+            <form className={`product-text-item__answer-form ${showForm ? '' : 'product-text-item__answer-form--hidden'}`} onSubmit={sendFormReviews}>
                 <textarea onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setTextAnswer(e.target.value)} />
                 <button>Отправить ответ на отзыв</button>
             </form>
