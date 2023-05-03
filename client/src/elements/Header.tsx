@@ -67,7 +67,7 @@ const Header = () => {
                 </div>
                 <Search />
                 <div className={'header__right'} >
-                    <Link to={"#"} className={'header__cart'}>
+                    <Link to={"/cart"} className={'header__cart'}>
                         {
                             goodsCount > 0 && <span>{goodsCount}</span>
                         }

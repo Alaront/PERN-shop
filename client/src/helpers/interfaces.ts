@@ -13,7 +13,13 @@ export interface deviceI {
     price: number,
     discount: number,
     typeId: number,
-    userShopId: number
+    userShopId: number,
+}
+
+export interface deviceCartI extends deviceI {
+    deviceInfo: deviceInfoI,
+    isCheck: boolean,
+    cartCount: number
 }
 
 export interface deviceInfoI {
@@ -35,6 +41,8 @@ export interface questionAnswersI {
     },
     questionAnswers?: Array<questionAnswersI>
 }
+
+
 
 export interface deviceQuestionI {
     id: number,

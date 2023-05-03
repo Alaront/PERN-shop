@@ -5,13 +5,16 @@ import Bitmap from '../../images/products/Bitmap.png'
 import CheckComponent from "../CheckComponent/CheckComponent";
 
 import './index.sass'
+import {deviceCartI} from "../../helpers/interfaces";
 
 interface ICartData {
     mainCheck: boolean
-    changeMainCheck: Function
+    changeMainCheck: Function,
+    product: Array<deviceCartI>,
+    changeChecked: Function
 }
 
-const CartData = ({mainCheck, changeMainCheck}: ICartData) => {
+const CartData = ({mainCheck, changeMainCheck, product, changeChecked}: ICartData) => {
     return (
         <div className={'cart-data'}>
             <div className={'cart-data__info'}>
@@ -21,9 +24,9 @@ const CartData = ({mainCheck, changeMainCheck}: ICartData) => {
                 </div>
             </div>
             <div className={'cart-data__list'}>
-                <CartItem photo={Bitmap} title={'Подставка для видеокарты CoolMoon CM-VT192 из алюминиевого сплава, держатель для видеокарт, охлаждающий комплект'} count={2} price={1212} isChecked={false} />
-                <CartItem photo={Bitmap} title={'Product 2'} count={2} price={12} isChecked={true} />
-                <CartItem photo={Bitmap} title={'Product 3'} count={12} price={1212} isChecked={false} />
+                {
+                    product && product.map(item => <CartItem key={item.id} photo={item.deviceInfo.mainPhoto} title={item.deviceInfo.fullName} count={item.cartCount} price={item.price} isChecked={item.isCheck} changeChecked={() => changeChecked(item.id)} />)
+                }
             </div>
         </div>
     );

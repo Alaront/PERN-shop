@@ -23,7 +23,7 @@ const TopInfo = ({discount, productId, price}: ContentInfo) => {
                     )
                 }
                 <p className={"top-content__price"}><span>Цена:</span> $ {(price - ((price * discount) / 100)).toFixed(2)}</p>
-                <button className={'top-content__buy'} onClick={() => writeLSShopingCart(0, 1)}>В корзну</button>
+                <button className={'top-content__buy'} onClick={() => writeLSShopingCart(productId, 1)}>В корзну</button>
             </div>
         </div>
     );

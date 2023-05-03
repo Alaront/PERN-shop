@@ -11,6 +11,7 @@ router.patch('/photo', checkOwnerDeviceMiddleware, deviceController.updateMainPh
 router.patch('/', checkOwnerDeviceMiddleware, deviceController.changeInfoDevice)
 router.post('/buyDevice', authMiddleware, deviceController.buyDevice)
 router.post('/newRating', authMiddleware, deviceController.newRatingDevice)
+router.post('/getDevicesById', deviceController.getDevicesById)
 router.get('/similar', deviceController.getSimilar)
 router.get('/:id', deviceController.getOne)
 router.get('/', deviceController.getAll)

@@ -1,16 +1,53 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+import {deviceCartI} from "../../helpers/interfaces";
 
-const CardAllChoosing = () => {
+interface cardAllChoosingI {
+    product: Array<deviceCartI>,
+}
 
+const CardAllChoosing = ({product}:cardAllChoosingI) => {
+
+    const [allSum, setAllSum] = useState<number>(0)
+    const [countProducts, setCountProducts] = useState<number>(product.length)
+    //const [sumCountProducts, setSumCountProducts] = useState<number>(0)
+    const [discount, setDiscount] = useState<number>(0)
+    const [order, setOrder] = useState<number>(0)
+
+    useEffect(() => {
+        console.log(product)
+
+        const allSumTemp:number = product.reduce(
+            (accumulator, currentValue) => accumulator + (currentValue.isCheck ? currentValue.price : 0),
+            0
+        )
+
+        const discountTemp:number = product.reduce(
+            (accumulator, currentValue) => accumulator + (currentValue.isCheck ? ((currentValue.price * currentValue.discount) / 100) : 0),
+            0
+        )
+
+        setCountProducts(
+            product.reduce(
+                (accumulator, currentValue) => accumulator + (currentValue.isCheck ? currentValue.cartCount : 0),
+                0
+            )
+        )
+
+        setAllSum(allSumTemp )
+        setDiscount(discountTemp)
+        setOrder(Math.ceil(allSumTemp - discountTemp))
+
+
+    }, [product])
 
     return (
         <div className={'card-all-choosing'}>
-            <p className={'card-all-choosing__title'}><span>Итого</span><span>3 514,69 руб.</span></p>
-            <p className={'card-all-choosing__products'}><span>5 товаров</span><span>3 764,45 руб.</span></p>
-            <p className={'card-all-choosing__discount'}><span>Скидки</span><span>764,45 руб.</span></p>
+            <p className={'card-all-choosing__title'}><span>Итого</span><span>{allSum}</span></p>
+            <p className={'card-all-choosing__products'}><span>{countProducts} товаров</span><span>{allSum} $</span></p>
+            <p className={'card-all-choosing__discount'}><span>Скидки</span><span>{discount} $</span></p>
             <div className={'card-all-choosing__btn'}>
                 <span>К оформлению</span>
-                <span>5 товаров - 3 764,45 руб.</span>
+                <span>{countProducts} товаров - {order} $</span>
             </div>
         </div>
     );

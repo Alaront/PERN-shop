@@ -1,21 +1,33 @@
 import {EVENT_ADD_GOODS_CARD, SHOPING_CARD_KEY} from "./consts";
 import {cartData} from "./interfaces";
 
-async function writeLSShopingCart(id: number | string, count:number): Promise<void> {
+async function writeLSShopingCart(id: number, count:number): Promise<void> {
     let data:string | null = localStorage.getItem(SHOPING_CARD_KEY);
 
     let arraDataCard:Array<object> = []
 
+    console.log('writeLSShopingCart', id, count, data)
+
     if (data != null) {
         let dataFromLS:Array<cartData> = await JSON.parse(data)
 
-        arraDataCard = dataFromLS.map(item => {
-            if (item.id === id) {
-                return {id, count: count + item.count}
-            }
+        let allId:Array<number> = dataFromLS.map(item => item.id);
 
-            return item
-        })
+        console.log('dataFromLS', dataFromLS)
+
+        if(allId.includes(id)) {
+            arraDataCard = dataFromLS.map(item => {
+                if (item.id === id) {
+                    return {id, count: 1 + item.count}
+                }
+
+                return item
+            })
+        } else {
+            arraDataCard = [...dataFromLS, {id, count}]
+        }
+
+        console.log('dataFromLS 2', dataFromLS)
 
     } else {
         arraDataCard = [{id, count}]

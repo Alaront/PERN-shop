@@ -12,10 +12,6 @@ const QuestionItem = ({questionItem}:QuestionItemI) => {
     const [showForm, setShowForm] = useState<boolean>(false)
     const [textAnswer, setTextAnswer] = useState<String>('')
 
-    console.log(questionItem['questionAnswers'])
-    if(typeof questionItem ) {
-
-    }
 
     return (
         <div className={'questions-item product-text-item'}>
