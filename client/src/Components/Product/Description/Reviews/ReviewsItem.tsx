@@ -84,6 +84,7 @@ const ReviewsItem = ({item, id}: reviewsItemI) => {
                 <textarea onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setTextAnswer(e.target.value)} />
                 <button>Отправить ответ на отзыв</button>
             </form>
+            <hr />
         </div>
     );
 };

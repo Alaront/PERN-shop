@@ -2,25 +2,31 @@
 
 .description-product, .reviews-product, .questions-product
   padding: 0 10px
-  margin-bottom: 40px
+  margin-bottom: 20px
 
-.description-product__title, .reviews-product__title, .questions-product__title
+  +min-w($tablet_m)
+    padding: 40px 20px 45px 20px
+    border-radius: 5px
+    box-shadow: $shadow_bg
+
+body p.description-product__title, p.reviews-product__title, p.questions-product__title
   font-style: normal
   font-weight: 500
   font-size: 20px
   line-height: 25px
   margin-bottom: 12px
+  color: $color_black
 
   +min-w($tablet_s)
     font-size: 20px
     line-height: 25px
     margin-bottom: 20px
 
-
   +min-w($desktop_m)
     font-size: 24px
     line-height: 28px
     margin-bottom: 20px
+    font-weight: 700
 
 .description-product__info
   position: relative
@@ -51,29 +57,33 @@
   display: flex
   flex-direction: column
 
-  +min-w($tablet)
-    flex-direction: row
-    justify-content: space-between
-    align-items: flex-start
-
 .description-product__btn-info
-  position: absolute
-  bottom: 0
-  left: 0
-  z-index: 2
-  font-size: 15px
-  line-height: 18px
-  background: $bg_color
-  width: 100%
-  border-bottom: 1px dashed #173C5F
+  width: max-content
+  padding: 5px 30px 5px 5px
+  color: $text_color
+  border: 1px solid $text_color
+  border-radius: 5px
   cursor: pointer
+  position: relative
+
+  &:before
+    content: ""
+    position: absolute
+    top: 50%
+    right: 8px
+    width: 15px
+    height: 15px
+    background: url("../../../images/decor/arrow.svg") no-repeat center
+    background-size: contain
+    transform: translateY(-50%)
+
+  &.open-info
+    &:before
+      transform: translateY(-50%) rotate(180deg)
 
 .description-product__characteristics
   padding-bottom: 30px
   position: relative
-
-  +min-w($tablet)
-    width: 45%
 
   p
     font-weight: 400
@@ -200,9 +210,11 @@
   +min-w($tablet_s)
     font-size: 20px
     line-height: 22px
+    margin-bottom: 18px
+    font-weight: 600
 
 .product-text-item__text
-  font-weight: 300
+  font-weight: 400
   font-size: 16px
   line-height: 18px
   margin-bottom: 20px
@@ -233,7 +245,7 @@
   +min-w($tablet_s)
     font-size: 19px
     line-height: 21px
-    margin-bottom: 30px
+    margin-bottom: 50px
 
     &:hover
       &:before
@@ -254,9 +266,9 @@
     resize: vertical
     padding: 15px
     border-radius: 15px
-    border: 0
     box-shadow: 4px 4px 10px rgba(0,0,0,0.06)
     height: 150px
+    border: 1px solid $base_color
 
     &:focus
       border: none
@@ -392,6 +404,9 @@
   padding: 15px 10px
   max-width: max-content
   border-radius: 5px
+
+  +min-w($tablet_s)
+    margin: 0 0 40px 0
 
 
 .questions-item

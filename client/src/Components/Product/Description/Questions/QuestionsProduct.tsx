@@ -6,13 +6,15 @@ import QuestionForm from "./QuestionForm";
 import {deviceQuestionI} from "../../../../helpers/interfaces";
 
 interface QuestionProductI {
-    deviceQuestion: Array<deviceQuestionI>
+    deviceQuestion: Array<deviceQuestionI>,
+    children: JSX.Element
 }
 
-const QuestionsProduct = ({deviceQuestion}:QuestionProductI) => {
+const QuestionsProduct = ({deviceQuestion, children}:QuestionProductI) => {
 
     return (
         <div className={'questions-product'}>
+            {children}
             <p className={'questions-product__title'}>Вопросы и ответы</p>
             <div className={'questions-product__form-block'}>
                 <p className={'questions-product__title'}>Вы можете задать свой вопрос</p>

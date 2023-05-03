@@ -6,14 +6,16 @@ import ReviewsForm from "./ReviewsForm";
 import {reviewsItem} from "../../../../helpers/interfaces";
 
 interface reviewsProductI {
-    deviceReviews: Array<reviewsItem>
+    deviceReviews: Array<reviewsItem>,
+    children: JSX.Element
 }
 
-const ReviewsProduct = ({deviceReviews}:reviewsProductI) => {
+const ReviewsProduct = ({deviceReviews, children}:reviewsProductI) => {
     const [showReviewsForm, setShowReviewsForm] = useState<Boolean>(false)
 
     return (
         <div className={'reviews-product'}>
+            {children}
             <p className={'reviews-product__title'}>Отзывы</p>
             <div className={'reviews-product__wrapper'}>
                 {

@@ -27,7 +27,7 @@ const Product = () => {
     const [deviceQuestion, setDeviceQuestion] = useState<Array<deviceQuestionI> | []>([])
     const [shopTitle, setShopTitle] = useState<string>('')
     const [similar, setSimilar] = useState<Array<deviceSimilar> | null>(null)
-    const [showReviews, setShowReviews] = useState<boolean>(false)
+    const [showReviews, setShowReviews] = useState<boolean>(true)
 
 
     const getProductData = async () => {
@@ -63,11 +63,23 @@ const Product = () => {
         <div className={'content product-content'}>
             <TopContent device={device} deviceCharacteristics={deviceCharacteristics} deviceInfo={deviceInfo} shopTitle={shopTitle} devicePhotos={devicePhotos}/>
             <Description descriptionInfo={deviceInfo.text} deviceCharacteristics={deviceCharacteristics}/>
+
             {
-                showReviews ? <p className={'btn-change-reviews'} onClick={() => setShowReviews(false)}>Показать вопросы</p> : <p className={'btn-change-reviews'} onClick={() => setShowReviews(true)}>Показать отзывы</p>
-            }
-            {
-                showReviews ?  <ReviewsProduct deviceReviews={deviceReviews}/> : <QuestionsProduct deviceQuestion={deviceQuestion}/>
+                showReviews ?
+                    <ReviewsProduct deviceReviews={deviceReviews} >
+                    <>
+                        {
+                            showReviews ? <p className={'btn-change-reviews'} onClick={() => setShowReviews(false)}>Показать вопросы</p> : <p className={'btn-change-reviews'} onClick={() => setShowReviews(true)}>Показать отзывы</p>
+                        }
+                    </>
+                </ReviewsProduct>
+                :  <QuestionsProduct deviceQuestion={deviceQuestion}>
+                        <>
+                            {
+                                showReviews ? <p className={'btn-change-reviews'} onClick={() => setShowReviews(false)}>Показать вопросы</p> : <p className={'btn-change-reviews'} onClick={() => setShowReviews(true)}>Показать отзывы</p>
+                            }
+                        </>
+                    </QuestionsProduct>
             }
 
             {

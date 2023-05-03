@@ -15,7 +15,6 @@ const Description = ({descriptionInfo, deviceCharacteristics}: Description) => {
 
     return (
         <div className={'description-product'}>
-            <p className={'description-product__title'}>Описание продукта</p>
             <div className={'description-product__wrapper'}>
                 <DescriptionInfoBlock descriptionInfo={descriptionInfo} />
                 <Characteristics listCharacteristics={deviceCharacteristics}/>
