@@ -3,9 +3,10 @@ import {deviceCartI} from "../../helpers/interfaces";
 
 interface cardAllChoosingI {
     product: Array<deviceCartI>,
+    buyProduct: Function
 }
 
-const CardAllChoosing = ({product}:cardAllChoosingI) => {
+const CardAllChoosing = ({product, buyProduct}:cardAllChoosingI) => {
 
     const [allSum, setAllSum] = useState<number>(0)
     const [countProducts, setCountProducts] = useState<number>(product.length)
@@ -14,8 +15,6 @@ const CardAllChoosing = ({product}:cardAllChoosingI) => {
     const [order, setOrder] = useState<number>(0)
 
     useEffect(() => {
-        console.log(product)
-
         const allSumTemp:number = product.reduce(
             (accumulator, currentValue) => accumulator + (currentValue.isCheck ? currentValue.price : 0),
             0
@@ -45,8 +44,8 @@ const CardAllChoosing = ({product}:cardAllChoosingI) => {
             <p className={'card-all-choosing__title'}><span>Итого</span><span>{allSum}</span></p>
             <p className={'card-all-choosing__products'}><span>{countProducts} товаров</span><span>{allSum} $</span></p>
             <p className={'card-all-choosing__discount'}><span>Скидки</span><span>{discount} $</span></p>
-            <div className={'card-all-choosing__btn'}>
-                <span>К оформлению</span>
+            <div className={'card-all-choosing__btn'} onClick={() => buyProduct()}>
+                <span>Купить</span>
                 <span>{countProducts} товаров - {order} $</span>
             </div>
         </div>

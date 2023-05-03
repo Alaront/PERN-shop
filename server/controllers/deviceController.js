@@ -239,21 +239,21 @@ class DeviceController {
 
     async buyDevice(req, res, next) {
         try {
-            const {id} = req.body;
+            const {id, countForBuy} = req.body;
 
-            if(!id) {
-                return next(ApiError.badRequest('Not set id'))
+            if(!id || !countForBuy) {
+                return next(ApiError.badRequest('Not set id or countForBuy'))
             }
 
             const device = await Device.findOne({where: {id}})
 
-            const count = await device.dataValues.count - 1;
+            const count = await device.dataValues.count - countForBuy;
 
             if(count < 0) {
                 return next(ApiError.badRequest('Недостаточно товаров для покупки'))
             }
 
-            const countSales = await device.dataValues.countSales + 1;
+            const countSales = await device.dataValues.countSales + countForBuy;
 
             const newDevice = await Device.update({count, countSales}, {where: {id}, returning: true})
 

@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import CartData from "../Components/Cart/CartData";
 import CardAllChoosing from "../Components/Cart/CardAllChoosing";
-import {readLSShopingCart} from "../helpers";
-import {$host} from "../axios";
+import {dellLSShopingCart, readLSShopingCart} from "../helpers";
+import {$authHost, $host} from "../axios";
 import {deviceCartI, deviceI} from "../helpers/interfaces";
 
 const Cart = () => {
-    const [mainCheck, setMainCheck] = useState<boolean>(false);
+    const [mainCheck, setMainCheck] = useState<boolean>(true);
 
     const [product, setProduct] = useState<Array<deviceCartI> | []>([])
 
@@ -23,6 +23,8 @@ const Cart = () => {
     const getProducts = async () => {
         const productInCart = await readLSShopingCart();
 
+        if(productInCart.length <= 0) return
+
         const productId:Array<number> = productInCart.map(item => item.id);
         const params = {
             allId: productId
@@ -30,9 +32,8 @@ const Cart = () => {
 
         const {data} = await $host.post('/device/getDevicesById', params);
 
-        console.log(productInCart.filter(itemCart => itemCart.id === 15)[0].count)
 
-        const productData:Array<deviceCartI> = data.map((item: any) => ({...item, isCheck: false, cartCount: productInCart.filter(itemCart => itemCart.id === item.id)[0].count}))
+        const productData:Array<deviceCartI> = data.map((item: any) => ({...item, isCheck: true, cartCount: productInCart.filter(itemCart => itemCart.id === item.id)[0].count}))
 
         setProduct(productData)
     }
@@ -47,14 +48,25 @@ const Cart = () => {
         )
     }
 
-    // useEffect(() => {
-    //     setProduct(
-    //         product.map(item => {
-    //             return {...item, isCheck: mainCheck}
-    //         })
-    //     )
-    //
-    // }, [mainCheck])
+    const buyProduct = async () => {
+        for (const item of product) {
+            if(!item.isCheck) continue
+            if(item.cartCount <= item.count && item.isCheck) {
+                const params = {
+                    id: item.id,
+                    countForBuy: item.cartCount
+                }
+                const {data} = await $authHost.post('/device/buyDevice', params);
+                alert(`Товар ${item.deviceInfo.fullName} был успешно куплен`)
+                dellLSShopingCart(item.id)
+                console.log(data)
+            } else {
+                alert(`Товара ${item.deviceInfo.fullName}(${item.cartCount}) не хватает на складе(${item.count})`)
+            }
+        }
+
+        window.location.reload();
+    }
 
     useEffect(() => {
         let hasNotCheck = false;
@@ -78,7 +90,7 @@ const Cart = () => {
             {
                 product && <CartData mainCheck={mainCheck} changeMainCheck={changeMainCheck} product={product} changeChecked={changeChecked}/>
             }
-            <CardAllChoosing  product={product}  />
+            <CardAllChoosing  product={product}  buyProduct={buyProduct}/>
         </div>
     );
 };

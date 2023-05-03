@@ -37,6 +37,17 @@ async function writeLSShopingCart(id: number, count:number): Promise<void> {
     document.dispatchEvent(new Event(EVENT_ADD_GOODS_CARD))
 }
 
+function dellLSShopingCart(id:number):void {
+    let data:string | null = localStorage.getItem(SHOPING_CARD_KEY);
+
+    if (data) {
+        let dataFromLS:Array<cartData> = JSON.parse(data);
+
+        dataFromLS = dataFromLS.filter(item => item.id !== id)
+        localStorage.setItem(SHOPING_CARD_KEY, JSON.stringify(dataFromLS));
+    }
+}
+
 async function readLSShopingCart(): Promise<Array<cartData>> {
     let data:string | null = localStorage.getItem(SHOPING_CARD_KEY);
 
@@ -55,4 +66,4 @@ function makeFullPhotoUrl(url:string):string {
     return `http://localhost:7000/${url}`
 }
 
-export {writeLSShopingCart, readLSShopingCart, makeFullPhotoUrl}
+export {writeLSShopingCart, readLSShopingCart, makeFullPhotoUrl, dellLSShopingCart}
