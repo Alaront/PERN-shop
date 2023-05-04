@@ -69,9 +69,7 @@ function makeFullPhotoUrl(url:string):string {
 const makeDataFormat = (dateStr:string):string => {
     const date = new Date(dateStr);
     const options:object = { day: 'numeric', month: 'long', year: 'numeric' };
-    const formattedDate = date.toLocaleDateString('ru-RU', options);
-    console.log(formattedDate);
-    return formattedDate
+    return date.toLocaleDateString('ru-RU', options)
 }
 
 export {writeLSShopingCart, readLSShopingCart, makeFullPhotoUrl, dellLSShopingCart, makeDataFormat}

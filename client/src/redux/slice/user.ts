@@ -2,7 +2,8 @@ import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
     isAuth: false,
-    user: {}
+    user: {},
+    status: 'padding'
 }
 
 const userSlice = createSlice({
@@ -13,7 +14,8 @@ const userSlice = createSlice({
             state.isAuth = action.payload
         },
         setUser(state, action) {
-          state.user = action.payload
+          state.user = action.payload;
+          state.status = 'loaded'
         }
     },
     extraReducers: {}
