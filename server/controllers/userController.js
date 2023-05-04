@@ -1,7 +1,7 @@
 import ApiError from "../Utils/ApiError.js";
 import {config} from "dotenv";
 import jwt from 'jsonwebtoken';
-import {User, UserShop} from "../models/models.js";
+import {User, UserOperation, UserShop} from "../models/models.js";
 import bcrypt from 'bcrypt';
 
 config()
@@ -77,6 +77,19 @@ class UserController {
 
             return res.json(user);
         } catch (e) {
+            return next(ApiError.badRequest('Error', e))
+        }
+    }
+
+    async getOperation(req, res, next) {
+        try {
+            const {id} = req.params;
+            console.log('id', id)
+            const allOperation = await UserOperation.findAll({where: {userId: id}})
+
+            return res.json(allOperation)
+        } catch (e) {
+            console.log(e)
             return next(ApiError.badRequest('Error', e))
         }
     }

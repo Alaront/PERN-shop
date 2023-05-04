@@ -9,7 +9,17 @@ import fileUpload from 'express-fileupload'
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import * as path from "path";
-import {Device, DeviceInfo, Question, QuestionAnswer, Review, ReviewComment, User, UserShop} from "./models/models.js";
+import {
+    Device,
+    DeviceInfo,
+    Question,
+    QuestionAnswer,
+    Review,
+    ReviewComment,
+    User,
+    UserOperation,
+    UserShop
+} from "./models/models.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -30,7 +40,8 @@ const startServer = async () => {
   try {
       await sequelize.authenticate();
       await sequelize.sync();
-
+      //await UserOperation.sync({ alter: true })
+      //await UserOperation.sync({ force: true })
       app.listen(PORT, () => {
           console.log('Server started ', PORT)
       })

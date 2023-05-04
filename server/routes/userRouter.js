@@ -8,6 +8,7 @@ router.post('/registration', userController.registration)
 router.post('/login', userController.login)
 router.get('/check', authMiddleware, userController.check)
 router.get('/search/:id', userController.getOne)
+router.get('/operation/:id', userController.getOperation)
 router.get('/', userController.getAll)
 
 export default router

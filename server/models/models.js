@@ -34,9 +34,6 @@ const UserOperation = sequelize.define('userOperation', {
         primaryKey: true,
         autoIncrement: true
     },
-    date: {
-        type: DataTypes.DATE,
-    },
     sum: {
         type: DataTypes.INTEGER
     },
@@ -44,6 +41,13 @@ const UserOperation = sequelize.define('userOperation', {
         type: DataTypes.STRING,
         defaultValue: "USER"
     },
+    product: {
+        type: DataTypes.INTEGER
+    },
+    count: {
+        type: DataTypes.INTEGER,
+        defaultValue: 1
+    }
 })
 
 

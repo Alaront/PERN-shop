@@ -21,6 +21,7 @@ import jwtDecode from "jwt-decode";
 import {useAppDispatch} from "./redux/helpers";
 import EditProduct from "./pages/editProduct";
 import EditProductPhoto from "./pages/EditProductPhoto";
+import UserOperation from "./pages/UserOperation";
 
 function App() {
 
@@ -49,6 +50,7 @@ function App() {
           <Route path="/addProduct" element={<AddProduct />} />
           <Route path="/editProduct/:id" element={<EditProduct />} />
           <Route path="/editProductPhoto/:id" element={<EditProductPhoto />} />
+          <Route path="/userOperation/:id" element={<UserOperation />} />
           <Route path="/admin/*" element={<Admin />} >
               <Route path="products" element={<AdminProducts />} />
               <Route path="brands" element={<AdminBrands />} />

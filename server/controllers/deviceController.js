@@ -7,7 +7,7 @@ import {
     User,
     UserShop,
     DevicePhoto,
-    Review, ReviewComment, Question, QuestionAnswer
+    Review, ReviewComment, Question, QuestionAnswer, UserOperation
 } from "../models/models.js";
 import HelperFiles from "../Utils/helperFiles.js";
 
@@ -73,15 +73,6 @@ class DeviceController {
             console.log(e)
             return next(ApiError.badRequest(e))
         }
-    }
-
-    async deviceCharacteristicsWrite(item, deviceId) {
-        console.log('item', item)
-        await DeviceCharacteristics.create({
-            title: item.title,
-            description: item.description,
-            deviceId
-        })
     }
 
     async addDevicePhoto(req, res, next) {
@@ -255,7 +246,11 @@ class DeviceController {
 
             const countSales = await device.dataValues.countSales + countForBuy;
 
-            const newDevice = await Device.update({count, countSales}, {where: {id}, returning: true})
+            const newDevice = await Device.update({count, countSales}, {where: {id}, returning: true});
+            const deviceOwner = await User.findOne({where: {id: device.dataValues.userShopId}})
+
+            await UserOperation.create({sum: countForBuy * device.dataValues.price, type: 'Покупка', userId: req.user.id, product: id, count: countForBuy})
+            await UserOperation.create({sum: countForBuy * device.dataValues.price, type: 'Продажа', userId: deviceOwner.dataValues.id, product: id, count: countForBuy})
 
             return res.json(newDevice)
         } catch (e) {
@@ -308,6 +303,8 @@ class DeviceController {
             let {allId} = req.body;
 
             console.log('allId', allId)
+
+            console.log(allId)
 
             if(!allId) {
                 return next(ApiError.badRequest('not set allId'));

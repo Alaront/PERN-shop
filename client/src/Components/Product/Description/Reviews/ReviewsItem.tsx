@@ -4,6 +4,7 @@ import GradeStars from "../../../Grade/GradeStars";
 import ReviewsAnswer from "./ReviewsAnswer";
 import {reviewsItem} from "../../../../helpers/interfaces";
 import {$authHost} from "../../../../axios";
+import {makeDataFormat} from "../../../../helpers";
 
 interface reviewsItemI {
     item: reviewsItem,
@@ -37,14 +38,6 @@ const ReviewsItem = ({item, id}: reviewsItemI) => {
         }
 
         console.log('textAnswer', textAnswer)
-    }
-
-    const makeDataFormat = (dateStr:string):string => {
-        const date = new Date(dateStr);
-        const options:object = { day: 'numeric', month: 'long', year: 'numeric' };
-        const formattedDate = date.toLocaleDateString('ru-RU', options);
-        console.log(formattedDate);
-        return formattedDate
     }
 
 

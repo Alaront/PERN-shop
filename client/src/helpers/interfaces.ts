@@ -100,3 +100,12 @@ export interface deviceSimilar {
     price: number,
     deviceInfo: deviceSimilarInfo
 }
+
+export interface userOperationI {
+    id: number,
+    product: number,
+    sum: number,
+    type: string,
+    updatedAt: string,
+    count: number
+}
