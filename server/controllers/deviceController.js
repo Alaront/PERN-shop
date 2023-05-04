@@ -298,13 +298,27 @@ class DeviceController {
         }
     }
 
+    async getDevicesByShop(req, res, next) {
+        try {
+            let {shopId} = req.body;
+
+            if(!shopId) {
+                return next(ApiError.badRequest('not set allId'));
+            }
+
+            const products = await Device.findAll({where: {userShopId: shopId}, include: [{model: DeviceInfo}]})
+
+            return res.json(products)
+
+        } catch (e) {
+            console.log(e)
+            return next(ApiError.badRequest(e))
+        }
+    }
+
     async getDevicesById(req, res, next) {
         try {
             let {allId} = req.body;
-
-            console.log('allId', allId)
-
-            console.log(allId)
 
             if(!allId) {
                 return next(ApiError.badRequest('not set allId'));

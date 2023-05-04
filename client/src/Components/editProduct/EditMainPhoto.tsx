@@ -5,13 +5,18 @@ import {useSelector} from "react-redux";
 import {useParams} from "react-router";
 import {$authHost} from "../../axios";
 
-const EditMainPhoto = () => {
+interface EditMainPhotoI {
+    type: string,
+    title: string
+}
+
+const EditMainPhoto = ({title, type}: EditMainPhotoI) => {
     // @ts-ignore
     const {user} = useSelector(state => state.user);
     const {id} = useParams();
 
-    const [photo, setPhoto] = useState<File | null>(null);
-    const [currentPhoto, setCurrentPhoto] = useState<string | null>(null);
+    const [photo, setPhoto] = useState<File | string>('');
+    const [currentPhoto, setCurrentPhoto] = useState<string>('');
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const selectedFile = event.target.files && event.target.files[0];
@@ -20,17 +25,20 @@ const EditMainPhoto = () => {
         }
     };
 
-    const formSubmit = async (e:FormEvent) => {
-        e.preventDefault();
 
-        if(!id || !photo) return
+    const sendShopPage = async (formData: FormData) => {
+        try {
+            const {data} = await $authHost.patch('/userShop/photo', formData)
+            alert('Фото было обновлено успешно')
 
-        const formData = new FormData();
-        formData.append('deviceId', id);
-        formData.append('photo', photo);
-        formData.append('userId', user.id);
+            window.location.reload();
+        } catch (e) {
+            console.log(e)
+            alert(e)
+        }
+    }
 
-
+    const sendDevice = async (formData: FormData) => {
         try {
             const {data} = await $authHost.patch('/device/photo', formData)
             alert('Фото было обновлено успешно')
@@ -42,19 +50,52 @@ const EditMainPhoto = () => {
         }
     }
 
-    const getData = async () => {
+    const formSubmit = async (e:FormEvent) => {
+        e.preventDefault();
+
+        if(!id || !photo) return
+
+        if(type === 'shopPage') {
+            const formData: FormData = new FormData();
+            formData.append('id', id);
+            formData.append('photo', photo);
+            formData.append('userId', user.id);
+            sendShopPage(formData)
+        } else {
+            const formData: FormData = new FormData();
+            formData.append('deviceId', id);
+            formData.append('photo', photo);
+            formData.append('userId', user.id);
+            sendDevice(formData)
+        }
+
+    }
+
+    const getDataDevice = async () => {
         const {data} = await $authHost.get(`/device/${id}`)
-        console.log(data)
         setCurrentPhoto(data.deviceInfo.mainPhoto)
+        console.log('test', data)
+    }
+
+    const getDataShop = async () => {
+        const {data} = await $authHost.get(`/userShop/${id}`)
+        setCurrentPhoto(data.img)
+        console.log('test', data)
     }
 
     useEffect(() => {
-        getData()
+
+        if(type === 'shopPage') {
+            getDataShop();
+        } else {
+            getDataDevice();
+        }
+
     }, [])
 
     return (
         <>
-            <h4 className={'add-product__title'}>Редактирование фотографий товара</h4>
+            <h4 className={'add-product__title'}>{title}</h4>
             <form className={'add-product__form'} onSubmit={formSubmit}>
                 <div className={'add-product__form-photo'}>
                     <span className={'add-product__form-name'}>Выберите главное фото продукта</span>

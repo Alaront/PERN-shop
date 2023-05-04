@@ -22,6 +22,7 @@ import {useAppDispatch} from "./redux/helpers";
 import EditProduct from "./pages/editProduct";
 import EditProductPhoto from "./pages/EditProductPhoto";
 import UserOperation from "./pages/UserOperation";
+import EditShopPage from "./pages/EditShopPage";
 
 function App() {
 
@@ -50,6 +51,7 @@ function App() {
           <Route path="/addProduct" element={<AddProduct />} />
           <Route path="/editProduct/:id" element={<EditProduct />} />
           <Route path="/editProductPhoto/:id" element={<EditProductPhoto />} />
+          <Route path="/editShopPage/:id" element={<EditShopPage />} />
           <Route path="/userOperation/:id" element={<UserOperation />} />
           <Route path="/admin/*" element={<Admin />} >
               <Route path="products" element={<AdminProducts />} />

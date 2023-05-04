@@ -7,7 +7,7 @@ const EditProductPhoto = () => {
 
     return (
         <div className={'content add-product edit-product'}>
-            <EditMainPhoto />
+            <EditMainPhoto title={'Редактирование фотографий товара'} type={'device'}/>
             <EditDifferentPhoto />
         </div>
     );

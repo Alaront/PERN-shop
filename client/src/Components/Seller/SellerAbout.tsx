@@ -5,6 +5,7 @@ import './index.sass'
 import {$host} from "../../axios";
 import {useParams} from "react-router";
 import {makeFullPhotoUrl} from "../../helpers";
+import ReactMarkdown from "react-markdown";
 
 interface shopDataI {
     img: string,
@@ -36,7 +37,9 @@ const SellerAbout = () => {
             </div>
             <div className={'seller-about__text'} >
                 <h2 className={'seller-about__title'}>{"title" in shopData ? shopData.title : ''}</h2>
-                <p className={'seller-about__description'}>{"description" in shopData ? shopData.description : ''}</p>
+                <div>
+                    <ReactMarkdown children={"description" in shopData ? shopData.description : ''} />
+                </div>
                 <ul className={'seller-about__info-list'}>
                     <li className={'seller-about__info-list--email'}><span>Email: </span>{"email" in shopData ? shopData.email : ''}</li>
                     <li className={'seller-about__info-list--phone'}><span>Телефон: </span>{"phone" in shopData ? shopData.phone : ''}</li>
