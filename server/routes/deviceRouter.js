@@ -14,6 +14,7 @@ router.post('/newRating', authMiddleware, deviceController.newRatingDevice)
 router.post('/getDevicesById', deviceController.getDevicesById)
 router.post('/getDevicesByShop', deviceController.getDevicesByShop)
 router.get('/similar', deviceController.getSimilar)
+router.get('/search', deviceController.getDevicesByFilter)
 router.get('/:id', deviceController.getOne)
 router.get('/', deviceController.getAll)
 

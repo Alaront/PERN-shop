@@ -23,6 +23,7 @@ import EditProduct from "./pages/editProduct";
 import EditProductPhoto from "./pages/EditProductPhoto";
 import UserOperation from "./pages/UserOperation";
 import EditShopPage from "./pages/EditShopPage";
+import SearchPage from "./pages/SearchPage";
 
 function App() {
 
@@ -53,6 +54,7 @@ function App() {
           <Route path="/editProductPhoto/:id" element={<EditProductPhoto />} />
           <Route path="/editShopPage/:id" element={<EditShopPage />} />
           <Route path="/userOperation/:id" element={<UserOperation />} />
+          <Route path="/search/:slug" element={<SearchPage />} />
           <Route path="/admin/*" element={<Admin />} >
               <Route path="products" element={<AdminProducts />} />
               <Route path="brands" element={<AdminBrands />} />

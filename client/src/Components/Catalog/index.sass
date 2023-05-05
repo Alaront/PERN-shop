@@ -1,0 +1,57 @@
+@import "../../styles/common/index"
+
+.catalog
+  position: fixed
+  top: 105px
+  left: 50%
+  transform: translateX(-50%)
+  border: 1px solid $base_color
+  border-bottom-left-radius: 5px
+  border-bottom-right-radius: 5px
+  width: 100%
+  max-width: 1340px
+  max-height: calc(100vh - 151px)
+  background: $bg_color
+  padding: 20px 10px
+  overflow: auto
+  display: none
+
+  +min-w($tablet_m)
+    top: 64px
+    padding: 40px 30px
+    max-height: calc(100vh - 64px)
+
+
+  &.catalog-show
+    display: block
+
+.catalog__title
+  font-style: normal
+  font-weight: 600
+  font-size: 18px
+  line-height: 22px
+  color: $text_color
+  margin: 0 0 20px 0
+
+  +min-w($tablet_m)
+    font-size: 25px
+    line-height: 28px
+    margin: 0 0 30px 0
+
+.catalog__wrapper
+  display: flex
+  flex-direction: row
+  flex-wrap: wrap
+
+  a
+    color: $text_color
+    text-decoration: none
+    display: block
+    max-width: max-content
+    margin: 0 60px 10px 0
+    cursor: pointer
+    transition: 0.3s
+    border-bottom: 1px solid rgba(255, 0, 0, 0)
+
+    &:hover
+      border-bottom: 1px solid $text_color

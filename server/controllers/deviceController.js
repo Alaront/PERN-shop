@@ -7,7 +7,7 @@ import {
     User,
     UserShop,
     DevicePhoto,
-    Review, ReviewComment, Question, QuestionAnswer, UserOperation
+    Review, ReviewComment, Question, QuestionAnswer, UserOperation, Type
 } from "../models/models.js";
 import HelperFiles from "../Utils/helperFiles.js";
 
@@ -188,6 +188,62 @@ class DeviceController {
             const shopTitle = deviceShopOwner.title;
 
             return res.json({shopTitle, device, deviceInfo, deviceCharacteristics, devicePhotos, deviceReviews, deviceQuestions})
+        } catch (e) {
+            console.log(e)
+            return next(ApiError.badRequest(e))
+        }
+    }
+
+    async getDevicesByFilter(req, res, next) {
+        console.log('star')
+        try {
+            const {slug, sort} = req.query;
+
+            console.log('slug', slug)
+
+            if(!slug) {
+                return next(ApiError.badRequest('Not set slug'))
+            }
+
+            const type = await Type.findOne({where: {slug}})
+
+            let options = {}
+
+            if(sort === 'priceDown') {
+                options = {
+                    where: {typeId: type.dataValues.id},
+                    include: [{model: DeviceInfo}],
+                    order: [['price', 'DESC']]
+                }
+            } else if(sort === 'priceUp') {
+                options = {
+                    where: {typeId: type.dataValues.id},
+                    include: [{model: DeviceInfo}],
+                    order: [['price', 'ASC']]
+                }
+            } else if(sort === 'ratingUp') {
+                options = {
+                    where: {typeId: type.dataValues.id},
+                    include: [{model: DeviceInfo}],
+                    order: [[DeviceInfo, 'rating', 'ASC']]
+                }
+            } else if(sort === 'ratingDown') {
+                options = {
+                    where: {typeId: type.dataValues.id},
+                    include: [{model: DeviceInfo}],
+                    order: [[DeviceInfo, 'rating', 'DESC']]
+                }
+            }  else {
+                options = {
+                    where: {typeId: type.dataValues.id},
+                    include: [{model: DeviceInfo}]
+                }
+            }
+
+            const device = await Device.findAll(options)
+
+            return res.json({device, type})
+
         } catch (e) {
             console.log(e)
             return next(ApiError.badRequest(e))

@@ -20,7 +20,7 @@ const DescriptionInfoBlock = ({descriptionInfo}: DescriptionInfoI) => {
     return (
         <div className={`description-product__info ${descriptionOpen && descriptionInfo.length > 150 ? 'info-open' : ''}`}  ref={scrollToRef}>
             <p className={'description-product__title'}>Описание продукта</p>
-            <div>
+            <div className={'mark-down'}>
                 <ReactMarkdown children={descriptionInfo} />
             </div>
             {

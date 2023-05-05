@@ -24,7 +24,7 @@ const SellerAbout = () => {
     useEffect(() => {
         $host.get(`/userShop/${id}`)
             .then(response => {
-                setShopData(response.data)
+                setShopData(response.data ? response.data : {})
             })
     }, [])
 

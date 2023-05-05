@@ -93,7 +93,7 @@ const AddProduct = () => {
         const {data} = await $authHost.post('/device', formData)
         //console.log(data)
 
-        navigate(`/addProduct/${data.device.id}`)
+        navigate(`/product/${data.device.id}`)
     }
 
     const editorOptions = useMemo(() => {

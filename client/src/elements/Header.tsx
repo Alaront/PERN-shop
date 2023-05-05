@@ -11,10 +11,12 @@ import {useSelector} from "react-redux";
 import {setIsAuth, setUser} from "../redux/slice/user";
 import jwtDecode from "jwt-decode";
 import {useAppDispatch} from "../redux/helpers";
+import Catalog from "../Components/Catalog/Catalog";
 
 const Header = () => {
     const [haveForm, setHaveForm] = useState<boolean>(false);
-    const [goodsCount, setGoodsCount] = useState<number>(0)
+    const [goodsCount, setGoodsCount] = useState<number>(0);
+    const [showCatalog, setShowCatalog] = useState<boolean>(false)
 
     const dispatch = useAppDispatch();
 
@@ -63,7 +65,7 @@ const Header = () => {
                     <NavLink to={'/'}>
                         <img src={logo} alt={'logo'} className={'header__logo'}/>
                     </NavLink>
-                    <div className={'header__menu-btn'}>Каталог</div>
+                    <div className={`header__menu-btn ${showCatalog ? 'header__menu-btn--close' : ''}`} onClick={() => setShowCatalog(!showCatalog)}>Каталог</div>
                 </div>
                 <Search />
                 <div className={'header__right'} >
@@ -76,6 +78,7 @@ const Header = () => {
                 </div>
             </div>
             <RegisterForm haveForm={haveForm && !isLogin.isAuth} setHaveForm={setHaveForm} />
+            <Catalog show={showCatalog}/>
         </header>
     );
 };
