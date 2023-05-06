@@ -74,6 +74,9 @@ const Header = () => {
                             goodsCount > 0 && <span>{goodsCount}</span>
                         }
                     </Link>
+                    {
+                        isLogin.isAuth && <Link to={"/userSetting"} className={'header__user-setting'}></Link>
+                    }
                     <Link to={"#"} className={`header__prof header__prof--${isLogin.isAuth ? 'logout' : 'login'}`} onClick={loginEvent}></Link>
                 </div>
             </div>

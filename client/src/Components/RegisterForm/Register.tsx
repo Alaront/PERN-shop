@@ -36,9 +36,29 @@ const Register = ({isHide}: registerPropsI) => {
 
     const dispatch = useAppDispatch();
 
+    const validation = (): boolean => {
+        let status = false;
+
+        if(!name.data.length) {
+            status = true;
+            console.log('error')
+            setName({...name, error: true})
+        }
+
+        if(!mail.data.length) {
+            status = true;
+            console.log('error')
+            setMail({...mail, error: true})
+        }
+
+        return status
+    }
 
     const formPush = async(e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+
+        if(validation()) return
 
         if(name.error || mail.error || pass.error || repPass.error) return
 
@@ -62,6 +82,8 @@ const Register = ({isHide}: registerPropsI) => {
     }
 
     const changeField = ({target}: React.ChangeEvent<HTMLInputElement>, fieldType: string):void => {
+        console.log('change')
+
         if(fieldType === 'name') {
             setName({data: target.value, error: !/^[a-zA-Zа-яА-я ]+$/.test(target.value)});
         }
@@ -84,20 +106,32 @@ const Register = ({isHide}: registerPropsI) => {
             <label className={'register-form-name'}>
                 <p>Имя</p>
                 <input type={'text'} className={`${name.error ? 'error-text' : ''}`} value={name.data} onChange={e => changeField(e, 'name')} />
+                {
+                    name.error &&  <p className={'error-text'}>Введите корректное имя пользователя</p>
+                }
             </label>
             <label className={'register-form-mail'}>
                 <p>Почта</p>
                 <input type={'text'} className={`${mail.error ? 'error-text' : ''}`} value={mail.data} onChange={e => changeField(e, 'mail')} />
+                {
+                    mail.error &&  <p className={'error-text'}>Введите корректную почту пользователя</p>
+                }
             </label>
             <label className={'register-form-pass'}>
                 <p>Пароль</p>
                 <input type={`${pass.show ? 'text' : 'password'}`} className={`${pass.error ? 'error-text' : ''}`} value={pass.data} onChange={e => changeField(e, 'pass')} />
                 <span onClick={() => { setPass({...pass, show: !pass.show}) }} className={`${pass.show ? '' : 'pass-close'}`}></span>
+                {
+                    pass.error &&  <p className={'error-text'}>Введите корректный пароль, пример rdr34fFD#</p>
+                }
             </label>
             <label className={'register-form-rep-pass'}>
                 <p>Повторите пароль</p>
                 <input type={`${repPass.show ? 'text' : 'password'}`} className={`${repPass.error ? 'error-text' : ''}`} value={repPass.data} onChange={e => changeField(e, 'repPass')} />
                 <span onClick={() => { setRepPass({...repPass, show: !repPass.show}) }} className={`${repPass.show ? '' : 'pass-close'}`}></span>
+                {
+                    repPass.error &&  <p className={'error-text'}>пароли не совпадают</p>
+                }
             </label>
             <button className={'register-form-rep-btn'}>регистрация</button>
             <span className={'register-form-rep-info'}>Регистрируясь на "PERN SHOP" вы соглашаетесь с <a href={'#'}>Пользовательским соглашением</a> и <a href={'#'}>Политикой конфиденциальности</a> </span>

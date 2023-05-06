@@ -1,0 +1,62 @@
+@import "common/index"
+
+.user-setting__title
+  font-style: normal
+  font-weight: 600
+  font-size: 18px
+  line-height: 22px
+  margin-bottom: 12px
+
+  +min-w($tablet)
+    font-size: 22px
+    line-height: 25px
+
+  +min-w($tablet_s)
+    font-weight: 600
+    font-size: 30px
+    line-height: 35px
+    color: $text_color
+
+.user-setting__links
+  display: flex
+  flex-wrap: wrap
+  flex-direction: row
+  margin-bottom: 25px
+
+  a
+    font-size: 18px
+    line-height: 22px
+    color: $color_white
+    background: $base_color
+    cursor: pointer
+    text-decoration: none
+    margin-right: 20px
+    padding: 5px 10px
+    border-radius: 5px
+
+.user-setting__devices
+  width: 100%
+
+  thead
+    background: #d7d7d7
+    width: 100%
+
+  tbody
+    tr:nth-child(2n)
+      background: #d7d7d7
+
+  td
+    padding: 10px 20px
+    text-align: center
+    border-bottom: 1px solid #F4EEE8
+    transition: all 0.5s linear
+    width: calc(100% / 7)
+    overflow: hidden
+    text-overflow: ellipsis
+    white-space: nowrap
+    vertical-align: middle
+
+  th
+    padding: 10px 20px
+    color: #3D3511
+    border-bottom: 1px solid #F4EEE8
