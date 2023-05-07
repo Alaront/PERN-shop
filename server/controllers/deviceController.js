@@ -10,6 +10,7 @@ import {
     Review, ReviewComment, Question, QuestionAnswer, UserOperation, Type
 } from "../models/models.js";
 import HelperFiles from "../Utils/helperFiles.js";
+import {Op} from "sequelize";
 
 const average = array => array.reduce((a, b) => a + b) / array.length;
 
@@ -348,6 +349,32 @@ class DeviceController {
             const deviceNew = await DeviceInfo.update({rating, ratingSetUsers}, {where: {id: deviceId}, returning: true});
 
             return res.json(deviceNew)
+        } catch (e) {
+            console.log(e)
+            return next(ApiError.badRequest(e))
+        }
+    }
+
+    async getDevicesBySubString(req, res, next) {
+        try {
+            const {str} = req.query;
+
+            if(!str) {
+                return next(ApiError.badRequest('Not set str'))
+            }
+
+            const devices = await DeviceInfo.findAll({
+                where: {
+                    fullName: {
+                        [Op.like]: `%${str}%`
+                    }
+                },
+                limit: 3,
+                include: [{model: Device}]
+            });
+
+            return res.json(devices)
+
         } catch (e) {
             console.log(e)
             return next(ApiError.badRequest(e))

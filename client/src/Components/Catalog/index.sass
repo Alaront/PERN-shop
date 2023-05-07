@@ -4,7 +4,7 @@
   position: fixed
   top: 105px
   left: 50%
-  transform: translateX(-50%)
+  transform: translateX(-50%) translateY(-100%)
   border: 1px solid $base_color
   border-bottom-left-radius: 5px
   border-bottom-right-radius: 5px
@@ -14,16 +14,18 @@
   background: $bg_color
   padding: 20px 10px
   overflow: auto
-  display: none
+  z-index: -1
 
   +min-w($tablet_m)
-    top: 64px
+    top: 63px
     padding: 40px 30px
     max-height: calc(100vh - 64px)
+    transition: 0.3s
 
 
   &.catalog-show
-    display: block
+    transform: translateX(-50%) translateY(0)
+    transition: 0.3s
 
 .catalog__title
   font-style: normal

@@ -2,16 +2,12 @@
 
 .header
   width: 100%
-  padding: 10px 10px
   background: $bg_color
   border-bottom: 1px solid $color_black
   position: fixed
   top: 0
   left: 0
   z-index: 4
-
-  +min-w($tablet_m)
-    padding: 10px 0
 
 .header-wrapper
   max-width: $max_wrapper
@@ -20,9 +16,12 @@
   flex-wrap: wrap
   align-items: center
   flex-direction: row
+  background: $bg_color
+  padding: 10px 10px
 
   +min-w($tablet_m)
     justify-content: space-between
+    padding: 10px 0
 
 
 .header__left
