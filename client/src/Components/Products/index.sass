@@ -13,6 +13,7 @@
   display: flex
   justify-content: space-between
   flex-direction: column
+  flex-grow: 1
 
   +min-w($tablet)
     min-height: 300px
@@ -32,6 +33,18 @@
   .similar-products__slider &
     width: 100%
 
+  .search-page__content &
+
+    +min-w(500px)
+      width: calc(100%/12*4 - 8px)
+
+    +min-w($tablet)
+      width: calc(100%/12*3 - 8px)
+
+    +min-w($tablet_s)
+      width: calc(100%/12*2 - 8px)
+
+
 
 .product-card-short__photo
   width: 100%
@@ -47,6 +60,10 @@
 
 .product-card-short__content
   padding: 6px 10px
+  min-height: 84px
+  display: flex
+  flex-direction: column
+  justify-content: flex-end
 
 .product-card-short__price
   transition: 0.3s

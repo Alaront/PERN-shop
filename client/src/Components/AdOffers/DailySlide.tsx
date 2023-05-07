@@ -1,4 +1,6 @@
 import React, {ImgHTMLAttributes} from 'react';
+import {makeFullPhotoUrl} from "../../helpers";
+import {NavLink} from "react-router-dom";
 
 interface sliderProps {
     title: string,
@@ -9,13 +11,13 @@ interface sliderProps {
 
 const DailySlide = ({discount, photo, title, linkHref}: sliderProps) => {
     return (
-        <a className={'deals-slider__item'} href={linkHref}>
+        <h4 className={'deals-slider__item'}>
             <div className={'deals-slider__photo'}>
-                <img src={photo} alt={title}/>
+                <img src={makeFullPhotoUrl(photo)} alt={title}/>
             </div>
-            <h4>{title}</h4>
+            <NavLink to={`product/${linkHref}`}>{title}</NavLink>
             <span>{discount}%</span>
-        </a>
+        </h4>
     );
 };
 

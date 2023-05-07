@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Swiper, SwiperSlide} from "swiper/react";
 import {Navigation, Pagination} from "swiper";
 import DailySlide from "./DailySlide";
@@ -7,15 +7,46 @@ import watchPhoto from '../../images/products/watch.png'
 
 import './index.sass'
 import 'swiper/css';
+import {deviceCartI, deviceI} from "../../helpers/interfaces";
+import {$host} from "../../axios";
 
 const Daily = () => {
+    const [time, setTime] = useState<string>('');
+    const [device, setDevice] = useState<Array<deviceCartI>>([])
+
+    const update = () => {
+        const dt:Date = new Date
+        const tz:number = dt.getTimezoneOffset()
+        const now:number = Math.floor(Number(dt) / 1000 - tz * 60)
+        const next:number = Math.ceil((Number(dt) / 1000 / 60 - tz) / 60 / 24) * 60 * 60 * 24
+        const left:number = next - now
+        const text:string = ~~(left/60/60) + ":" + ~~(left/60%60) + ":" + ~~(left%60)
+        setTime(text)
+    }
+
+    const getData = async () => {
+        const {data} = await $host.get('/device/getDevicesForMain', {
+            params: {
+                type: 'discount'
+            }
+        });
+
+        setDevice(data)
+
+    }
+
+    useEffect(() => {
+        update()
+        setInterval(update, 1000)
+
+        getData();
+    }, [])
+
     return (
         <div className={'deals'}>
             <div className={'deals__title'}>
-                <div className={'deals__text'}>
-                    <p className={'deals__text-title'}>Скидки сегодня</p>
-                </div>
-                <div className={'deals__time'}>03:13:34</div>
+                <h4 className={'deals__text'}>Скидки сегодня</h4>
+                <div className={'deals__time'}>Осталось: <span>{time}</span></div>
             </div>
             <div className={'deals__offers'}>
                 <Swiper
@@ -23,24 +54,13 @@ const Daily = () => {
                     slidesPerView={'auto'}
                     className={'deals-slider'}
                 >
-                    <SwiperSlide>
-                        <DailySlide title={'Smart watches'} discount={25} photo={watchPhoto} linkHref={"#"}/>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <DailySlide title={'Laptops'} discount={75} photo={watchPhoto} linkHref={"#"}/>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <DailySlide title={'GoPro cameras'} discount={50} photo={watchPhoto} linkHref={"#"}/>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <DailySlide title={'Headphones'} discount={40} photo={watchPhoto} linkHref={"#"}/>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <DailySlide title={'Canon camreras'} discount={85} photo={watchPhoto} linkHref={"#"}/>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <DailySlide title={'Blenders'} discount={85} photo={watchPhoto} linkHref={"#"}/>
-                    </SwiperSlide>
+                    {
+                        device && device.map(item => (
+                            <SwiperSlide key={item.id}>
+                                <DailySlide title={item.deviceInfo.fullName} discount={item.discount} photo={item.deviceInfo.mainPhoto} linkHref={String(item.id)}/>
+                            </SwiperSlide>
+                        ))
+                    }
                 </Swiper>
             </div>
         </div>

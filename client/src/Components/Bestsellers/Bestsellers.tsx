@@ -1,19 +1,35 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Bitmap from '../../images/products/Bitmap.png'
 
 import './index.sass'
 import ProductCartShort from "../Products/ProductCartShort";
+import {$host} from "../../axios";
+import {deviceCartI} from "../../helpers/interfaces";
 const Bestsellers = () => {
+    const [device, setDevice] = useState<Array<deviceCartI>>([])
+
+    const getData = async () => {
+        const {data} = await $host.get('/device/getDevicesForMain', {
+            params: {
+                type: 'rating'
+            }
+        });
+
+        setDevice(data)
+    }
+
+    useEffect(() => {
+
+        getData();
+    }, [])
+
     return (
         <div className={'bestsellers'}>
             <h3 className={'bestsellers__title'}>Хиты продаж</h3>
             <div className={'bestsellers__wrapper-card'}>
-                {/*<ProductCartShort title={'T-shirts with multiple colors, for men'} photoUrl={Bitmap} price={7.30} hrefLink={"#"} />*/}
-                {/*<ProductCartShort title={'T-shirts with multiple colors, for men'} photoUrl={Bitmap} price={10} oldPrice={9} hrefLink={"#"} />*/}
-                {/*<ProductCartShort title={'T-shirts with multiple colors, for men'} photoUrl={Bitmap} price={10.30} hrefLink={"#"} />*/}
-                {/*<ProductCartShort title={'T-shirts with multiple colors, for men'} photoUrl={Bitmap} price={3} hrefLink={"#"} />*/}
-                {/*<ProductCartShort title={'T-shirts with multiple colors, for men'} photoUrl={Bitmap} price={3.2} oldPrice={92} hrefLink={"#"} />*/}
-                {/*<ProductCartShort title={'T-shirts with multiple colors, for men'} photoUrl={Bitmap} price={12.80} oldPrice={32} hrefLink={"#"} />*/}
+                {
+                    device && device.map(item =>  <ProductCartShort title={item.deviceInfo.fullName} photoUrl={item.deviceInfo.mainPhoto} price={item.price} discount={item.discount} hrefLink={String(item.id)} />)
+                }
             </div>
         </div>
     );

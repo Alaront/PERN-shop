@@ -19,7 +19,6 @@ const Catalog = ({show}:CatalogI) => {
 
     const getData = async () => {
         const {data} = await $host.get('/type');
-        console.log(data)
         setCatalogList(data)
     }
 

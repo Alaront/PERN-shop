@@ -355,6 +355,40 @@ class DeviceController {
         }
     }
 
+    async getDevicesForMain(req, res, next) {
+        try {
+            let {type} = req.query;
+
+            type = type || 'discount';
+
+            let device;
+
+            if(type === 'discount') {
+                device =  await Device.findAll({
+                    where: { discount: {
+                            [Op.gt]: 0
+                        }
+                    },
+                    include: [{model: DeviceInfo}],
+                    limit: 6,
+                    order: [['discount', 'DESC']]
+                })
+            } else {
+                device =  await Device.findAll({
+                    include: [{model: DeviceInfo}],
+                    limit: 18,
+                    order: [[DeviceInfo, 'rating', 'DESC']]
+                })
+            }
+
+
+            return res.json(device)
+        } catch (e) {
+            console.log(e)
+            return next(ApiError.badRequest(e))
+        }
+    }
+
     async getDevicesBySubString(req, res, next) {
         try {
             const {str} = req.query;
