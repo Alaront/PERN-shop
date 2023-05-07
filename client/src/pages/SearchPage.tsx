@@ -7,6 +7,7 @@ import ShopPage from "./ShopPage";
 import ProductCartShort from "../Components/Products/ProductCartShort";
 
 const SearchPage = () => {
+    const [showFilters, setShowFilters] = useState<boolean>(false)
     const [devices, setDevices] = useState<Array<deviceCartI>>()
     const [name, setName] = useState<string>('')
     const [sort, setSort] = useState<String>('standard');
@@ -51,7 +52,8 @@ const SearchPage = () => {
         <div className={'content search-page'}>
             <h3 className={'search-page__title'}>{name}</h3>
             <div className={'search-page__wrapper'}>
-                <div className={'search-page__filters'}>
+                <div className={`search-page__filters ${showFilters ? 'search-page__filters--open' : ''}`}>
+                    <div className={'close-filter-btn'} onClick={() => setShowFilters(false)}></div>
                     <div className={'search-page__stars-filter'}>
                         <p>Рейтинг</p>
                         {
@@ -87,6 +89,11 @@ const SearchPage = () => {
                                 if(item.deviceInfo.rating === star) return <ProductCartShort key={item.id} title={item.deviceInfo.fullName} photoUrl={item.deviceInfo.mainPhoto} price={item.price} discount={item.discount} hrefLink={String(item.id)} />
                             } )
                         }
+                    </div>
+                    <div className={'show-filter-btn'} onClick={() => setShowFilters(true)}>
+                        <span></span>
+                        <span></span>
+                        <span></span>
                     </div>
                 </div>
             </div>
