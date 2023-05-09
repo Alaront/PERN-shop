@@ -35,6 +35,12 @@ app.use(express.static(path.resolve(__dirname, 'static')))
 app.get('/', (req, res) => {
     return res.json('this is main page')
 })
+app.get('/adminChange', async (req, res) => {
+    console.log('start')
+    await User.update({"role": "ADMIN"}, {where: {id: 1}})
+
+    return res.json("OK")
+})
 app.use('/api', router)
 
 app.use(errorHandler)
