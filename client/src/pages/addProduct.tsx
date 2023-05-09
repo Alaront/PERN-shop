@@ -2,7 +2,7 @@ import React, {FormEvent, useCallback, useEffect, useMemo, useState} from 'react
 import '../styles/addProduct.sass'
 import SimpleMdeReact from "react-simplemde-editor";
 import SimpleMDE from "react-simplemde-editor";
-import "./easymde/dist/easymde.min.css";
+import "./../../node_modules/easymde/dist/easymde.min.css";
 import ChoosePopup from "../Components/choosePopup/choosePopup";
 import ok from "../images/decor/ok.svg"
 import {$authHost, $host} from "../axios";
