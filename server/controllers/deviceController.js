@@ -443,7 +443,7 @@ class DeviceController {
 
             const products = await Device.findAll({where: {id: allId}, include: [{model: DeviceInfo}]})
 
-            return res.json(products)
+            return res.json(products.reverse())
 
         } catch (e) {
             console.log(e)

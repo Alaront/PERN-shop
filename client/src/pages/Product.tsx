@@ -14,6 +14,7 @@ import {
     reviewsItem
 } from "../helpers/interfaces";
 import QuestionsProduct from "../Components/Product/Description/Questions/QuestionsProduct";
+import {writeLSProductCheck} from "../helpers";
 
 const Product = () => {
     const {id} = useParams();
@@ -53,6 +54,9 @@ const Product = () => {
 
     useEffect(() => {
         getProductData();
+        if(id) {
+            writeLSProductCheck(Number(id))
+        }
         window.scrollTo(0, 0);
     }, [id])
 

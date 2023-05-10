@@ -28,7 +28,7 @@ const Bestsellers = () => {
             <h3 className={'bestsellers__title'}>Хиты продаж</h3>
             <div className={'bestsellers__wrapper-card'}>
                 {
-                    device && device.map(item =>  <ProductCartShort title={item.deviceInfo.fullName} photoUrl={item.deviceInfo.mainPhoto} price={item.price} discount={item.discount} hrefLink={String(item.id)} />)
+                    device && device.map(item =>  <ProductCartShort key={item.id} title={item.deviceInfo.fullName} photoUrl={item.deviceInfo.mainPhoto} price={item.price} discount={item.discount} hrefLink={String(item.id)} />)
                 }
             </div>
         </div>
