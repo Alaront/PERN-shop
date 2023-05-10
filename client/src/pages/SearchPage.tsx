@@ -39,6 +39,10 @@ const SearchPage = () => {
         getData()
     }, [sort])
 
+    useEffect(() => {
+        if(name) document.title = name
+    }, [name])
+
     const changeCheck = (index:number) => {
         console.log(index)
         if(index === star) {

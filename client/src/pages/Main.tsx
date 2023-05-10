@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import AdSlider from "../Components/AdSlider/AdSlider";
 import Daily from "../Components/AdOffers/Daily";
 import Bestsellers from "../Components/Bestsellers/Bestsellers";

@@ -83,6 +83,7 @@ const Cart = () => {
 
     useEffect(() => {
         getProducts()
+        document.title = 'Cart';
     }, [])
 
     return (

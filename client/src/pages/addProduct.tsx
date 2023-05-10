@@ -152,6 +152,10 @@ const AddProduct = () => {
 
     }, [])
 
+    useEffect(() => {
+        document.title = 'Add product'
+    }, [])
+
     // @ts-ignore
     return (
         <div className={'content add-product'}>

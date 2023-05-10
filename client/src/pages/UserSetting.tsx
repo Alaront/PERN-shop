@@ -28,6 +28,7 @@ const UserSetting = () => {
 
     useEffect(() => {
         getData();
+        document.title = 'User setting';
     }, [user])
 
 
@@ -44,6 +45,7 @@ const UserSetting = () => {
                 <NavLink to={`/addProduct`}>Добавить продукт</NavLink>
                 <NavLink to={`/shopPage/${user.id}`}>Открыть страницу</NavLink>
                 <NavLink to={`/editShopPage/${user.id}`}>Редактировать главную страницу</NavLink>
+                <NavLink to={`/userOperation/${user.id}`}>Операции пользователя</NavLink>
             </div>
             <table className={'user-setting__devices'}>
                 <thead className={'user-setting__devices'}>

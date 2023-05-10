@@ -60,6 +60,13 @@ const Product = () => {
         window.scrollTo(0, 0);
     }, [id])
 
+    useEffect(() => {
+        console.log(deviceInfo)
+
+        if(deviceInfo?.fullName) {
+            document.title = deviceInfo.fullName
+        }
+    }, [deviceInfo])
 
     if (!device || !deviceCharacteristics || !deviceInfo || !devicePhotos || !deviceQuestion) return <div className={'content product-content'}></div>
 

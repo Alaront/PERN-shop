@@ -168,6 +168,7 @@ const EditProduct = () => {
             })
 
         getProductData();
+        document.title = 'Edit product';
     }, [])
 
 

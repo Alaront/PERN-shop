@@ -17,7 +17,7 @@ interface shopDataI {
 }
 
 const SellerAbout = () => {
-    const [shopData, setShopData] = useState<shopDataI | {}>({})
+    const [shopData, setShopData] = useState<shopDataI | null>(null)
 
     const {id} = useParams();
 
@@ -28,22 +28,32 @@ const SellerAbout = () => {
             })
     }, [])
 
-    if(!Object.keys(shopData).length) return <></>
+    useEffect(() => {
+        if(shopData?.title) {
+            document.title = shopData.title
+        }
+
+    }, [shopData])
+
+
+    if(!shopData) {
+        return <></>
+    }
 
     return (
         <div className={'seller-about'}>
             <div className={'seller-about__photo'}>
-                <img src={"img" in shopData ? makeFullPhotoUrl(shopData.img) : ''} alt={'photo'} />
+                <img src={makeFullPhotoUrl(shopData.img)} alt={'photo'} />
             </div>
             <div className={'seller-about__text'} >
-                <h2 className={'seller-about__title'}>{"title" in shopData ? shopData.title : ''}</h2>
+                <h2 className={'seller-about__title'}>{shopData.title}</h2>
                 <div>
-                    <ReactMarkdown children={"description" in shopData ? shopData.description : ''} />
+                    <ReactMarkdown children={shopData.description} />
                 </div>
                 <ul className={'seller-about__info-list'}>
-                    <li className={'seller-about__info-list--email'}><span>Email: </span>{"email" in shopData ? shopData.email : ''}</li>
-                    <li className={'seller-about__info-list--phone'}><span>Телефон: </span>{"phone" in shopData ? shopData.phone : ''}</li>
-                    <li className={'seller-about__info-list--country'}><span>Страна: </span>{"country" in shopData ? shopData.country : ''}</li>
+                    <li className={'seller-about__info-list--email'}><span>Email: </span>{shopData.email}</li>
+                    <li className={'seller-about__info-list--phone'}><span>Телефон: </span>{shopData.phone}</li>
+                    <li className={'seller-about__info-list--country'}><span>Страна: </span>{shopData.country}</li>
                 </ul>
             </div>
         </div>

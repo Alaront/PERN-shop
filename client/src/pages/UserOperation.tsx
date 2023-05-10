@@ -29,6 +29,7 @@ const UserOperation = () => {
 
     useEffect(() => {
         getData();
+        document.title = 'User operation';
     }, [])
 
 
