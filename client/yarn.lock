@@ -3936,7 +3936,7 @@
   "resolved" "https://registry.npmjs.org/duplexer/-/duplexer-0.1.2.tgz"
   "version" "0.1.2"
 
-"easymde@>= 2.0.0 < 3.0.0":
+"easymde@^2.16.1", "easymde@>= 2.0.0 < 3.0.0":
   "integrity" "sha512-IxVVUxNWIoXLeqtBU4BLc+eS/ScYhT1Dcb6yF5Wchoj1iXAV+TIIDWx+NCaZhY7RcSHqDPKllbYq7nwGKILnoA=="
   "resolved" "https://registry.npmjs.org/easymde/-/easymde-2.18.0.tgz"
   "version" "2.18.0"
