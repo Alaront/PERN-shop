@@ -31,7 +31,9 @@ const PORT = process.env.PORT || 5000;
 app.use(cors())
 app.use(express.json())
 app.use(fileUpload())
-app.use(express.static(path.resolve(__dirname, 'static')))
+//app.use(express.static(path.resolve(__dirname, 'static')))
+app.use('/img', express.static('static/img'))
+
 app.get('/', (req, res) => {
     return res.json('this is main page')
 })
