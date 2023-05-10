@@ -19,3 +19,4 @@ client/build
 .DS_Store
 .env.local
 /server/static/img/*
+!/server/static/img/.gitkeep
