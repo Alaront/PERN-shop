@@ -73,7 +73,7 @@ const EditMainPhoto = ({title, type}: EditMainPhotoI) => {
 
     const getDataDevice = async () => {
         const {data} = await $authHost.get(`/device/${id}`)
-        setCurrentPhoto(data.deviceInfo.mainPhoto)
+        setCurrentPhoto(data.deviceInfo?.mainPhoto)
         console.log('test', data)
     }
 

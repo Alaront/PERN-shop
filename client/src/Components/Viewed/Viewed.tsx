@@ -32,7 +32,7 @@ const Viewed = () => {
             <p className={'viewed__title'}>Вы смотрели</p>
             <div className={'viewed__wrapper-card'}>
                 {
-                    data && data.map(item => <ProductCartShort key={item.id} title={item.deviceInfo?.fullName} photoUrl={item.deviceInfo.mainPhoto} price={item.price} discount={item.discount} hrefLink={String(item.id)} />)
+                    data && data.map(item => <ProductCartShort key={item.id} title={item.deviceInfo?.fullName} photoUrl={item.deviceInfo?.mainPhoto} price={item.price} discount={item.discount} hrefLink={String(item.id)} />)
                 }
             </div>
         </div>
