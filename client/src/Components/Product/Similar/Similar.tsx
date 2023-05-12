@@ -13,7 +13,7 @@ interface SimilarI {
 }
 
 const Similar = ({allSimilar}:SimilarI) => {
-    console.log(allSimilar[0].deviceInfo.fullName)
+
     return (
         <div className={'similar-products'}>
             <h6 className={'similar-products__title'}>Похожие товары</h6>

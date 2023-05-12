@@ -415,6 +415,23 @@ class DeviceController {
         }
     }
 
+    async dellDevice(req, res, next) {
+        try {
+            let {id} = req.body;
+
+            if(!id) {
+                return next(ApiError.badRequest('Not set id'))
+            }
+
+            await Device.destroy({where: {id}})
+
+            return res.json('devices was dell')
+        } catch (e) {
+            console.log(e)
+            return next(ApiError.badRequest(e))
+        }
+    }
+
     async getDevicesByShop(req, res, next) {
         try {
             let {shopId} = req.body;
