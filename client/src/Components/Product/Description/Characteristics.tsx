@@ -12,7 +12,6 @@ const Characteristics = ({listCharacteristics}: CharacteristicsI) => {
 
     const clickBtn = () => {
         setCharacteristicsOpen(!characteristicsOpen);
-        scrollToRef.current?.scrollIntoView();
     }
 
     return (

@@ -57,11 +57,11 @@ const Cart = () => {
                     countForBuy: item.cartCount
                 }
                 const {data} = await $authHost.post('/device/buyDevice', params);
-                alert(`Товар ${item.deviceInfo.fullName} был успешно куплен`)
+                alert(`Товар ${item.deviceInfo?.fullName} был успешно куплен`)
                 dellLSShopingCart(item.id)
                 console.log(data)
             } else {
-                alert(`Товара ${item.deviceInfo.fullName}(${item.cartCount}) не хватает на складе(${item.count})`)
+                alert(`Товара ${item.deviceInfo?.fullName}(${item.cartCount}) не хватает на складе(${item.count})`)
             }
         }
 

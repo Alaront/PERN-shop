@@ -28,7 +28,7 @@ const Similar = ({allSimilar}:SimilarI) => {
                 >
                     {allSimilar && allSimilar.map(item => (
                         <SwiperSlide key={item.id}>
-                            <ProductCartShort title={item.deviceInfo.fullName} photoUrl={item.deviceInfo.mainPhoto} price={item.price} discount={item.discount} hrefLink={String(item.id)} />
+                            <ProductCartShort title={item.deviceInfo?.fullName} photoUrl={item.deviceInfo?.mainPhoto} price={item.price} discount={item.discount} hrefLink={String(item.id)} />
                         </SwiperSlide>
                     ))}
                 </Swiper>

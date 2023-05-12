@@ -16,7 +16,7 @@ class TypeController {
                 slug = tr(name).replace(' ', '') + '_' + Date.now()
             }
 
-            const type = await Type.create({name, slug})
+            const type = await Type.create({name, slug: tr(slug)})
 
             return res.json(type)
 

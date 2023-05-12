@@ -57,7 +57,7 @@ const Daily = () => {
                     {
                         device && device.map(item => (
                             <SwiperSlide key={item.id}>
-                                <DailySlide title={item.deviceInfo.fullName} discount={item.discount} photo={item.deviceInfo.mainPhoto} linkHref={String(item.id)}/>
+                                <DailySlide title={item.deviceInfo?.fullName} discount={item.discount} photo={item.deviceInfo?.mainPhoto} linkHref={String(item.id)}/>
                             </SwiperSlide>
                         ))
                     }

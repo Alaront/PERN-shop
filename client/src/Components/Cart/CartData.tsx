@@ -25,7 +25,7 @@ const CartData = ({mainCheck, changeMainCheck, product, changeChecked}: ICartDat
             </div>
             <div className={'cart-data__list'}>
                 {
-                    product && product.map(item => <CartItem key={item.id} id={item.id} photo={item.deviceInfo.mainPhoto} title={item.deviceInfo.fullName} count={item.cartCount} price={item.price} isChecked={item.isCheck} changeChecked={() => changeChecked(item.id)} />)
+                    product && product.map(item => <CartItem key={item.id} id={item.id} photo={item.deviceInfo?.mainPhoto} title={item.deviceInfo?.fullName} count={item.cartCount} price={item.price} isChecked={item.isCheck} changeChecked={() => changeChecked(item.id)} />)
                 }
             </div>
         </div>

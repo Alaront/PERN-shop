@@ -89,8 +89,8 @@ const SearchPage = () => {
                     <div className={'search-page__devices'}>
                         {
                             devices && devices.map(item => {
-                                if(star === 0) return <ProductCartShort key={item.id} title={item.deviceInfo.fullName} photoUrl={item.deviceInfo.mainPhoto} price={item.price} discount={item.discount} hrefLink={String(item.id)} />
-                                if(item.deviceInfo.rating === star) return <ProductCartShort key={item.id} title={item.deviceInfo.fullName} photoUrl={item.deviceInfo.mainPhoto} price={item.price} discount={item.discount} hrefLink={String(item.id)} />
+                                if(star === 0) return <ProductCartShort key={item.id} title={item.deviceInfo?.fullName} photoUrl={item.deviceInfo?.mainPhoto} price={item.price} discount={item.discount} hrefLink={String(item.id)} />
+                                if(item.deviceInfo.rating === star) return <ProductCartShort key={item.id} title={item.deviceInfo?.fullName} photoUrl={item.deviceInfo?.mainPhoto} price={item.price} discount={item.discount} hrefLink={String(item.id)} />
                             } )
                         }
                     </div>

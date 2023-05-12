@@ -14,7 +14,6 @@ const DescriptionInfoBlock = ({descriptionInfo}: DescriptionInfoI) => {
 
     const clickBtn = () => {
         setDescriptionOpen(!descriptionOpen);
-        scrollToRef.current?.scrollIntoView();
     }
 
     return (
