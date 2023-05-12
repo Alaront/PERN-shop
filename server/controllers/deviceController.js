@@ -48,7 +48,7 @@ class DeviceController {
             if(!photo) {
                 photo = '';
             } else  {
-                photo = HelperFiles.makeImgReturnPath(photo)
+                photo = await HelperFiles.makeImgReturnPath(photo)
             }
 
             const device = await Device.create({ price, discount, count, countSales, typeId, brandId, userShopId: id });
@@ -85,7 +85,7 @@ class DeviceController {
                 return next(ApiError.badRequest('Not set id or logo'))
             }
 
-            const fileName = HelperFiles.makeImgReturnPath(photo)
+            const fileName = await HelperFiles.makeImgReturnPath(photo)
 
             const photoNew = await DevicePhoto.create({url: fileName, text: '', deviceId})
 
@@ -117,7 +117,7 @@ class DeviceController {
                 });
             }
 
-            const fileName = HelperFiles.makeImgReturnPath(photo)
+            const fileName = await HelperFiles.makeImgReturnPath(photo)
 
             let deviceInfo = await DeviceInfo.update({mainPhoto: fileName}, {where: {deviceId}, returning: true})
 
