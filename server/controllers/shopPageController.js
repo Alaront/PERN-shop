@@ -47,7 +47,7 @@ class ShopPageController {
                     }
                 });
             }
-            const fileName = HelperFiles.makeImgReturnPath(photo)
+            const fileName = await HelperFiles.makeImgReturnPath(photo)
 
             let shopPage = await UserShop.update({img: fileName}, {where: {id: id}, returning: true})
 

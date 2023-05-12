@@ -13,7 +13,7 @@ class BrandController {
                 return next(ApiError.badRequest('Not set name or logo'))
             }
 
-            const fileName = HelperFiles.makeImgReturnPath(logo)
+            const fileName = await HelperFiles.makeImgReturnPath(logo)
 
             const brand = await Brand.create({name: title, photo: fileName})
 
@@ -66,16 +66,11 @@ class BrandController {
             const oldBrand = await Brand.findOne({where: {id}})
             const photoUrl = oldBrand.dataValues.photo
             if(photoUrl) {
-               await HelperFiles.dellFile(photoUrl, ({status, data}) => {
-
-                   if(status !== 'success') {
-                       return next(ApiError.internal('Error', data))
-                   }
-               });
+               await HelperFiles.dellFile(photoUrl);
             }
 
             console.log(3)
-            const fileName = HelperFiles.makeImgReturnPath(logo)
+            const fileName = await HelperFiles.makeImgReturnPath(logo)
 
             let brand = await Brand.update({photo: fileName}, {where: {id: id}, returning: true})
 
@@ -97,7 +92,7 @@ class BrandController {
 
             const brand = await Brand.findOne({where: {id}})
             const photoUrl = brand.dataValues.photo
-            HelperFiles.dellFile(photoUrl, ({status, data}) => {
+            await HelperFiles.dellFile(photoUrl, ({status, data}) => {
                 if(status !== 'success') {
                     return next(ApiError.internal('Error', data))
                 }

@@ -93,8 +93,16 @@ async function readLSShopingCart(): Promise<Array<cartData>> {
 
 }
 
-function makeFullPhotoUrl(url:string):string {
-    return `${process.env.REACT_APP_API_URL}/${url}`
+function makeFullPhotoUrl(dataJson:string):string {
+    try {
+        const data = JSON.parse(dataJson);
+        console.log(data)
+        return data.newUrl
+    } catch (e) {
+        console.log(e)
+    }
+
+    return ''
 }
 
 const makeDataFormat = (dateStr:string):string => {
