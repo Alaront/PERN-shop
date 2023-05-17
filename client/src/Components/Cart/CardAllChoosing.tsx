@@ -25,16 +25,16 @@ const CardAllChoosing = ({product, buyProduct}:cardAllChoosingI) => {
             0
         )
 
-        setCountProducts(
-            product.reduce(
-                (accumulator, currentValue) => accumulator + (currentValue.isCheck ? currentValue.cartCount : 0),
-                0
-            )
+        const countProductsTemp:number = product.reduce(
+            (accumulator, currentValue) => accumulator + (currentValue.isCheck ? currentValue.cartCount : 0),
+            0
         )
 
-        setAllSum(allSumTemp )
+
+        setAllSum(allSumTemp * countProductsTemp)
         setDiscount(discountTemp)
         setOrder(Math.ceil(allSumTemp - discountTemp))
+        setCountProducts(countProductsTemp)
 
 
     }, [product])
@@ -46,7 +46,7 @@ const CardAllChoosing = ({product, buyProduct}:cardAllChoosingI) => {
             <p className={'card-all-choosing__discount'}><span>Скидки</span><span>{discount} $</span></p>
             <div className={'card-all-choosing__btn'} onClick={() => buyProduct()}>
                 <span>Купить</span>
-                <span>{countProducts} товаров - {order} $</span>
+                <span>{countProducts} товаров - {allSum - discount} $</span>
             </div>
         </div>
     );

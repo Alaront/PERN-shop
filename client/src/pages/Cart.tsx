@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import CartData from "../Components/Cart/CartData";
 import CardAllChoosing from "../Components/Cart/CardAllChoosing";
-import {dellLSShopingCart, readLSShopingCart} from "../helpers";
+import {dellLSShopingCart, newDataLSShopingCart, readLSShopingCart} from "../helpers";
 import {$authHost, $host} from "../axios";
 import {deviceCartI, deviceI} from "../helpers/interfaces";
 
@@ -18,6 +18,23 @@ const Cart = () => {
                     return {...item, isCheck: !mainCheckOld}
                 })
             )
+    }
+
+    const changeCountItem = (id:number, type: string):void => {
+        console.log('id', id)
+        const productTemp:Array<deviceCartI> = product.map(item => {
+            if(item.id === id) {
+                return type === 'decrease' ? { ...item, cartCount: --item.cartCount} : {...item, cartCount: ++item.cartCount}
+            }
+
+            return item
+        }).filter(item => item.cartCount >= 1);
+
+        setProduct(
+            productTemp
+        )
+
+        newDataLSShopingCart(productTemp)
     }
 
     const getProducts = async () => {
@@ -89,7 +106,7 @@ const Cart = () => {
     return (
         <div className={'content content-cart'}>
             {
-                product && <CartData mainCheck={mainCheck} changeMainCheck={changeMainCheck} product={product} changeChecked={changeChecked}/>
+                product && <CartData mainCheck={mainCheck} changeMainCheck={changeMainCheck} product={product} changeChecked={changeChecked} changeCountItem={changeCountItem}/>
             }
             <CardAllChoosing  product={product}  buyProduct={buyProduct}/>
         </div>

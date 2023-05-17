@@ -1,5 +1,5 @@
 import {EVENT_ADD_GOODS_CARD, SHOPING_CARD_KEY, SHOPING_CHECK_KEY} from "./consts";
-import {cartData} from "./interfaces";
+import {cartData, deviceCartI} from "./interfaces";
 
 function writeLSProductCheck(id: number):void {
     let data:string | null = localStorage.getItem(SHOPING_CHECK_KEY);
@@ -68,6 +68,14 @@ async function writeLSShopingCart(id: number, count:number): Promise<void> {
     document.dispatchEvent(new Event(EVENT_ADD_GOODS_CARD))
 }
 
+function newDataLSShopingCart(arraDataCard:Array<deviceCartI>) {
+    let dataToLS:Array<cartData> = arraDataCard.map(item => {
+        return { id: item.id, count: item.cartCount }
+    } )
+
+    localStorage.setItem(SHOPING_CARD_KEY, JSON.stringify(dataToLS));
+}
+
 function dellLSShopingCart(id:number):void {
     let data:string | null = localStorage.getItem(SHOPING_CARD_KEY);
 
@@ -111,4 +119,4 @@ const makeDataFormat = (dateStr:string):string => {
     return date.toLocaleDateString('ru-RU', options)
 }
 
-export {writeLSShopingCart, readLSShopingCart, makeFullPhotoUrl, dellLSShopingCart, makeDataFormat, writeLSProductCheck, readLSProductCheck}
+export {writeLSShopingCart, readLSShopingCart, makeFullPhotoUrl, dellLSShopingCart, makeDataFormat, writeLSProductCheck, readLSProductCheck, newDataLSShopingCart}

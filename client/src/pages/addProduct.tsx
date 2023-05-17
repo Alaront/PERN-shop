@@ -178,8 +178,8 @@ const AddProduct = () => {
                 </div>
 
                 <div className={'add-product__form-price'}>
-                    <span className={'add-product__form-name'}>Скидка на товар</span>
-                    <input type={'number'} value={discount} onChange={(e) => {setDiscount(Number(e.target.value))}} />
+                    <span className={'add-product__form-name'}>Скидка на товар(%)</span>
+                    <input type={'number'} max={99} value={discount} onChange={(e) => {setDiscount(Number(e.target.value) <= 99 ? Number(e.target.value) : 99)}} />
                 </div>
 
                 <div className={'add-product__form-type'}>

@@ -11,10 +11,11 @@ interface ICartData {
     mainCheck: boolean
     changeMainCheck: Function,
     product: Array<deviceCartI>,
-    changeChecked: Function
+    changeChecked: Function,
+    changeCountItem: Function
 }
 
-const CartData = ({mainCheck, changeMainCheck, product, changeChecked}: ICartData) => {
+const CartData = ({mainCheck, changeMainCheck, product, changeChecked, changeCountItem}: ICartData) => {
     return (
         <div className={'cart-data'}>
             <div className={'cart-data__info'}>
@@ -25,7 +26,7 @@ const CartData = ({mainCheck, changeMainCheck, product, changeChecked}: ICartDat
             </div>
             <div className={'cart-data__list'}>
                 {
-                    product && product.map(item => <CartItem key={item.id} id={item.id} photo={item.deviceInfo?.mainPhoto} title={item.deviceInfo?.fullName} count={item.cartCount} price={item.price} isChecked={item.isCheck} changeChecked={() => changeChecked(item.id)} />)
+                    product && product.map(item => <CartItem key={item.id} id={item.id} photo={item.deviceInfo?.mainPhoto} title={item.deviceInfo?.fullName} cartCount={item.cartCount} price={item.price} isChecked={item.isCheck} changeChecked={() => changeChecked(item.id)} changeCountItem={changeCountItem}/>)
                 }
             </div>
         </div>
