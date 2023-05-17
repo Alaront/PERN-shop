@@ -4,6 +4,7 @@ import CardAllChoosing from "../Components/Cart/CardAllChoosing";
 import {dellLSShopingCart, newDataLSShopingCart, readLSShopingCart} from "../helpers";
 import {$authHost, $host} from "../axios";
 import {deviceCartI, deviceI} from "../helpers/interfaces";
+import Loader from "react-loaders";
 
 const Cart = () => {
     const [mainCheck, setMainCheck] = useState<boolean>(true);
@@ -106,7 +107,7 @@ const Cart = () => {
     return (
         <div className={'content content-cart'}>
             {
-                product && <CartData mainCheck={mainCheck} changeMainCheck={changeMainCheck} product={product} changeChecked={changeChecked} changeCountItem={changeCountItem}/>
+                product ? <CartData mainCheck={mainCheck} changeMainCheck={changeMainCheck} product={product} changeChecked={changeChecked} changeCountItem={changeCountItem}/> : <Loader type="pacman" active={true} />
             }
             <CardAllChoosing  product={product}  buyProduct={buyProduct}/>
         </div>

@@ -15,6 +15,7 @@ import {
 } from "../helpers/interfaces";
 import QuestionsProduct from "../Components/Product/Description/Questions/QuestionsProduct";
 import {writeLSProductCheck} from "../helpers";
+import Loader from "react-loaders";
 
 const Product = () => {
     const {id} = useParams();
@@ -68,7 +69,9 @@ const Product = () => {
         }
     }, [deviceInfo])
 
-    if (!device || !deviceCharacteristics || !deviceInfo || !devicePhotos || !deviceQuestion) return <div className={'content product-content'}></div>
+    if (!device || !deviceCharacteristics || !deviceInfo || !devicePhotos || !deviceQuestion) return <div className={'content product-content'}>
+        <Loader type="pacman" active={true} />
+    </div>
 
     return (
         <div className={'content product-content'}>

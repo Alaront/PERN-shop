@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap')
 @import "common/style-reset"
 @import "common/index"
+@import 'loaders.css/src/animations/pacman.scss'
 
 body
   font-family: 'Roboto', sans-serif
@@ -23,3 +24,15 @@ body
   //&.product-content
   //  padding: 0 10px
 
+.loader-hidden
+  display: none
+
+.loader-active
+  display: flex
+  justify-content: center
+  align-items: center
+  width: 100%
+  height: 100%
+
+.pacman
+  max-width: max-content

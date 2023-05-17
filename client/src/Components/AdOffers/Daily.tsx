@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Swiper, SwiperSlide} from "swiper/react";
 import {Navigation, Pagination} from "swiper";
 import DailySlide from "./DailySlide";
-
+import Loader from 'react-loaders'
 import watchPhoto from '../../images/products/watch.png'
 
 import './index.sass'
@@ -12,7 +12,7 @@ import {$host} from "../../axios";
 
 const Daily = () => {
     const [time, setTime] = useState<string>('');
-    const [device, setDevice] = useState<Array<deviceCartI>>([])
+    const [device, setDevice] = useState<Array<deviceCartI> | null>(null)
 
     const update = () => {
         const dt:Date = new Date
@@ -49,6 +49,9 @@ const Daily = () => {
                 <div className={'deals__time'}>Осталось: <span>{time}</span></div>
             </div>
             <div className={'deals__offers'}>
+                {
+                    !device && <Loader type="pacman" active={true} />
+                }
                 <Swiper
                     modules={[Navigation, Pagination]}
                     slidesPerView={'auto'}

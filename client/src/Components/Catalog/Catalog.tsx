@@ -3,6 +3,7 @@ import React, {useEffect, useState} from 'react';
 import './index.sass'
 import {NavLink} from "react-router-dom";
 import {$host} from "../../axios";
+import Loader from "react-loaders";
 
 interface catalogItemI {
     name: string,
@@ -15,7 +16,7 @@ interface CatalogI {
 }
 
 const Catalog = ({show}:CatalogI) => {
-    const [catalogList, setCatalogList] = useState<Array<catalogItemI>>([])
+    const [catalogList, setCatalogList] = useState<Array<catalogItemI> | null>(null)
 
     const getData = async () => {
         const {data} = await $host.get('/type');
@@ -31,7 +32,7 @@ const Catalog = ({show}:CatalogI) => {
             <h6 className={'catalog__title'}>Каталог продукции</h6>
             <div className={'catalog__wrapper'}>
                 {
-                    catalogList && catalogList.map(item => <NavLink key={item.id} target={'_blank'} to={`search/${item.slug}`}>{item.name}</NavLink>)
+                    catalogList ? catalogList.map(item => <NavLink key={item.id} target={'_blank'} to={`search/${item.slug}`}>{item.name}</NavLink>) : <Loader type="pacman" active={true} />
                 }
             </div>
         </div>

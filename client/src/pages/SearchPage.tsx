@@ -5,10 +5,11 @@ import {$host} from "../axios";
 import {useParams} from "react-router";
 import ShopPage from "./ShopPage";
 import ProductCartShort from "../Components/Products/ProductCartShort";
+import Loader from "react-loaders";
 
 const SearchPage = () => {
     const [showFilters, setShowFilters] = useState<boolean>(false)
-    const [devices, setDevices] = useState<Array<deviceCartI>>()
+    const [devices, setDevices] = useState<Array<deviceCartI> | null >(null)
     const [name, setName] = useState<string>('')
     const [sort, setSort] = useState<String>('standard');
     const [star, setStar] = useState<number>(0)
@@ -88,10 +89,12 @@ const SearchPage = () => {
                     </div>
                     <div className={'search-page__devices'}>
                         {
-                            devices && devices.map(item => {
-                                if(star === 0) return <ProductCartShort key={item.id} title={item.deviceInfo?.fullName} photoUrl={item.deviceInfo?.mainPhoto} price={item.price} discount={item.discount} hrefLink={String(item.id)} />
-                                if(item.deviceInfo.rating === star) return <ProductCartShort key={item.id} title={item.deviceInfo?.fullName} photoUrl={item.deviceInfo?.mainPhoto} price={item.price} discount={item.discount} hrefLink={String(item.id)} />
-                            } )
+                            devices
+                                ? devices.map(item => {
+                                    if(star === 0) return <ProductCartShort key={item.id} title={item.deviceInfo?.fullName} photoUrl={item.deviceInfo?.mainPhoto} price={item.price} discount={item.discount} hrefLink={String(item.id)} />
+                                    if(item.deviceInfo.rating === star) return <ProductCartShort key={item.id} title={item.deviceInfo?.fullName} photoUrl={item.deviceInfo?.mainPhoto} price={item.price} discount={item.discount} hrefLink={String(item.id)} />
+                                } )
+                                : <Loader type="pacman" active={true} />
                         }
                     </div>
                     <div className={'show-filter-btn'} onClick={() => setShowFilters(true)}>

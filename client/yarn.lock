@@ -3178,6 +3178,11 @@
   "resolved" "https://registry.npmjs.org/cjs-module-lexer/-/cjs-module-lexer-1.2.2.tgz"
   "version" "1.2.2"
 
+"classnames@^2.2.3":
+  "integrity" "sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw=="
+  "resolved" "https://registry.npmjs.org/classnames/-/classnames-2.3.2.tgz"
+  "version" "2.3.2"
+
 "clean-css@^5.2.2":
   "integrity" "sha512-JVJbM+f3d3Q704rF4bqQ5UUyTtuJ0JRKNbTKVEeujCCBoMdkEi+V+e8oktO9qGQNSvHrFTM6JZRXrUvGR1czww=="
   "resolved" "https://registry.npmjs.org/clean-css/-/clean-css-5.3.2.tgz"
@@ -6303,6 +6308,11 @@
   "resolved" "https://registry.npmjs.org/loader-utils/-/loader-utils-3.2.1.tgz"
   "version" "3.2.1"
 
+"loaders.css@^0.1.2":
+  "integrity" "sha512-Rhowlq24ey1VOeor+3wYOt9+MjaxBOJm1u4KlQgNC3+0xJ0LS4wq4iG57D/BPzvuD/7HHDGQOWJ+81oR2EI9bQ=="
+  "resolved" "https://registry.npmjs.org/loaders.css/-/loaders.css-0.1.2.tgz"
+  "version" "0.1.2"
+
 "locate-path@^3.0.0":
   "integrity" "sha512-7AO748wWnIhNqAuaty2ZWHkQHRSNfPVIsPIfwEOWO22AmaoVrWavlOcMR5nzTLNYvp36X220/maaRsrec1G65A=="
   "resolved" "https://registry.npmjs.org/locate-path/-/locate-path-3.0.0.tgz"
@@ -7829,7 +7839,7 @@
     "kleur" "^3.0.3"
     "sisteransi" "^1.0.5"
 
-"prop-types@^15.0.0", "prop-types@^15.8.1":
+"prop-types@^15.0.0", "prop-types@^15.8.1", "prop-types@>=15.6.0":
   "integrity" "sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg=="
   "resolved" "https://registry.npmjs.org/prop-types/-/prop-types-15.8.1.tgz"
   "version" "15.8.1"
@@ -7997,6 +8007,13 @@
   "resolved" "https://registry.npmjs.org/react-is/-/react-is-18.2.0.tgz"
   "version" "18.2.0"
 
+"react-loaders@^3.0.1":
+  "integrity" "sha512-4igMNqs9Fb3d4Z+0UHIGQNJsw/37gX0nUO8QxupnEKRn1dtyYC1LGwk5GuaoDciMQCQc/MmPwb4Fn6ZfdoX1FQ=="
+  "resolved" "https://registry.npmjs.org/react-loaders/-/react-loaders-3.0.1.tgz"
+  "version" "3.0.1"
+  dependencies:
+    "classnames" "^2.2.3"
+
 "react-markdown@^8.0.7":
   "integrity" "sha512-bvWbzG4MtOU62XqBx3Xx+zB2raaFFsq4mYiAzfjXJMEz2sixgeAfraA3tvzULF02ZdOMUOKTBFFaZJDDrq+BJQ=="
   "resolved" "https://registry.npmjs.org/react-markdown/-/react-markdown-8.0.7.tgz"
@@ -8112,7 +8129,7 @@
   dependencies:
     "@types/codemirror" "~5.60.5"
 
-"react@^16.8 || ^17.0 || ^18.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^16.9.0 || ^17.0.0 || ^18", "react@^18.0.0", "react@^18.2.0", "react@>= 16", "react@>=16", "react@>=16.8", "react@>=16.8.2":
+"react@^16.8 || ^17.0 || ^18.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^16.9.0 || ^17.0.0 || ^18", "react@^18.0.0", "react@^18.2.0", "react@>= 16", "react@>=15", "react@>=16", "react@>=16.8", "react@>=16.8.2":
   "integrity" "sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ=="
   "resolved" "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
   "version" "18.2.0"

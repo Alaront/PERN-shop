@@ -6,10 +6,11 @@ import {NavLink} from "react-router-dom";
 import {$host} from "../axios";
 import {deviceCartI} from "../helpers/interfaces";
 import {makeDataFormat} from "../helpers";
+import Loader from "react-loaders";
 
 const UserSetting = () => {
 
-    const [devices, setDevices] = useState<Array<deviceCartI>>()
+    const [devices, setDevices] = useState<Array<deviceCartI> | null>(null)
     // @ts-ignore
     const {user, status} = useSelector(state => state.user)
     const navigate = useNavigate();
@@ -54,7 +55,9 @@ const UserSetting = () => {
 
                 <tbody>
                 {
-                    devices && devices.map((item, index) => <tr key={item.id}><td>{index + 1}</td><td>{item.id}</td><td><NavLink to={`/product/${item.id}`}>Товар</NavLink></td><td>{item.count}</td><td>{item.price}$</td><td><NavLink to={`/editProduct/${String(item.id)}`} target={'_blank'}>Редактировать</NavLink></td><td><NavLink to={`/editProductPhoto/${String(item.id)}`} target={'_blank'}>Редактировать фото</NavLink></td></tr>)
+                    devices
+                        ? devices.map((item, index) => <tr key={item.id}><td>{index + 1}</td><td>{item.id}</td><td><NavLink to={`/product/${item.id}`}>Товар</NavLink></td><td>{item.count}</td><td>{item.price}$</td><td><NavLink to={`/editProduct/${String(item.id)}`} target={'_blank'}>Редактировать</NavLink></td><td><NavLink to={`/editProductPhoto/${String(item.id)}`} target={'_blank'}>Редактировать фото</NavLink></td></tr>)
+                        : <Loader type="pacman" active={true} />
                 }
                 </tbody>
             </table>
