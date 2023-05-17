@@ -34,7 +34,7 @@ const EditProduct = () => {
     const [discount, setDiscount] = useState<number | null>(null)
     const [brand, setBrand] = useState<number | null>(null)
     const [description, setDescription] = useState<string | null>(null)
-
+    const [formDisabled, setFormDisabled] = useState<boolean>(false)
 
     const [showTypePopup, setShowTypePopup] = useState<boolean>(false);
     const [showBrandPopup, setShowBrandPopup] = useState<boolean>(false);
@@ -108,6 +108,8 @@ const EditProduct = () => {
         formData.append('text', description)
         formData.append('rating', '0')
 
+        setFormDisabled(true)
+
         try {
             const {data} = await $authHost.patch('/device', formData)
             alert('Товар был обновлен успешно')
@@ -118,6 +120,8 @@ const EditProduct = () => {
             console.log(e)
             alert(e)
         }
+
+        setFormDisabled(false)
 
     }
 
@@ -235,7 +239,7 @@ const EditProduct = () => {
 
                 <hr />
 
-                <button className={'add-product__form-btn'}>Редактировать товар</button>
+                <button className={'add-product__form-btn'} disabled={formDisabled}>Редактировать товар</button>
             </form>
         </div>
     );

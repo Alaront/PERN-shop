@@ -36,6 +36,7 @@ const AddProduct = () => {
     const [photo, setPhoto] = useState<File | null>(null);
     const [description, setDescription] = useState<string>('')
     const [characteristics, setCharacteristics] = useState<Array<characteristicsI>>([])
+    const [formDisabled, setFormDisabled] = useState<boolean>(false)
 
     const [showTypePopup, setShowTypePopup] = useState<boolean>(false);
     const [showBrandPopup, setShowBrandPopup] = useState<boolean>(false);
@@ -90,8 +91,12 @@ const AddProduct = () => {
         formData.append('photo', photo)
         formData.append('characteristics', JSON.stringify(characteristics))
 
+        setFormDisabled(true)
+
         const {data} = await $authHost.post('/device', formData)
         //console.log(data)
+
+        setFormDisabled(false)
 
         navigate(`/product/${data.device.id}`)
     }
@@ -240,7 +245,7 @@ const AddProduct = () => {
 
                 <hr />
 
-                <button className={'add-product__form-btn'}>Добавить товар</button>
+                <button className={'add-product__form-btn'} disabled={formDisabled}>Добавить товар</button>
             </form>
         </div>
     );

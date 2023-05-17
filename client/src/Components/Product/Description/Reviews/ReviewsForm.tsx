@@ -12,7 +12,7 @@ const ReviewsForm = ({closeForm}:reviewsForm) => {
     const [advantages, setAdvantages] = useState<string>('')
     const [disadvantages, setDisadvantages] = useState<string>('')
     const [comments, setComments] = useState<string>('')
-
+    const [formDisabled, setFormDisabled] = useState<boolean>(false)
     const [grade, setGrade] = useState<Number>(2);
 
     // @ts-ignore
@@ -31,6 +31,7 @@ const ReviewsForm = ({closeForm}:reviewsForm) => {
             userId: user.id
         }
 
+        setFormDisabled(true)
         try {
             const {data} = await $authHost.post('/review/device', params);
             console.log(data)
@@ -42,8 +43,8 @@ const ReviewsForm = ({closeForm}:reviewsForm) => {
             // @ts-ignore
             alert(e.response.data.message)
         }
-        //closeForm()
-        console.log(advantages, disadvantages, comments)
+        setFormDisabled(false)
+        closeForm()
     }
 
     return (
@@ -71,7 +72,7 @@ const ReviewsForm = ({closeForm}:reviewsForm) => {
                                 Ваша оценка: {grade}
                             </>
                     </div>
-                    <button>Отправить</button>
+                    <button disabled={formDisabled}>Отправить</button>
                 </form>
                 <div className={'reviews-form__close'} onClick={() => closeForm()}></div>
             </div>
