@@ -10,20 +10,9 @@ import jwtDecode from "jwt-decode";
 import {useSelector} from "react-redux";
 import {useNavigate, useParams} from "react-router";
 
-interface photoItemI {
-    id: number,
-    data: FileList
-}
-
 interface allTypeI {
     id: number,
     name: string,
-}
-
-interface characteristicsI {
-    id: number,
-    title: string,
-    description: string
 }
 
 const EditProduct = () => {
@@ -156,7 +145,6 @@ const EditProduct = () => {
         setDiscount(data.device.discount)
 
         console.log('data', data);
-
     }
 
     useEffect(() => {
@@ -176,40 +164,35 @@ const EditProduct = () => {
     }, [])
 
 
-
-    if (title === null || type === null || price === null || count === null || discount === null || brand === null || description === null) return <div className={'content product-content'}></div>
-
-
-    // @ts-ignore
     return (
         <div className={'content add-product'}>
             <h4 className={'add-product__title'}>Редактировать товар</h4>
             <form className={'add-product__form'} onSubmit={formSubmit}>
                 <div className={'add-product__form-title'}>
                     <span className={'add-product__form-name'}>Название товара *</span>
-                    <input type={'text'} value={title} onChange={(e) => {setTitle(e.target.value)}} />
+                    <input type={'text'} value={title ? title : ''} onChange={(e) => {setTitle(e.target.value)}} />
                     <span className={`add-product__form-error ${titleError ? 'add-product__form--error' : ''}`}>Введите корректное название продукта</span>
                 </div>
 
                 <div className={'add-product__form-count'}>
                     <span className={'add-product__form-name'}>Кол-во товара в наличии</span>
-                    <input type={'number'} value={count} onChange={(e) => {setCount(Number(e.target.value))}} />
+                    <input type={'number'} value={count ? count : ''} onChange={(e) => {setCount(Number(e.target.value))}} />
                 </div>
 
                 <div className={'add-product__form-price'}>
                     <span className={'add-product__form-name'}>Цена товара(без скидки)</span>
-                    <input type={'number'} value={price} onChange={(e) => {setPrice(Number(e.target.value))}} />
+                    <input type={'number'} value={price ? price : ''} onChange={(e) => {setPrice(Number(e.target.value))}} />
                 </div>
 
                 <div className={'add-product__form-price'}>
                     <span className={'add-product__form-name'}>Скидка на товар (%)</span>
-                    <input type={'number'} value={discount} onChange={(e) => {setDiscount(Number(e.target.value) <= 99 ? Number(e.target.value) : 99)}} />
+                    <input type={'number'} value={discount ? discount : ''} onChange={(e) => {setDiscount(Number(e.target.value) <= 99 ? Number(e.target.value) : 99)}} />
                 </div>
 
                 <div className={'add-product__form-type'}>
                     <p className={'add-product__form-name'}>Выберите тип продукта *</p>
                     { showTypePopup &&
-                        <ChoosePopup title={'Выбрать тип'} data={allType} change={(id: number) => setType(id)} choose={type} closePopup={() => setShowTypePopup(false)}/>
+                        <ChoosePopup title={'Выбрать тип'} data={allType} change={(id: number) => setType(id)} choose={type ? type : 0} closePopup={() => setShowTypePopup(false)}/>
                     }
                     <span>Тип: { allType.map(item => {
                         if(item.id === type) return item.name
@@ -221,7 +204,7 @@ const EditProduct = () => {
                 <div className={'add-product__form-brand'}>
                     <p className={'add-product__form-name'}>Выберите бренд продукта *</p>
                     { showBrandPopup &&
-                        <ChoosePopup title={'Выбрать бренд'} data={allBrands} change={(id: number) => setBrand(id)} choose={brand} closePopup={() => setShowBrandPopup(false)}/>
+                        <ChoosePopup title={'Выбрать бренд'} data={allBrands} change={(id: number) => setBrand(id)} choose={brand ? brand : 0} closePopup={() => setShowBrandPopup(false)}/>
                     }
                     <span>Тип: { allBrands.map(item => {
                         if(item.id === brand) return item.name
@@ -232,10 +215,9 @@ const EditProduct = () => {
 
                 <div className={'add-product__form-description'}>
                     <span className={'add-product__form-name'}>Описание продукта *</span>
-                    <SimpleMdeReact value={description} onChange={onChange} options={editorOptions}/>
+                    <SimpleMdeReact value={description ? description : ''} onChange={onChange} options={editorOptions}/>
                     <span className={`add-product__form-error ${descriptionError ? 'add-product__form--error' : ''}`}>Нужно составить описание продукта</span>
                 </div>
-
 
                 <hr />
 

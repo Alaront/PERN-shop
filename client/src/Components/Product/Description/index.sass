@@ -12,27 +12,30 @@
 body p.description-product__title, p.reviews-product__title, p.questions-product__title
   font-style: normal
   font-weight: 500
-  font-size: 20px
+  font-size: 22px
   line-height: 25px
-  margin-bottom: 12px
+  margin-bottom: 14px
   color: $color_black
 
   +min-w($tablet_s)
-    font-size: 20px
+    font-size: 22px
     line-height: 25px
-    margin-bottom: 20px
+    margin-bottom: 22px
 
   +min-w($desktop_m)
-    font-size: 24px
+    font-size: 27px
     line-height: 28px
-    margin-bottom: 20px
+    margin-bottom: 22px
     font-weight: 700
 
 .description-product__info
   position: relative
   margin-bottom: 40px
 
-  div
+  +min-w($desktop_m)
+    margin-bottom: 60px
+
+  .mark-down
     height: auto
     max-height: 100px
     overflow: hidden
@@ -43,40 +46,60 @@ body p.description-product__title, p.reviews-product__title, p.questions-product
     letter-spacing: -0.2px
     color: $text_color
     transition: max-height 0.4s cubic-bezier(0,1,0,1)
+    position: relative
+    margin-bottom: 10px
+
+    &.mark-down--after:after
+      content: ''
+      position: absolute
+      bottom: 0
+      left: 0
+      width: 100%
+      height: 90px
+      z-index: 5
+      background-image: linear-gradient(180deg, hsla(0,0%,100%,0), #fff)
+      transition: 0.4s
 
   &.info-open
-    div
+    .mark-down
       max-height: 99999px
       transition: max-height 0.4s cubic-bezier(0,1,0,1)
+
+      &.mark-down--after:after
+        content: none
 
 .description-product__wrapper
   display: flex
   flex-direction: column
+  position: relative
+  z-index: 2
 
 .description-product__btn-info
   width: max-content
-  padding: 5px 30px 5px 5px
-  color: $text_color
-  border: 1px solid $text_color
+  padding: 5px 30px 5px 0
+  color: $color_black
+  font-weight: 600
+  text-transform: uppercase
+  //border: 1px solid $text_color
   border-radius: 5px
   cursor: pointer
   position: relative
   background: $bg_color
+  display: block
 
   &:before
     content: ""
     position: absolute
-    top: 50%
+    top: 5px
     right: 8px
     width: 15px
     height: 15px
     background: url("../../../images/decor/arrow.svg") no-repeat center
     background-size: contain
-    transform: translateY(-50%)
 
   &.open-info
     &:before
-      transform: translateY(-50%) rotate(180deg)
+      transform: rotate(180deg)
 
 .description-product__characteristics
   padding-bottom: 30px
@@ -89,16 +112,32 @@ body p.description-product__title, p.reviews-product__title, p.questions-product
     color: #173C5F
 
 
-.description-product__characteristics-wrapper
+.description-product__characteristics-content
   height: auto
   max-height: 100px
   transition: max-height 0.4s cubic-bezier(0,1,0,1)
   overflow: hidden
+  position: relative
+  margin-bottom: 10px
+
+  &.description-product__characteristics--after:after
+    content: ''
+    position: absolute
+    bottom: 0
+    left: 0
+    width: 100%
+    height: 90px
+    z-index: 5
+    background-image: linear-gradient(180deg, hsla(0,0%,100%,0), #fff)
+    transition: 0.4s
 
   &.characteristics-open
     height: auto
     max-height: 99999px
     transition: max-height 0.4s cubic-bezier(0,1,0,1)
+
+    &:after
+      content: none
 
   dl
     display: flex
@@ -395,7 +434,7 @@ body p.description-product__title, p.reviews-product__title, p.questions-product
   font-size: 20px
   line-height: 22px
   cursor: pointer
-  margin: 0 10px 10px 10px
+  margin: 0 10px 20px 0
   background: $base_color_red
   color: #FFFFFF
   padding: 15px 10px
