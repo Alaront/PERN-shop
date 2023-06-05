@@ -219,6 +219,9 @@
 .top-content__info-price
   +min-w($tablet)
     position: sticky
+    top: 110px
+
+  +min-w($tablet_s)
     top: 80px
 
 .top-content__info-type
@@ -248,6 +251,32 @@
       height: 100%
       object-fit: contain
 
+.top-content__brand
+  display: flex
+  align-items: center
+  margin-bottom: 20px
+
+.top-content__brand-logo
+  display: block
+  padding: 5px 10px
+  border-radius: 8px
+  border: 2px solid $color_black
+  width: 100px
+  height: 50px
+  margin-right: 10px
+
+  img
+    width: 100%
+    height: 100%
+    object-fit: contain
+
+
+.top-content__brand-text
+  p
+    font-weight: 600
+    font-size: 20px
+    line-height: 22px
+    color: $text_color
 
 .top-content__buy
   background: $base_color_red

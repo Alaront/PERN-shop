@@ -8,13 +8,9 @@ import {fetchBrands, removeBrand} from "../../../redux/slice/brands";
 import {makeFullPhotoUrl} from "../../../helpers";
 import {$authHost, $host} from "../../../axios";
 import {removeType} from "../../../redux/slice/types";
+import {brandI} from "../../../helpers/interfaces";
 
 
-interface brandI {
-    id: number,
-    photo: string,
-    name: string,
-}
 
 interface allBrandsI {
     allBrands: Array<brandI>,

@@ -109,3 +109,9 @@ export interface userOperationI {
     updatedAt: string,
     count: number
 }
+
+export interface brandI {
+    id: number,
+    photo: string,
+    name: string,
+}

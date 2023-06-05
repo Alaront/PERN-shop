@@ -6,6 +6,7 @@ const router = new Router();
 
 router.post('', checkRoleMiddleware('ADMIN'), brandController.create)
 router.get('', brandController.get)
+router.get('/one/:id', brandController.getOne)
 router.delete('', checkRoleMiddleware('ADMIN'), brandController.dell)
 router.patch('/title', checkRoleMiddleware('ADMIN'), brandController.updateTitle)
 router.patch('/photo', checkRoleMiddleware('ADMIN'), brandController.updatePhoto)

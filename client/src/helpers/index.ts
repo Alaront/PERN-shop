@@ -104,7 +104,6 @@ async function readLSShopingCart(): Promise<Array<cartData>> {
 function makeFullPhotoUrl(dataJson:string):string {
     try {
         const data = JSON.parse(dataJson);
-        console.log(data)
         return data.newUrl
     } catch (e) {
         console.log(e)

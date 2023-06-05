@@ -39,7 +39,7 @@ const TopContent = ({deviceCharacteristics, deviceInfo, device, shopTitle, devic
             </div>
             <div className={'top-content__info-right'}>
                 <TopSlider mainPhoto={deviceInfo.mainPhoto} otherPhotos={[...devicePhotos.map(item => item.url)]}/>
-                <TopInfo productId={device.id} price={device.price} discount={device.discount} />
+                <TopInfo productId={device.id} price={device.price} discount={device.discount} brand={device.brandId}/>
             </div>
         </div>
     );

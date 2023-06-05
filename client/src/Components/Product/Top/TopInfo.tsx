@@ -1,29 +1,26 @@
 import React from 'react';
-import {typeProduct} from "./TopContent";
 import {writeLSShopingCart} from "../../../helpers";
+import TopBrand from "./TopBrand";
+import TopDiscount from "./TopDiscount";
+import TopPrice from "./TopPrice";
 
 interface ContentInfo {
     productId: number,
     price: number,
     discount: number,
+    brand: number
 }
 
-const TopInfo = ({discount, productId, price}: ContentInfo) => {
+const TopInfo = ({discount, productId, price, brand}: ContentInfo) => {
 
     return (
         <div className={'top-content__info'}>
-
             <div className={"top-content__info-price"}>
+                <TopBrand brandParams={brand}/>
                 {
-                    discount > 0 && (
-                        <div className={"top-content__info-discount"}>
-                            <p className={'top-content__old-price'}>&nbsp;$ {price.toFixed(2)}&nbsp;</p>
-                            <p className={'top-content__discount'}>{discount}%</p>
-                        </div>
-                    )
+                    discount > 0 && <TopDiscount discount={discount} price={price} />
                 }
-                <p className={"top-content__price"}><span>Цена:</span> $ {(price - ((price * discount) / 100)).toFixed(2)}</p>
-                <button className={'top-content__buy'} onClick={() => writeLSShopingCart(productId, 1)}>В корзину</button>
+                <TopPrice price={price} discount={discount} productId={productId} />
             </div>
         </div>
     );

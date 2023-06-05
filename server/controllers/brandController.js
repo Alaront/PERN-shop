@@ -36,6 +36,21 @@ class BrandController {
         }
     }
 
+    async getOne(req, res, next) {
+        try {
+            const {id} = req.params;
+
+            if(!id) return next(ApiError.badRequest('Not set id logo'))
+
+            const logo = await Brand.findOne({where: {id}})
+
+            return res.json(logo)
+
+        } catch (e) {
+            return next(ApiError.internal('Error', e))
+        }
+    }
+
     async updateTitle(req, res, next) {
         try {
             const { id, title } = req.body;
