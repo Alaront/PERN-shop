@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Swiper, SwiperSlide} from "swiper/react";
 import {Navigation, Pagination} from "swiper";
+import { ReactFullscreenCarousel, ISlide } from 'react-fullscreen-carousel';
 
 import 'swiper/css';
 
-import watchPhoto from "../../../images/products/watch.png";
 import {makeFullPhotoUrl} from "../../../helpers";
 
 interface TopSliderI {
@@ -13,6 +13,18 @@ interface TopSliderI {
 }
 
 const TopSlider = ({mainPhoto, otherPhotos}: TopSliderI) => {
+    const [open, setOpen] = useState<boolean>(false)
+    const [sliderCurrent, setSliderCurrent] = useState<number>(0)
+
+    const getSliderPhoto = ():Array<ISlide> => {
+        return [{img: makeFullPhotoUrl(mainPhoto), alt: "image"}, ...otherPhotos.map(item => {return {img: makeFullPhotoUrl(item), alt: "image"}})]
+    }
+    getSliderPhoto()
+    const clickOnSlider = (index:number):void => {
+        setSliderCurrent(index)
+        setOpen(!open)
+    }
+
     return (
         <div className={'top-slider'}>
             <Swiper
@@ -24,7 +36,7 @@ const TopSlider = ({mainPhoto, otherPhotos}: TopSliderI) => {
             >
                 {
                     [mainPhoto, ...otherPhotos].map((item, index) => (
-                        <SwiperSlide key={index}>
+                        <SwiperSlide key={index} onClick={() => clickOnSlider(index)}>
                             <div className={'deals-slider_img'}>
                                 <img src={makeFullPhotoUrl(item)} alt={'photo'}/>
                             </div>
@@ -32,6 +44,10 @@ const TopSlider = ({mainPhoto, otherPhotos}: TopSliderI) => {
                     ))
                 }
             </Swiper>
+            {open ?
+                <ReactFullscreenCarousel slides={getSliderPhoto()} handleClose={() => setOpen(false)} startSlideIndex={sliderCurrent}  />
+                : null
+            }
         </div>
     );
 };
