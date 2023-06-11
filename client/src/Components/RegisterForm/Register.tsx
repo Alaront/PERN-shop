@@ -134,7 +134,7 @@ const Register = ({isHide}: registerPropsI) => {
                 }
             </label>
             <button className={'register-form-rep-btn'}>регистрация</button>
-            <span className={'register-form-rep-info'}>Регистрируясь на "PERN SHOP" вы соглашаетесь с <a href={'#'}>Пользовательским соглашением</a> и <a href={'#'}>Политикой конфиденциальности</a> </span>
+            <span className={'register-form-rep-info'}>Регистрируясь на "PERN SHOP" вы соглашаетесь с <a href={`${process.env.REACT_APP_API_URL}/pdf/user_greement.pdf`} target={"_blank"}>Пользовательским соглашением</a> и <a href={`${process.env.REACT_APP_API_URL}/pdf/privacy_policy.pdf`} target={"_blank"}>Политикой конфиденциальности</a> </span>
         </form>
     );
 };

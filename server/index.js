@@ -35,6 +35,7 @@ app.use(cors())
 app.use(express.json())
 app.use(fileUpload())
 app.use(express.static(path.resolve(__dirname, 'static')))
+app.use(express.static(path.resolve(__dirname, 'static/pdf')))
 app.get('/', (req, res) => {
     return res.json('this is main page')
 })
