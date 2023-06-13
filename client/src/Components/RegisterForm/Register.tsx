@@ -3,6 +3,7 @@ import {$host} from "../../axios";
 import jwtDecode from "jwt-decode";
 import {setIsAuth, setUser} from "../../redux/slice/user";
 import {useAppDispatch} from "../../redux/helpers";
+import {NavLink} from "react-router-dom";
 
 interface registerPropsI {
     isHide: boolean
@@ -134,7 +135,7 @@ const Register = ({isHide}: registerPropsI) => {
                 }
             </label>
             <button className={'register-form-rep-btn'}>регистрация</button>
-            <span className={'register-form-rep-info'}>Регистрируясь на "PERN SHOP" вы соглашаетесь с <a href={`${process.env.REACT_APP_API_URL}/pdf/user_greement.pdf`} target={"_blank"}>Пользовательским соглашением</a> и <a href={`${process.env.REACT_APP_API_URL}/pdf/privacy_policy.pdf`} target={"_blank"}>Политикой конфиденциальности</a> </span>
+            <span className={'register-form-rep-info'}>Регистрируясь на "PERN SHOP" вы соглашаетесь с <NavLink to={`${process.env.REACT_APP_API_URL}/pdf/user_greement.pdf`} target={"_blank"}>Пользовательским соглашением</NavLink> и <NavLink to={`${process.env.REACT_APP_API_URL}/pdf/privacy_policy.pdf`} target={"_blank"}>Политикой конфиденциальности</NavLink> </span>
         </form>
     );
 };

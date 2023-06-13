@@ -6,126 +6,131 @@ import FooterItem from "../Components/Footer/FooterItem";
 export interface itemData {
     id: number,
     title: string,
-    link: string
+    link: string,
+    target: "_self" | "_blank"
 }
 
 const Footer = () => {
     const [buyersData, setBuyersData] = useState<itemData[]>([
         {
             id: 0,
-            link: '#',
-            title: 'Как сделать заказ'
+            link: '/special/howMakeOrder',
+            title: 'Как сделать заказ',
+            target: "_self"
         },
         {
             id: 1,
-            link: '#',
-            title: 'Способы оплаты'
+            link: '/special/paymentMethods',
+            title: 'Способы оплаты',
+            target: "_self"
         },
         {
             id: 2,
-            link: '#',
-            title: 'Доставка'
+            link: '/special/delivery',
+            title: 'Доставка',
+            target: "_self"
         },
         {
             id: 3,
-            link: '#',
-            title: 'Возврат товара'
-        },
-        {
-            id: 4,
-            link: '#',
-            title: 'Как сделать заказ'
-        },
-        {
-            id: 5,
-            link: '#',
-            title: 'Возврат денежных средств'
+            link: '/special/purchaseReturns',
+            title: 'Возврат товара',
+            target: "_self"
         },
         {
             id: 6,
-            link: '#',
-            title: 'Правила продажи'
+            link: '/special/sellingRules',
+            title: 'Правила продажи',
+            target: "_self"
         },
         {
             id: 7,
-            link: '#',
-            title: 'Правила пользования торговой площадкой'
-        },
-        {
-            id: 8,
-            link: '#',
-            title: 'Вопросы и ответы'
+            link: '/special/rulesUsing',
+            title: 'Правила пользования торговой площадкой',
+            target: "_self"
         },
     ])
     const [companyData, setCompanyData] = useState<itemData[]>([
         {
             id: 0,
-            link: '#',
-            title: 'О нас'
+            link: '/special/aboutAs',
+            title: 'О нас',
+            target: "_self"
         },
         {
             id: 1,
-            link: '#',
-            title: 'Реквизиты'
+            link: '/special/paymentMethods',
+            title: 'Реквизиты',
+            target: "_self"
         },
         {
             id: 2,
-            link: '#',
-            title: 'Пресс-центр'
+            link: '/special/howMakeOrder',
+            title: 'Пресс-центр',
+            target: "_self"
         },
         {
             id: 3,
-            link: '#',
-            title: 'Контакты'
+            link: '/special/howMakeOrder',
+            title: 'Контакты',
+            target: "_self"
         }
     ])
     const [partnersData, setPartnersData] = useState<itemData[]>([
         {
             id: 0,
-            link: '#',
-            title: 'Продавайте на PERN SHOP'
+            link: '/special/sellingRules',
+            title: 'Продавайте на PERN SHOP',
+            target: "_self"
         },
         {
             id: 1,
-            link: '#',
-            title: 'Курьерам'
+            link: '/special/rulesUsing',
+            title: 'Курьерам',
+            target: "_self"
         },
         {
             id: 2,
-            link: '#',
-            title: 'Перевозчикам'
+            link: '/special/rulesUsing',
+            title: 'Перевозчикам',
+            target: "_self"
         },
         {
             id: 3,
-            link: '#',
-            title: 'Партнерский пункт выдачи'
+            link: '/special/delivery',
+            title: 'Партнерский пункт выдачи',
+            target: "_self"
         },
         {
             id: 4,
-            link: '#',
-            title: 'Франшизный пункт выдачи'
+            link: '/special/delivery',
+            title: 'Франшизный пункт выдачи',
+            target: "_self"
         }
     ])
     const [socialData, setSocialData] = useState<itemData[]>([
         {
             id: 0,
-            link: '#',
-            title: 'ВКонтакте'
+            link: 'https://vk.com/',
+            title: 'ВКонтакте',
+            target: "_blank"
         },
         {
             id: 1,
-            link: '#',
-            title: 'Одноклассники'
+            link: 'https://ok.ru/',
+            title: 'Одноклассники',
+            target: "_blank"
         },
         {
             id: 2,
-            link: '#',
-            title: 'YouTube'
+            link: 'https://www.youtube.com/',
+            title: 'YouTube',
+            target: "_blank"
         },
         {
             id: 3,
-            link: '#',
-            title: 'Телеграм'
+            link: 'https://web.telegram.org/',
+            title: 'Телеграм',
+            target: "_blank"
         }
     ])
 

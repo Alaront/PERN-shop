@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {itemData} from "../../elements/Footer";
+import {NavLink} from "react-router-dom";
 
 interface FooterItemData {
     title: string,
@@ -18,7 +19,7 @@ const FooterItem = ({itemData, title}: FooterItemData) => {
             <p className={'footer__title'} onClick={changeFooter}> {title} </p>
             <ul>
                 {
-                    itemData.map(item => <li key={item.id}><a className={'footer__link'} href={item.link}>{item.title}</a></li>)
+                    itemData.map(item => <li key={item.id}><NavLink className={'footer__link'} to={item.link} target={item.target}>{item.title}</NavLink></li>)
                 }
             </ul>
         </div>

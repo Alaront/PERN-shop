@@ -25,6 +25,14 @@ import UserOperation from "./pages/UserOperation";
 import EditShopPage from "./pages/EditShopPage";
 import SearchPage from "./pages/SearchPage";
 import UserSetting from "./pages/UserSetting";
+import Specials from "./pages/special/Specials";
+import HowMakeOrder from "./pages/special/HowMakeOrder";
+import PaymentMethods from "./pages/special/PaymentMethods";
+import Delivery from "./pages/special/Delivery";
+import PurchaseReturns from "./pages/special/PurchaseReturns";
+import SellingRules from "./pages/special/SellingRules";
+import RulesUsing from "./pages/special/RulesUsing";
+import AboutUs from "./pages/special/AboutUs";
 
 function App() {
 
@@ -63,6 +71,15 @@ function App() {
               <Route path="users" element={<AdminUsers />} />
               <Route path="productsType" element={<AdminProductsType />} />
               <Route path="brandNew" element={<AdminBrandNew />} />
+          </Route>
+          <Route path="/special/*" element={<Specials />}>
+              <Route path="howMakeOrder" element={<HowMakeOrder />} />
+              <Route path="paymentMethods" element={<PaymentMethods />} />
+              <Route path="delivery" element={<Delivery />} />
+              <Route path="purchaseReturns" element={<PurchaseReturns />} />
+              <Route path="sellingRules" element={<SellingRules />} />
+              <Route path="rulesUsing" element={<RulesUsing />} />
+              <Route path="aboutAs" element={<AboutUs />} />
           </Route>
           <Route path="*" element={<NotFound />} />
       </Routes>
