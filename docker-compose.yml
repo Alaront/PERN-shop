@@ -1,0 +1,48 @@
+version: '3'
+
+services:
+
+  frontend:
+    build: './client'
+    restart: always
+    networks:
+      - examplenetwork
+    ports:
+      - '3000:3000'
+    volumes:
+      - /app/node_modules'
+      - ./client:/app
+
+  server:
+    build:  './server'
+    restart: always
+    depends_on:
+      - shop_db
+    networks:
+      - examplenetwork
+    ports:
+      - '7000:7000'
+
+    volumes:
+      - /server/node_modules
+      - ./server:/app
+
+  shop_db:
+    image: postgres:14
+    networks:
+      - examplenetwork
+    restart: always
+    command: postgres -c shared_preload_libraries=pg_stat_statements -c pg_stat_statements.track=all -c max_connections=200
+    environment:
+      - POSTGRES_USER=alarontShop
+      - POSTGRES_PASSWORD=10001
+    ports:
+      - '5445:5432'
+    volumes:
+      - shop_db:/var/lib/postgresql/data
+
+networks:
+  examplenetwork:
+
+volumes:
+  shop_db:

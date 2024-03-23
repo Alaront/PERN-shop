@@ -30,7 +30,6 @@ const app = new express();
 const PORT = process.env.PORT || 5000;
 
 
-
 app.use(cors())
 app.use(express.json())
 app.use(fileUpload())
@@ -50,7 +49,7 @@ const startServer = async () => {
       //await UserOperation.sync({ alter: true })
       //await UserOperation.sync({ force: true })
       app.listen(PORT, () => {
-          console.log('Server started ', PORT)
+          console.log('Server started:', PORT)
       })
   }  catch (e) {
       console.log(e)
